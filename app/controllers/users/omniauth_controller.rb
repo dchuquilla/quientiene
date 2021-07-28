@@ -5,7 +5,7 @@ class Users::OmniauthController < ApplicationController
     @user = User.create_from_provider_data(request.env['omniauth.auth'])
     if @user.persisted?
       sign_in_and_redirect @user
-      set_flash_message(:notice, :success, kind: 'Facebook') if is_navigational_format?
+      flash[:info] = 'Acceso exitoso mediante Facebook' if is_navigational_format?
     else
       flash[:error] = 'Hubo un problema para registrarse mediante Facebook. Por favor regístrese o inténtelo más tarde.'
       redirect_to new_user_registration_url
@@ -17,7 +17,7 @@ class Users::OmniauthController < ApplicationController
     @user = User.create_from_google_data(request.env['omniauth.auth'])
     if @user.persisted?
       sign_in_and_redirect @user
-      set_flash_message(:notice, :success, kind: 'Google') if is_navigational_format?
+      flash[:info] = 'Acceso exitoso mediante Google' if is_navigational_format?
     else
       flash[:error] = 'Hubo un problema para registrarse mediante Google. Por favor regístrese o inténtelo más tarde.'
       redirect_to new_user_registration_url
@@ -29,7 +29,7 @@ class Users::OmniauthController < ApplicationController
     @user = User.create_from_twitter_data(request.env['omniauth.auth'])
     if @user.persisted?
       sign_in_and_redirect @user
-      set_flash_message(:notice, :success, kind: 'Twitter') if is_navigational_format?
+      flash[:info] = 'Acceso exitoso mediante Twitter' if is_navigational_format?
     else
       flash[:error] = 'Hubo un problema para registrarse mediante Twitter. Por favor regístrese o inténtelo más tarde.'
       redirect_to new_user_registration_url
