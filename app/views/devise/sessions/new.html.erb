@@ -18,7 +18,7 @@
               <%- if devise_mapping.omniauthable? %>
                 <%- resource_class.omniauth_providers.each do |provider| %>
                   <%= link_to omniauth_authorize_path(resource_name, provider), class: "#{OmniAuth::Utils.camelize(provider).downcase.gsub('oauth2', '')} btn d-flex justify-content-center align-items-center", method: :post do %>
-                    <span class="icon-<%= OmniAuth::Utils.camelize(provider).downcase.gsub('oauth2', '') %> mr-3"></span> Acceder con <%= OmniAuth::Utils.camelize(provider) %>
+                    <span class="icon-<%= OmniAuth::Utils.camelize(provider).downcase.gsub('oauth2', '') %> mr-3"></span> Acceder con <%= OmniAuth::Utils.camelize(provider).gsub('Oauth2', '') %>
                   <% end %>
                 <% end %>
               <% end %>
