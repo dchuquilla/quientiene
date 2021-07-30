@@ -14,7 +14,7 @@
 
 </head>
 
-<body class="<%= params[:action] == 'index' ? 'is-boxed' : '' %>">
+<body class="<%= params[:action] == 'index' && ['home'].include?(params[:controller]) ? 'is-boxed' : '' %>">
   <% if notice %>
   <p class="alert alert-success"><%= notice %></p>
   <% end %>

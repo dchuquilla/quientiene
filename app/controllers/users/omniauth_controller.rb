@@ -15,7 +15,7 @@ class Users::OmniauthController < ApplicationController
 
   # google callback
   def google_oauth2
-    @user = User.create_from_google_data(request.env['omniauth.auth'])
+    @user = User.create_from_provider_data(request.env['omniauth.auth'])
     if @user.persisted?
       sign_in @user
       redirect_to dashboard_path
@@ -28,7 +28,7 @@ class Users::OmniauthController < ApplicationController
 
   # twitter callback
   def twitter
-    @user = User.create_from_twitter_data(request.env['omniauth.auth'])
+    @user = User.create_from_provider_data(request.env['omniauth.auth'])
     if @user.persisted?
       sign_in @user
       redirect_to dashboard_path
