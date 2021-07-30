@@ -1,0 +1,62 @@
+<div class="row justify-content-center">
+  <div class="col-md-1 col-sm-1"></div>
+  <div class="col">
+    <h1>
+      <%= link_to dashboard_path, class:"btn btn-outline-dark btn-lg" do %>
+        <i class="material-icons text-dark" style="top: 0;">arrow_back_ios_new</i>
+      <% end %>
+      Mis vehículos
+    </h1>
+
+    <% @vehicles.each do |vehicle| %>
+      <div class="card card-stats">
+        <div class="card-header card-header-warning card-header-icon">
+          <div class="card-icon">
+            <i class="material-icons">commute</i>
+          </div>
+          <p class="card-category"><%= vehicle.brand %> <%= vehicle.model %> <%= vehicle.year %></p>
+          <h3 class="card-title"><%= vehicle.plate %> <small><%= vehicle.chasis %></small></h3>
+        </div>
+        <div class="card-footer">
+          <div class="stats align-items-center">
+            <%= link_to edit_vehicle_path(vehicle), class:"text-info btn btn-outline-info btn-sm" do %>
+              <i class="material-icons text-dark mr-2" style="top: 0;">mode_edit</i>
+              Editar
+            <% end %>
+            <%= link_to vehicle, method: :delete, data: { confirm: 'Are you sure?' }, class:"text-danger btn btn-outline-danger btn-sm" do %>
+              <i class="material-icons mr-2" style="top: 0;">remove_circle_outline</i>
+              Eliminar
+            <% end %>
+          </div>
+        </div>
+      </div>
+    <% end %>
+
+    <br>
+
+  </div>
+  <div class="col-md-1 col-sm-1"></div>
+</div>
+
+<div class="row justify-content-center">
+  <div class="col-md-1 col-sm-1"></div>
+  <div class="col">
+    <%= link_to new_vehicle_path, class:"btn btn-outline-success btn-lg btn-block" do %>
+      <i class="material-icons text-dark mr-3" style="top: 0;">electric_car</i>
+      Agregar vehículo
+    <% end %>
+    <a href="#" class="btn btn-outline-primary btn-lg btn-block">
+      <i class="material-icons text-dark mr-3" style="top: 0;">flare</i>
+      Enviar solicitud
+    </a>
+  </div>
+  <div class="col-md-1 col-sm-1"></div>
+</div>
+<br>
+<div class="row justify-content-center">
+  <div class="col-md-1 col-sm-1"></div>
+    <div class="col">
+      Publicidad Aqúi
+    </div>
+  <div class="col-md-1 col-sm-1"></div>
+</div>

@@ -1,0 +1,25 @@
+<div class="row justify-content-center">
+  <div class="col-md-1 col-sm-1"></div>
+  <div class="col">
+    <h1>
+      <%= link_to dashboard_path, class:"btn btn-outline-dark btn-lg" do %>
+        <i class="material-icons text-dark" style="top: 0;">arrow_back_ios_new</i>
+      <% end %>
+      Agrear Vehículo
+    </h1>
+    <%= render 'form', vehicle: @vehicle %>
+  </div>
+  <div class="col-md-1 col-sm-1"></div>
+</div>
+
+<br>
+
+<div class="row justify-content-center">
+  <div class="col-md-1 col-sm-1"></div>
+    <div class="col">
+      Publicidad Aqúi
+    </div>
+  <div class="col-md-1 col-sm-1"></div>
+</div>
+
+

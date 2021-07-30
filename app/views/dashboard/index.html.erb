@@ -2,18 +2,18 @@
   <div class="col-md-4 col-sm-4">
     <div class="card card-stats">
       <div class="card-header card-header-warning card-header-icon">
-      <div class="card-icon">
-        <i class="material-icons">commute</i>
-      </div>
-      <p class="card-category">Mis vehículos</p>
-      <h3 class="card-title">1 <small>vehículo</small></h3>
+        <div class="card-icon">
+          <i class="material-icons">commute</i>
+        </div>
+        <p class="card-category">Mis vehículos</p>
+        <h3 class="card-title">1 <small>vehículo</small></h3>
       </div>
       <div class="card-footer">
         <div class="stats align-items-center">
-          <a href="#" class="text-info btn btn-outline-info btn-sm">
+          <%= link_to vehicles_path, class:"text-info btn btn-outline-info btn-sm" do %>
             <i class="material-icons text-dark mr-2" style="top: 0;">add_circle_outline</i>
             Ver vehículos
-          </a>
+          <% end %>
         </div>
       </div>
     </div>
@@ -68,10 +68,10 @@
       <i class="material-icons text-dark mr-3" style="top: 0;">flare</i>
       Enviar solicitud
     </a>
-    <a href="#" class="btn btn-outline-success btn-lg btn-block">
+    <%= link_to new_vehicle_path, class:"btn btn-outline-success btn-lg btn-block" do %>
       <i class="material-icons text-dark mr-3" style="top: 0;">electric_car</i>
       Agregar vehículo
-    </a>
+    <% end %>
   </div>
   <div class="col-md-1 col-sm-1"></div>
 </div>
