@@ -10,10 +10,22 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_07_30_191145) do
+ActiveRecord::Schema.define(version: 2021_07_31_011648) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
+
+  create_table "replacement_requests", force: :cascade do |t|
+    t.bigint "user_id"
+    t.bigint "vehicle_id"
+    t.text "part_number"
+    t.string "short_name"
+    t.text "description"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["user_id"], name: "index_replacement_requests_on_user_id"
+    t.index ["vehicle_id"], name: "index_replacement_requests_on_vehicle_id"
+  end
 
   create_table "sessions", force: :cascade do |t|
     t.string "session_id"

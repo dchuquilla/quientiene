@@ -1,5 +1,4 @@
 Rails.application.routes.draw do
-  resources :vehicles
   root to: 'home#index'
   
   get 'home/index'
@@ -12,4 +11,7 @@ Rails.application.routes.draw do
     sessions: 'users/sessions'
   }
   # For details on the DSL available within this file, see https://guides.rubyonrails.org/routing.html
+  
+  resources :replacement_requests
+  resources :vehicles
 end

@@ -1,0 +1,51 @@
+<%= form_with(model: replacement_request) do |form| %>
+  <% if replacement_request.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(replacement_request.errors.count, "error") %> prohibited this replacement_request from being saved:</h2>
+
+      <ul>
+        <% replacement_request.errors.each do |error| %>
+          <li><%= error.full_message %></li>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
+  <div class="card">
+    <div class="card-header card-header-primary">
+      <p class="card-category">Describa el repuesto que requiere lo mejor posible</p>
+    </div>
+    <div class="card-body">
+
+      <div class="form-group">
+        <%= form.label :vehicle_id, "Vehículo", class:"bmd-label-floating" %>
+        <%#= form.text_field :vehicle_id, class:"form-control" %>
+        <select class="form-control" name="replacement_request[vehicle_id]" id="replacement_request_vehicle_id" >
+          <%= options_for_select(current_user.vehicles.collect{ |t| [ "#{t.plate} - #{t.brand} #{t.model} #{t.year}", t.id ] }) %>
+        </select>
+      </div>
+
+      <div class="form-group">
+        <%= form.label :part_number, "Número de parte", class:"bmd-label-floating" %>
+        <%= form.text_field :part_number, class:"form-control" %>
+      </div>
+
+      <div class="form-group">
+        <%= form.label :short_name, "Nombre", class:"bmd-label-floating" %>
+        <%= form.text_field :short_name, class:"form-control" %>
+      </div>
+
+      <div class="form-group">
+        <%= form.label :description, "Descripción", class:"bmd-label-floating" %>
+        <%= form.text_area :description, class:"form-control", rows: 4 %>
+      </div>
+    </div>
+    <div class="card-footer">
+      <div class="stats align-items-center">
+        <%= form.submit 'Guardar', class:"text-info btn btn-outline-info btn-sm" %>
+        &nbsp;&nbsp;
+        <%= link_to 'Cancelar', replacement_requests_path, class:"text-danger btn btn-outline-danger btn-sm" %>
+      </div>
+    </div>
+  </div>
+
+<% end %>

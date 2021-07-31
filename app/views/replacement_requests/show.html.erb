@@ -1,0 +1,29 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>User:</strong>
+  <%= @replacement_request.user_id %>
+</p>
+
+<p>
+  <strong>Car:</strong>
+  <%= @replacement_request.vehicle_id %>
+</p>
+
+<p>
+  <strong>Part number:</strong>
+  <%= @replacement_request.part_number %>
+</p>
+
+<p>
+  <strong>Short name:</strong>
+  <%= @replacement_request.short_name %>
+</p>
+
+<p>
+  <strong>Description:</strong>
+  <%= @replacement_request.description %>
+</p>
+
+<%= link_to 'Edit', edit_replacement_request_path(@replacement_request) %> |
+<%= link_to 'Back', replacement_requests_path %>

@@ -5,25 +5,36 @@
       <%= link_to dashboard_path, class:"btn btn-outline-dark btn-lg" do %>
         <i class="material-icons text-dark" style="top: 0;">arrow_back_ios_new</i>
       <% end %>
-      Mis vehículos
+      Mis solicitudes
     </h1>
 
-    <% @vehicles.each do |vehicle| %>
-      <div class="card card-stats">
-        <div class="card-header card-header-warning card-header-icon">
+    <% @replacement_requests.each do |replacement_request| %>
+      <div class="card">
+        <div class="card-header card-header-success card-header-icon">
           <div class="card-icon">
-            <i class="material-icons">commute</i>
+            <i class="material-icons">email</i>
           </div>
-          <p class="card-category"><%= vehicle.brand %> <%= vehicle.model %> <%= vehicle.year %></p>
-          <h3 class="card-title"><%= vehicle.plate %> <small><%= vehicle.chasis %></small></h3>
+          <div class="row">
+            <div class="col-md-4 col-sm-6">
+              <p class="card-category text-dark"><%= replacement_request.updated_at.strftime('%d/%m/%Y %H:%M') %> </p>
+            </div>
+            <div class="col-md-8 col-sm-6">
+              <p class="card-category text-dark"><%= replacement_request.vehicle.brand %> <%= replacement_request.vehicle.model %> <%= replacement_request.vehicle.year %> </p>
+            </div>
+          </div>
+          <h3 class="card-title"><%= replacement_request.short_name %></h3>
+        </div>
+        <div class="card-body">
+          <h4>P/N: <%= replacement_request.part_number %></h4>
+          <%= replacement_request.description.html_safe %>
         </div>
         <div class="card-footer">
           <div class="stats align-items-center">
-            <%= link_to edit_vehicle_path(vehicle), class:"text-info btn btn-outline-info btn-sm" do %>
+            <%= link_to edit_replacement_request_path(replacement_request), class:"text-info btn btn-outline-info btn-sm" do %>
               <i class="material-icons text-dark mr-2" style="top: 0;">mode_edit</i>
               Editar
             <% end %>
-            <%= link_to vehicle, method: :delete, data: { confirm: 'Are you sure?' }, class:"text-danger btn btn-outline-danger btn-sm" do %>
+            <%= link_to replacement_request, method: :delete, data: { confirm: 'Are you sure?' }, class:"text-danger btn btn-outline-danger btn-sm" do %>
               <i class="material-icons mr-2" style="top: 0;">remove_circle_outline</i>
               Eliminar
             <% end %>
@@ -41,10 +52,6 @@
 <div class="row justify-content-center">
   <div class="col-md-1 col-sm-1"></div>
   <div class="col">
-    <%= link_to new_vehicle_path, class:"btn btn-outline-success btn-lg btn-block" do %>
-      <i class="material-icons text-dark mr-3" style="top: 0;">electric_car</i>
-      Agregar vehículo
-    <% end %>
     <%= link_to new_replacement_request_path, class:"btn btn-outline-primary btn-lg btn-block" do %>
       <i class="material-icons text-dark mr-3" style="top: 0;">flare</i>
       Enviar solicitud

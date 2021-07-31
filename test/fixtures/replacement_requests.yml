@@ -1,0 +1,15 @@
+# Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  user_id: one
+  vehicle_id: one
+  part_number: MyText
+  short_name: MyString
+  description: MyText
+
+two:
+  user_id: two
+  vehicle_id: two
+  part_number: MyText
+  short_name: MyString
+  description: MyText

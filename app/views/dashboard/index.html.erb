@@ -6,7 +6,7 @@
           <i class="material-icons">commute</i>
         </div>
         <p class="card-category">Mis vehículos</p>
-        <h3 class="card-title">1 <small>vehículo</small></h3>
+        <h3 class="card-title"><%= current_user.vehicles.count %> <small>vehículo</small></h3>
       </div>
       <div class="card-footer">
         <div class="stats align-items-center">
@@ -22,18 +22,18 @@
   <div class="col-md-4 col-sm-4">
     <div class="card card-stats">
       <div class="card-header card-header-success card-header-icon">
-      <div class="card-icon">
-        <i class="material-icons">email</i>
-      </div>
-      <p class="card-category">Solicitudes enviadas</p>
-      <h3 class="card-title">50 <small>solicitudes</small></h3>
+        <div class="card-icon">
+          <i class="material-icons">email</i>
+        </div>
+        <p class="card-category">Solicitudes enviadas</p>
+        <h3 class="card-title"><%= current_user.replacement_requests.count %> <small>solicitudes</small></h3>
       </div>
       <div class="card-footer">
         <div class="stats align-items-center">
-          <a href="#" class="text-info btn btn-outline-info btn-sm">
+          <%= link_to replacement_requests_path, class:"text-info btn btn-outline-info btn-sm" do %>
             <i class="material-icons text-dark mr-2" style="top: 0;">fact_check</i>
             Ver solicitudes
-          </a>
+          <% end %>
         </div>
       </div>
     </div>
@@ -42,11 +42,11 @@
   <div class="col-md-4 col-sm-4">
     <div class="card card-stats">
       <div class="card-header card-header-primary card-header-icon">
-      <div class="card-icon">
-        <i class="material-icons">store</i>
-      </div>
-      <p class="card-category">Solicitudes atendidas</p>
-      <h3 class="card-title">45 <small>solicitudes</small></h3>
+        <div class="card-icon">
+          <i class="material-icons">store</i>
+        </div>
+        <p class="card-category">Solicitudes atendidas</p>
+        <h3 class="card-title">45 <small>solicitudes</small></h3>
       </div>
       <div class="card-footer">
         <div class="stats align-items-center">
@@ -64,10 +64,10 @@
 <div class="row justify-content-center">
   <div class="col-md-1 col-sm-1"></div>
   <div class="col">
-    <a href="#" class="btn btn-outline-primary btn-lg btn-block">
+    <%= link_to new_replacement_request_path, class:"btn btn-outline-primary btn-lg btn-block" do %>
       <i class="material-icons text-dark mr-3" style="top: 0;">flare</i>
       Enviar solicitud
-    </a>
+    <% end %>
     <%= link_to new_vehicle_path, class:"btn btn-outline-success btn-lg btn-block" do %>
       <i class="material-icons text-dark mr-3" style="top: 0;">electric_car</i>
       Agregar vehículo
