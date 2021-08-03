@@ -6,7 +6,7 @@
           <i class="material-icons">commute</i>
         </div>
         <p class="card-category">Mis vehículos</p>
-        <h3 class="card-title"><%= current_user.vehicles.count %> <small>vehículo</small></h3>
+        <h3 class="card-title"><%= @my_vehicles %> <small>vehículos</small></h3>
       </div>
       <div class="card-footer">
         <div class="stats align-items-center">
@@ -26,7 +26,7 @@
           <i class="material-icons">email</i>
         </div>
         <p class="card-category">Solicitudes enviadas</p>
-        <h3 class="card-title"><%= current_user.replacement_requests.count %> <small>solicitudes</small></h3>
+        <h3 class="card-title"><%= @my_requests %> <small>solicitudes</small></h3>
       </div>
       <div class="card-footer">
         <div class="stats align-items-center">
@@ -46,7 +46,7 @@
           <i class="material-icons">store</i>
         </div>
         <p class="card-category">Solicitudes atendidas</p>
-        <h3 class="card-title">45 <small>solicitudes</small></h3>
+        <h3 class="card-title"><%= @my_a_requests %> <small>solicitudes</small></h3>
       </div>
       <div class="card-footer">
         <div class="stats align-items-center">
