@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
 <head>
   <meta charset="utf-8">
@@ -6,22 +6,62 @@
   <link href="https://fonts.googleapis.com/css?family=Roboto:300,400&display=swap" rel="stylesheet">
 
   <title>Quientiene</title>
-  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
   <%= csrf_meta_tags %>
   <%= csp_meta_tag %>
 
   <%= stylesheet_link_tag 'application', media: 'all', 'data-turbolinks-track': 'reload' %>
+  <script src="/js_core/10jquery-3.3.1.min.js" data-turbolinks-track="reload"></script>
+  <script src="/js_core/20popper.min.js" data-turbolinks-track="reload"></script>
+  <script src="/js_core/35bootstrap-material-design.min.js" data-turbolinks-track="reload"></script>
+  <script src="/js_core/40material-dashboard.js" data-turbolinks-track="reload"></script>
+  <%= javascript_pack_tag 'application', 'data-turbolinks-track': 'reload' %>
 
 </head>
 
 <body class="<%= params[:action] == 'index' && ['home'].include?(params[:controller]) ? 'is-boxed' : '' %>">
+  <% if user_signed_in? %>
+    <nav class="user-navigation navbar navbar-expand-lg navbar-dark bg-dark">
+      <div class="container">
+        <%= link_to root_path, class:"navbar-brand" do %>
+          <%= image_tag "quientiene_logo.png", height: "50" %>
+        <% end %>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarText" aria-controls="navbarText" aria-expanded="false" aria-label="Toggle navigation">
+          <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarText">
+          <ul class="navbar-nav mr-auto">
+            <li class="nav-item active">
+              <%= link_to "Panel de control", dashboard_path, class:"nav-link" %>
+            </li>
+            <li class="nav-item">
+              <%= link_to "Solicitudes", replacement_requests_path, class: "nav-link" %>
+            </li>
+            <li class="nav-item">
+              <%= link_to "Vehículos", replacement_requests_path, class: "nav-link" %>
+            </li>
+          </ul>
+          <span class="navbar-text">
+            <ul class="navbar-nav mr-auto">
+              <li class="nav-item">
+                <a class="nav-link" href="#">Mi cuenta</a>
+              </li>
+              <li class="nav-item">
+                <%= link_to "Salir", destroy_user_session_path, method: :delete, class:"nav-link" %>
+              </li>
+            </ul>
+          </span>
+        </div>
+      </div>
+    </nav>
+  <% end %>
   <% if notice %>
-  <p class="alert alert-success"><%= notice %></p>
+    <p class="alert alert-success"><%= notice %></p>
   <% end %>
   <% if alert %>
-  <p class="alert alert-danger"><%= alert %></p>
+    <p class="alert alert-danger"><%= alert %></p>
   <% end %>
   <%= yield %>
-  <%= javascript_pack_tag 'application', 'data-turbolinks-track': 'reload' %>
+  
 </body>
 </html>
