@@ -14,6 +14,9 @@ class ReplacementRequestsController < ApplicationController
 
   # GET /replacement_requests/new
   def new
+    if current_user.vehicles.count == 0
+      redirect_to new_vehicle_path, alert: "Primero debe registrar un vehículo."
+    end
     @replacement_request = ReplacementRequest.new
     @replacement_request.user_id = current_user.id
   end
@@ -31,7 +34,7 @@ class ReplacementRequestsController < ApplicationController
 
     respond_to do |format|
       if @replacement_request.save
-        format.html { redirect_to replacement_requests_url, notice: "Replacement request was successfully created." }
+        format.html { redirect_to replacement_requests_url, notice: "Solicitud creada correctamente." }
         format.json { render :show, status: :created, location: @replacement_request }
       else
         format.html { render :new, status: :unprocessable_entity }
@@ -44,7 +47,7 @@ class ReplacementRequestsController < ApplicationController
   def update
     respond_to do |format|
       if @replacement_request.update(replacement_request_params)
-        format.html { redirect_to replacement_requests_url, notice: "Replacement request was successfully updated." }
+        format.html { redirect_to replacement_requests_url, notice: "Solicitud actualizada correctamente." }
         format.json { render :show, status: :ok, location: @replacement_request }
       else
         format.html { render :edit, status: :unprocessable_entity }
@@ -57,7 +60,7 @@ class ReplacementRequestsController < ApplicationController
   def destroy
     @replacement_request.destroy
     respond_to do |format|
-      format.html { redirect_to replacement_requests_url, notice: "Replacement request was successfully destroyed." }
+      format.html { redirect_to replacement_requests_url, notice: "Solicitud eliminada correctamente." }
       format.json { head :no_content }
     end
   end

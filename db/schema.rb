@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_07_31_011648) do
+ActiveRecord::Schema.define(version: 2021_08_03_210815) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -34,6 +34,20 @@ ActiveRecord::Schema.define(version: 2021_07_31_011648) do
     t.datetime "updated_at", precision: 6, null: false
     t.index ["session_id"], name: "index_sessions_on_session_id", unique: true
     t.index ["updated_at"], name: "index_sessions_on_updated_at"
+  end
+
+  create_table "shops", force: :cascade do |t|
+    t.bigint "user_id", null: false
+    t.string "name"
+    t.string "ruc"
+    t.string "phone1"
+    t.string "phone2"
+    t.string "address"
+    t.string "contact_name"
+    t.string "sector"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["user_id"], name: "index_shops_on_user_id"
   end
 
   create_table "users", force: :cascade do |t|
@@ -77,4 +91,5 @@ ActiveRecord::Schema.define(version: 2021_07_31_011648) do
     t.index ["user_id"], name: "index_vehicles_on_user_id"
   end
 
+  add_foreign_key "shops", "users"
 end

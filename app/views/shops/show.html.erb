@@ -1,0 +1,44 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>User:</strong>
+  <%= @shop.user_id %>
+</p>
+
+<p>
+  <strong>Name:</strong>
+  <%= @shop.name %>
+</p>
+
+<p>
+  <strong>Ruc:</strong>
+  <%= @shop.ruc %>
+</p>
+
+<p>
+  <strong>Phone1:</strong>
+  <%= @shop.phone1 %>
+</p>
+
+<p>
+  <strong>Phone2:</strong>
+  <%= @shop.phone2 %>
+</p>
+
+<p>
+  <strong>Address:</strong>
+  <%= @shop.address %>
+</p>
+
+<p>
+  <strong>Contact name:</strong>
+  <%= @shop.contact_name %>
+</p>
+
+<p>
+  <strong>Sector:</strong>
+  <%= @shop.sector %>
+</p>
+
+<%= link_to 'Edit', edit_shop_path(@shop) %> |
+<%= link_to 'Back', shops_path %>
