@@ -13,6 +13,7 @@ class ShopsController < ApplicationController
   # GET /shops/new
   def new
     @shop = Shop.new
+    @shop.user = current_user
   end
 
   # GET /shops/1/edit

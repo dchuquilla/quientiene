@@ -11,47 +11,54 @@
     </div>
   <% end %>
 
-  <div class="field">
-    <%= form.label :user_id %>
-    <%= form.text_field :user_id %>
-  </div>
+  <div class="card">
+    <div class="card-header card-header-warning">
+      <p class="card-category">Registre la información de su local comercial para que los compradores puedan localizarlo.</p>
+    </div>
+    <div class="card-body">
 
-  <div class="field">
-    <%= form.label :name %>
-    <%= form.text_field :name %>
-  </div>
+      <div class="form-group">
+        <%= form.label :name, class:"bmd-label-floating" %>
+        <%= form.text_field :name, class:"form-control" %>
+      </div>
 
-  <div class="field">
-    <%= form.label :ruc %>
-    <%= form.text_field :ruc %>
-  </div>
+      <div class="form-group">
+        <%= form.label :ruc, class:"bmd-label-floating" %>
+        <%= form.text_field :ruc, class:"form-control" %>
+      </div>
 
-  <div class="field">
-    <%= form.label :phone1 %>
-    <%= form.text_field :phone1 %>
-  </div>
+      <div class="form-group">
+        <%= form.label :phone1, class:"bmd-label-floating" %>
+        <%= form.text_field :phone1, class:"form-control" %>
+      </div>
 
-  <div class="field">
-    <%= form.label :phone2 %>
-    <%= form.text_field :phone2 %>
-  </div>
+      <div class="form-group">
+        <%= form.label :phone2, class:"bmd-label-floating" %>
+        <%= form.text_field :phone2, class:"form-control" %>
+      </div>
 
-  <div class="field">
-    <%= form.label :address %>
-    <%= form.text_field :address %>
-  </div>
+      <div class="form-group">
+        <%= form.label :address, class:"bmd-label-floating" %>
+        <%= form.text_field :address, class:"form-control" %>
+      </div>
 
-  <div class="field">
-    <%= form.label :contact_name %>
-    <%= form.text_field :contact_name %>
-  </div>
+      <div class="form-group">
+        <%= form.label :contact_name, class:"bmd-label-floating" %>
+        <%= form.text_field :contact_name, class:"form-control" %>
+      </div>
 
-  <div class="field">
-    <%= form.label :sector %>
-    <%= form.text_field :sector %>
-  </div>
+      <div class="form-group">
+        <%= form.label :sector, class:"bmd-label-floating" %>
+        <%= form.text_field :sector, class:"form-control" %>
+      </div>
 
-  <div class="actions">
-    <%= form.submit %>
+    </div>
+    <div class="card-footer">
+      <div class="stats align-items-center">
+        <%= form.submit 'Guardar', class:"text-info btn btn-outline-info btn-sm" %>
+        &nbsp;&nbsp;
+        <%= link_to 'Cancelar', shops_path, class:"text-danger btn btn-outline-danger btn-sm" %>
+      </div>
+    </div>
   </div>
 <% end %>

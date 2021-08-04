@@ -31,15 +31,25 @@
         </button>
         <div class="collapse navbar-collapse" id="navbarText">
           <ul class="navbar-nav mr-auto">
-            <li class="nav-item active">
-              <%= link_to "Panel de control", dashboard_path, class:"nav-link" %>
-            </li>
-            <li class="nav-item">
-              <%= link_to "Solicitudes", replacement_requests_path, class: "nav-link" %>
-            </li>
-            <li class="nav-item">
-              <%= link_to "Vehículos", replacement_requests_path, class: "nav-link" %>
-            </li>
+            <% if current_user.has_role?(:customer) %>
+              <li class="nav-item active">
+                <%= link_to "Panel de control", dashboard_path, class:"nav-link" %>
+              </li>
+              <li class="nav-item">
+                <%= link_to "Solicitudes", replacement_requests_path, class: "nav-link" %>
+              </li>
+              <li class="nav-item">
+                <%= link_to "Vehículos", replacement_requests_path, class: "nav-link" %>
+              </li>
+            <% end %>
+            <% if current_user.has_role?(:shop) %>
+              <li class="nav-item active">
+                <%= link_to "Panel de control", dashboard_shop_path, class:"nav-link" %>
+              </li>
+              <li class="nav-item">
+                <%= link_to "Locales", shops_path, class:"nav-link" %>
+              </li>
+            <% end %>
           </ul>
           <span class="navbar-text">
             <ul class="navbar-nav mr-auto">

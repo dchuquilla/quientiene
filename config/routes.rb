@@ -5,6 +5,7 @@ Rails.application.routes.draw do
   get 'home/index'
   get 'home/signup'
   get 'dashboard', to: "dashboard#index"
+  get 'dashboard_shop', to: "dashboard#shop"
   
   #devise_for :users
   devise_for :users, controllers: { 

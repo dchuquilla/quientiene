@@ -1,10 +1,11 @@
 class ReplacementRequestsController < ApplicationController
   before_action :set_replacement_request, only: %i[ show edit update destroy ]
   before_action :authenticate_user!
+  load_and_authorize_resource
 
   # GET /replacement_requests or /replacement_requests.json
   def index
-    @replacement_requests = ReplacementRequest.all.order(id: :desc)
+    @replacement_requests = @replacement_requests.all.order(id: :desc)
   end
 
   # GET /replacement_requests/1 or /replacement_requests/1.json
@@ -29,11 +30,15 @@ class ReplacementRequestsController < ApplicationController
   def create
     @replacement_request = ReplacementRequest.new(replacement_request_params)
     @replacement_request.user_id = current_user.id
+    @replacement_request.state = "created"
 
     #TODO: Enviar notificaciones
 
     respond_to do |format|
       if @replacement_request.save
+        
+        current_user.add_role(:customer, @replacement_request)
+
         format.html { redirect_to replacement_requests_url, notice: "Solicitud creada correctamente." }
         format.json { render :show, status: :created, location: @replacement_request }
       else
@@ -68,7 +73,7 @@ class ReplacementRequestsController < ApplicationController
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_replacement_request
-      @replacement_request = ReplacementRequest.find(params[:id])
+      #@replacement_request = ReplacementRequest.find(params[:id])
     end
 
     # Only allow a list of trusted parameters through.

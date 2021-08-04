@@ -37,6 +37,18 @@ en:
         restrict_dependent_destroy:
           has_one: No se puede eliminar el registro porque existe un %{record} dependiente
           has_many: No se puede eliminar el registro porque existen %{record} dependientes
+    attributes:
+      shop:
+        name: Nombre
+        ruc: RUC
+        phone1: Telefono
+        phone2: Telefono alternativo
+        address: Dirección
+        contact_name: Nombre de contacto
+    models:
+      shop: "Local"
+      shops: "Locales"
+
   date:
     abbr_day_names:
     - dom
@@ -247,3 +259,6 @@ en:
       long: "%-d de %B de %Y %H:%M"
       short: "%-d de %b %H:%M"
     pm: pm
+  global:
+    forms:
+      submit: Guardar
