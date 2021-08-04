@@ -39,16 +39,34 @@ en:
           has_many: No se puede eliminar el registro porque existen %{record} dependientes
     attributes:
       shop:
+        user_id: Usuario
         name: Nombre
         ruc: RUC
         phone1: Telefono
         phone2: Telefono alternativo
         address: Dirección
         contact_name: Nombre de contacto
+      vehicle:
+        user_id: Usuario
+        plate: Placa
+        brand: Marca
+        model: Modelo
+        year: año
+      replacement_request:
+        user_id: Usuario
+        vehicle_id: Vehículo
+        part_number: Número de parte
+        short_name: Nombre
+        description: Descripción
     models:
       shop: "Local"
       shops: "Locales"
-
+      vehicle: "Vehículo"
+      vehicles: "Vehículos"
+      replacement_request: "Solicitud de repuesto"
+      replacement_requests: "Solicitudes de repuesto"
+      user: "Usuario"
+      users: "Usuarios"
   date:
     abbr_day_names:
     - dom
@@ -181,6 +199,9 @@ en:
       wrong_length:
         one: no tiene la longitud correcta (1 carácter exactos)
         other: no tiene la longitud correcta (%{count} caracteres exactos)
+      not_saved:
+        one: 'Ocurrió un error al tratar de guardar %{resource}:'
+        other: 'Ocurrieron %{count} errores al tratar de guardar %{resource}:'
     template:
       body: 'Se encontraron problemas con los siguientes campos:'
       header:

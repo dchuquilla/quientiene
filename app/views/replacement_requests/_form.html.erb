@@ -1,7 +1,9 @@
 <%= form_with(model: replacement_request) do |form| %>
   <% if replacement_request.errors.any? %>
-    <div id="error_explanation">
-      <h2><%= pluralize(replacement_request.errors.count, "error") %> prohibited this replacement_request from being saved:</h2>
+    <div class="alert alert-danger" role="alert">
+      <h2>
+        <%= I18n.t("errors.messages.not_saved", count: replacement_request.errors.count, resource: replacement_request.class.model_name.human.downcase) %>
+      </h2>
 
       <ul>
         <% replacement_request.errors.each do |error| %>
