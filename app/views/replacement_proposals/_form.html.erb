@@ -1,4 +1,5 @@
 <%= form_with(model: replacement_proposal) do |form| %>
+  <%= form.hidden_field :replacement_request_id, value: @replacement_request.id %>
   <% if replacement_proposal.errors.any? %>
     <div class="alert alert-danger" role="alert">
       <h2>

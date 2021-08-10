@@ -24,6 +24,7 @@ class ReplacementProposalsController < ApplicationController
   # POST /replacement_proposals or /replacement_proposals.json
   def create
     @replacement_proposal = ReplacementProposal.new(replacement_proposal_params)
+    @replacement_proposal.user = current_user
 
     respond_to do |format|
       if @replacement_proposal.save
