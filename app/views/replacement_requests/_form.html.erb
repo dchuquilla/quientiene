@@ -20,7 +20,6 @@
 
       <div class="form-group">
         <%= form.label :vehicle_id, "Vehículo", class:"bmd-label-floating" %>
-        <%#= form.text_field :vehicle_id, class:"form-control" %>
         <select class="form-control" name="replacement_request[vehicle_id]" id="replacement_request_vehicle_id" >
           <%= options_for_select(current_user.vehicles.collect{ |t| [ "#{t.plate} - #{t.brand} #{t.model} #{t.year}", t.id ] }) %>
         </select>

@@ -1,0 +1,22 @@
+<div class="card">
+  <div class="card-header card-header-success card-header-icon">
+    <div class="card-icon">
+      <i class="material-icons">email</i>
+    </div>
+    <div class="row">
+      <div class="col-md-4 col-sm-6">
+        <p class="card-category text-dark"><%= replacement_request.updated_at.strftime('%d/%m/%Y %H:%M') %> </p>
+      </div>
+      <div class="col-md-8 col-sm-6">
+        <p class="card-category text-dark"><%= replacement_request.vehicle.brand %> <%= replacement_request.vehicle.model %> <%= replacement_request.vehicle.year %> </p>
+      </div>
+    </div>
+    <h3 class="card-title"><%= replacement_request.short_name %></h3>
+  </div>
+  <div class="card-body">
+    <% if replacement_request.part_number.present? %>
+      <h4>P/N: <%= replacement_request.part_number %></h4>
+    <% end %>
+    <%= replacement_request.description.html_safe %>
+  </div>
+</div>

@@ -1,5 +1,5 @@
 class ReplacementProposalsController < ApplicationController
-  before_action :set_replacement_proposal, only: %i[ show edit update destroy ]
+  before_action :set_replacement_request, only: %i[ show edit update new ]
   before_action :authenticate_user!
   load_and_authorize_resource
 
@@ -27,7 +27,10 @@ class ReplacementProposalsController < ApplicationController
 
     respond_to do |format|
       if @replacement_proposal.save
-        format.html { redirect_to @replacement_proposal, notice: "Replacement proposal was successfully created." }
+
+        current_user.add_role :shop, @replacement_proposal
+
+        format.html { redirect_to @replacement_proposal, notice: "Propuesta creada correctamente." }
         format.json { render :show, status: :created, location: @replacement_proposal }
       else
         format.html { render :new, status: :unprocessable_entity }
@@ -40,7 +43,7 @@ class ReplacementProposalsController < ApplicationController
   def update
     respond_to do |format|
       if @replacement_proposal.update(replacement_proposal_params)
-        format.html { redirect_to @replacement_proposal, notice: "Replacement proposal was successfully updated." }
+        format.html { redirect_to @replacement_proposal, notice: "Propuesta actualizada correctamente." }
         format.json { render :show, status: :ok, location: @replacement_proposal }
       else
         format.html { render :edit, status: :unprocessable_entity }
@@ -53,7 +56,7 @@ class ReplacementProposalsController < ApplicationController
   def destroy
     @replacement_proposal.destroy
     respond_to do |format|
-      format.html { redirect_to replacement_proposals_url, notice: "Replacement proposal was successfully destroyed." }
+      format.html { redirect_to replacement_proposals_url, notice: "Propuesta eliminada correctamente." }
       format.json { head :no_content }
     end
   end
@@ -62,6 +65,10 @@ class ReplacementProposalsController < ApplicationController
     # Use callbacks to share common setup or constraints between actions.
     def set_replacement_proposal
       #@replacement_proposal = ReplacementProposal.find(params[:id])
+    end
+
+    def set_replacement_request
+      @replacement_request = ReplacementRequest.find(params[:request])
     end
 
     # Only allow a list of trusted parameters through.

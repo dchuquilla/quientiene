@@ -58,6 +58,18 @@ en:
         part_number: Número de parte
         short_name: Nombre
         description: Descripción
+      replacement_proposal:
+        user_id: Usuario
+        replacement_request_id: Solicitud
+        sho_id: Local
+        name: Nombre de parte
+        price: Precio
+        original: "Repuesto original"
+        brand: Marca
+        model: Modelo
+        origin: "Pais de origen"
+        life_time: "Vida útil"
+        
     models:
       shop: "Local"
       shops: "Locales"
@@ -65,6 +77,8 @@ en:
       vehicles: "Vehículos"
       replacement_request: "Solicitud de repuesto"
       replacement_requests: "Solicitudes de repuesto"
+      replacement_proposal: "Propuesta de repuesto"
+      replacement_proposals: "Propuestas de repuesto"
       user: "Usuario"
       users: "Usuarios"
   date:

@@ -47,7 +47,7 @@
               <% end %>
             <% end %>
             <% if can? :create, ReplacementProposal %>
-              <%= link_to new_replacement_proposal_path, class:"text-warning btn btn-outline-warning btn-sm" do %>
+              <%= link_to new_replacement_proposal_path(request: replacement_request), class:"text-warning btn btn-outline-warning btn-sm" do %>
                 <i class="material-icons mr-2" style="top: 0;">mark_email_read</i>
                 Agregar propueta
               <% end %>
@@ -68,17 +68,20 @@
   <div class="col-md-1 col-sm-1"></div>
 </div>
 
-<div class="row justify-content-center">
-  <div class="col-md-1 col-sm-1"></div>
-  <div class="col">
-    <%= link_to new_replacement_request_path, data: { turbolinks: false }, class:"btn btn-outline-primary btn-lg btn-block" do %>
-      <i class="material-icons text-dark mr-3" style="top: 0;">flare</i>
-      Solicitar repuesto
-    <% end %>
+<% if current_user.has_role? :customer %>
+  <div class="row justify-content-center">
+    <div class="col-md-1 col-sm-1"></div>
+    <div class="col">
+      <%= link_to new_replacement_request_path, data: { turbolinks: false }, class:"btn btn-outline-primary btn-lg btn-block" do %>
+        <i class="material-icons text-dark mr-3" style="top: 0;">flare</i>
+        Solicitar repuesto
+      <% end %>
+    </div>
+    <div class="col-md-1 col-sm-1"></div>
   </div>
-  <div class="col-md-1 col-sm-1"></div>
-</div>
-<br>
+  <br>
+<% end %>
+
 <div class="row justify-content-center">
   <div class="col-md-1 col-sm-1"></div>
     <div class="col">
