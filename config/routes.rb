@@ -1,19 +1,21 @@
 Rails.application.routes.draw do
-  resources :shops
   root to: 'home#index'
   
   get 'home/index'
-  get 'home/signup'
+  get 'privacy-policy', to: 'home#privacy_policy'
+  get 'empresas', to: 'home#business'
   get 'dashboard', to: "dashboard#index"
   get 'dashboard_shop', to: "dashboard#shop"
   
   #devise_for :users
   devise_for :users, controllers: { 
     omniauth_callbacks: 'users/omniauth',
-    sessions: 'users/sessions'
+    sessions: 'users/sessions',
+    registrations: 'users/registrations'
   }
   # For details on the DSL available within this file, see https://guides.rubyonrails.org/routing.html
   
   resources :replacement_requests
   resources :vehicles
+  resources :shops
 end
