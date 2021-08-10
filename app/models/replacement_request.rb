@@ -3,6 +3,7 @@ class ReplacementRequest < ApplicationRecord
   
   belongs_to :user
   belongs_to :vehicle
+  has_many :replacement_proposals
 
   validates :short_name, presence: true
 

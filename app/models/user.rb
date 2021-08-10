@@ -11,6 +11,7 @@ class User < ApplicationRecord
   has_many :vehicles, dependent: :destroy
   has_many :replacement_requests, dependent: :destroy
   has_many :shops, dependent: :destroy
+  has_many :replacement_proposals, dependent: :destroy
 
   after_create :assign_default_role
 
