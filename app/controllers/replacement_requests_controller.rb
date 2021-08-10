@@ -37,7 +37,7 @@ class ReplacementRequestsController < ApplicationController
     respond_to do |format|
       if @replacement_request.save
         
-        current_user.add_role(:customer, @replacement_request)
+        current_user.add_role :customer, @replacement_request
 
         format.html { redirect_to replacement_requests_url, notice: "Solicitud creada correctamente." }
         format.json { render :show, status: :created, location: @replacement_request }

@@ -31,9 +31,9 @@ class VehiclesController < ApplicationController
     respond_to do |format|
       if @vehicle.save
 
-        current_user.add_role(:customer, @vehicle)
-        
-        format.html { redirect_to vehicles_url, notice: "Vehicle was successfully created." }
+        current_user.add_role :customer, @vehicle
+
+        format.html { redirect_to vehicles_url, notice: "Vehículo creado correctamente." }
         format.json { render :show, status: :created, location: @vehicle }
       else
         format.html { render :new, status: :unprocessable_entity }
@@ -47,7 +47,7 @@ class VehiclesController < ApplicationController
     @vehicle.user_id = current_user.id
     respond_to do |format|
       if @vehicle.update(vehicle_params)
-        format.html { redirect_to vehicles_url, notice: "Vehicle was successfully updated." }
+        format.html { redirect_to vehicles_url, notice: "Vehículo editado correctamente." }
         format.json { render :show, status: :ok, location: @vehicle }
       else
         format.html { render :edit, status: :unprocessable_entity }
@@ -60,7 +60,7 @@ class VehiclesController < ApplicationController
   def destroy
     @vehicle.destroy
     respond_to do |format|
-      format.html { redirect_to vehicles_url, notice: "Vehicle was successfully destroyed." }
+      format.html { redirect_to vehicles_url, notice: "Vehículo eliminado correctamente." }
       format.json { head :no_content }
     end
   end

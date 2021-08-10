@@ -1,9 +1,10 @@
 class ShopsController < ApplicationController
   before_action :set_shop, only: %i[ show edit update destroy ]
+  load_and_authorize_resource
 
   # GET /shops or /shops.json
   def index
-    @shops = Shop.all
+    #@shops = Shop.all
   end
 
   # GET /shops/1 or /shops/1.json
@@ -23,10 +24,14 @@ class ShopsController < ApplicationController
   # POST /shops or /shops.json
   def create
     @shop = Shop.new(shop_params)
+    @shop.user = current_user
 
     respond_to do |format|
       if @shop.save
-        format.html { redirect_to @shop, notice: "Shop was successfully created." }
+        
+        current_user.add_role :shop, @shop
+        
+        format.html { redirect_to shops_url, notice: "Local creado correctamente." }
         format.json { render :show, status: :created, location: @shop }
       else
         format.html { render :new, status: :unprocessable_entity }
@@ -39,7 +44,7 @@ class ShopsController < ApplicationController
   def update
     respond_to do |format|
       if @shop.update(shop_params)
-        format.html { redirect_to @shop, notice: "Shop was successfully updated." }
+        format.html { redirect_to shops_url, notice: "Local actualizado correctamente." }
         format.json { render :show, status: :ok, location: @shop }
       else
         format.html { render :edit, status: :unprocessable_entity }
@@ -52,7 +57,7 @@ class ShopsController < ApplicationController
   def destroy
     @shop.destroy
     respond_to do |format|
-      format.html { redirect_to shops_url, notice: "Shop was successfully destroyed." }
+      format.html { redirect_to shops_url, notice: "Local eliminado correctamente." }
       format.json { head :no_content }
     end
   end
