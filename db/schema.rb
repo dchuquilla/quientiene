@@ -10,10 +10,28 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_08_03_223736) do
+ActiveRecord::Schema.define(version: 2021_08_10_201736) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
+
+  create_table "replacement_proposals", force: :cascade do |t|
+    t.bigint "user_id", null: false
+    t.bigint "shop_id", null: false
+    t.string "name"
+    t.decimal "price"
+    t.boolean "original"
+    t.string "brand"
+    t.string "origin"
+    t.string "life_time"
+    t.string "target"
+    t.string "delivery_time"
+    t.string "conditions"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["shop_id"], name: "index_replacement_proposals_on_shop_id"
+    t.index ["user_id"], name: "index_replacement_proposals_on_user_id"
+  end
 
   create_table "replacement_requests", force: :cascade do |t|
     t.bigint "user_id"
@@ -110,5 +128,7 @@ ActiveRecord::Schema.define(version: 2021_08_03_223736) do
     t.index ["user_id"], name: "index_vehicles_on_user_id"
   end
 
+  add_foreign_key "replacement_proposals", "shops"
+  add_foreign_key "replacement_proposals", "users"
   add_foreign_key "shops", "users"
 end

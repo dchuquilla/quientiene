@@ -6,7 +6,7 @@ class DashboardController < ApplicationController
     end
     @my_vehicles = current_user.vehicles.count
     @my_requests = current_user.replacement_requests.count
-    @my_a_requests = current_user.replacement_requests.where(state: "answered").count
+    @my_c_requests = ReplacementRequest.closed.count
   end
 
   def shop
@@ -14,5 +14,7 @@ class DashboardController < ApplicationController
       redirect_to new_shop_path, alert: "Por favor registre un local"
     end
     @my_shops = current_user.shops.count
+    @pending_requests = ReplacementRequest.pending.count
+    @accepted_requests = ReplacementRequest.accepted.count
   end
 end

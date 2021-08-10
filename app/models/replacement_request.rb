@@ -5,4 +5,8 @@ class ReplacementRequest < ApplicationRecord
   belongs_to :vehicle
 
   validates :short_name, presence: true
+
+  scope :pending, ->() {where(state: 'created')}
+  scope :closed, ->() {where(state: 'closed')}
+  scope :answered, ->() {where(state: 'answered')}
 end

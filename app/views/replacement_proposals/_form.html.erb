@@ -1,0 +1,72 @@
+<%= form_with(model: replacement_proposal) do |form| %>
+  <% if replacement_proposal.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(replacement_proposal.errors.count, "error") %> prohibited this replacement_proposal from being saved:</h2>
+
+      <ul>
+        <% replacement_proposal.errors.each do |error| %>
+          <li><%= error.full_message %></li>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= form.label :user_id %>
+    <%= form.text_field :user_id %>
+  </div>
+
+  <div class="field">
+    <%= form.label :shop_id %>
+    <%= form.text_field :shop_id %>
+  </div>
+
+  <div class="field">
+    <%= form.label :name %>
+    <%= form.text_field :name %>
+  </div>
+
+  <div class="field">
+    <%= form.label :price %>
+    <%= form.text_field :price %>
+  </div>
+
+  <div class="field">
+    <%= form.label :original %>
+    <%= form.check_box :original %>
+  </div>
+
+  <div class="field">
+    <%= form.label :brand %>
+    <%= form.text_field :brand %>
+  </div>
+
+  <div class="field">
+    <%= form.label :origin %>
+    <%= form.text_field :origin %>
+  </div>
+
+  <div class="field">
+    <%= form.label :life_time %>
+    <%= form.text_field :life_time %>
+  </div>
+
+  <div class="field">
+    <%= form.label :target %>
+    <%= form.text_field :target %>
+  </div>
+
+  <div class="field">
+    <%= form.label :delivery_time %>
+    <%= form.text_field :delivery_time %>
+  </div>
+
+  <div class="field">
+    <%= form.label :conditions %>
+    <%= form.text_field :conditions %>
+  </div>
+
+  <div class="actions">
+    <%= form.submit %>
+  </div>
+<% end %>

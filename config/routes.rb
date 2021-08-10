@@ -18,4 +18,5 @@ Rails.application.routes.draw do
   resources :replacement_requests
   resources :vehicles
   resources :shops
+  resources :replacement_proposals
 end

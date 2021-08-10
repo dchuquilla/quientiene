@@ -1,0 +1,59 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>User:</strong>
+  <%= @replacement_proposal.user_id %>
+</p>
+
+<p>
+  <strong>Shop:</strong>
+  <%= @replacement_proposal.shop_id %>
+</p>
+
+<p>
+  <strong>Name:</strong>
+  <%= @replacement_proposal.name %>
+</p>
+
+<p>
+  <strong>Price:</strong>
+  <%= @replacement_proposal.price %>
+</p>
+
+<p>
+  <strong>Original:</strong>
+  <%= @replacement_proposal.original %>
+</p>
+
+<p>
+  <strong>Brand:</strong>
+  <%= @replacement_proposal.brand %>
+</p>
+
+<p>
+  <strong>Origin:</strong>
+  <%= @replacement_proposal.origin %>
+</p>
+
+<p>
+  <strong>Life time:</strong>
+  <%= @replacement_proposal.life_time %>
+</p>
+
+<p>
+  <strong>Target:</strong>
+  <%= @replacement_proposal.target %>
+</p>
+
+<p>
+  <strong>Delivery time:</strong>
+  <%= @replacement_proposal.delivery_time %>
+</p>
+
+<p>
+  <strong>Conditions:</strong>
+  <%= @replacement_proposal.conditions %>
+</p>
+
+<%= link_to 'Edit', edit_replacement_proposal_path(@replacement_proposal) %> |
+<%= link_to 'Back', replacement_proposals_path %>
