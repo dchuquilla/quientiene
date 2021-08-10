@@ -30,10 +30,10 @@
       </div>
       <div class="card-footer">
         <div class="stats align-items-center">
-          <a href="#" class="text-info btn btn-outline-info btn-sm">
+          <%= link_to replacement_requests_path, class: "text-info btn btn-outline-info btn-sm" do %>
             <i class="material-icons text-dark mr-2" style="top: 0;">summarize</i>
             Ver solicitudes
-          </a>
+          <% end %>
         </div>
       </div>
     </div>
@@ -46,11 +46,11 @@
           <i class="material-icons">forward_to_inbox</i>
         </div>
         <p class="card-category">Propuestas aceptadas</p>
-        <h3 class="card-title">90 <small>Propuestas</small></h3>
+        <h3 class="card-title"><%= @accepted_proposals %> <small>Propuestas</small></h3>
       </div>
       <div class="card-footer">
         <div class="stats align-items-center">
-          <%= link_to '#', class:"text-info btn btn-outline-info btn-sm" do %>
+          <%= link_to replacement_proposals_path, class:"text-info btn btn-outline-info btn-sm" do %>
             <i class="material-icons text-dark mr-2" style="top: 0;">fact_check</i>
             Ver propuestas
           <% end %>

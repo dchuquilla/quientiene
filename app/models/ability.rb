@@ -9,12 +9,14 @@ class Ability
     if user.has_role?(:customer)
       can :manage, Vehicle, user: user
       can :manage, ReplacementRequest, user: user
+      can :read, ReplacementProposal
     end
 
     # Shop Permissions
     if user.has_role?(:shop)
       can :read, ReplacementRequest
       can :manage, Shop, user: user
+      can :manage, ReplacementProposal, user: user
     end
 
     if user.has_role?(:administrator)

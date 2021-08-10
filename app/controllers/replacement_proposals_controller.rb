@@ -1,9 +1,11 @@
 class ReplacementProposalsController < ApplicationController
   before_action :set_replacement_proposal, only: %i[ show edit update destroy ]
+  before_action :authenticate_user!
+  load_and_authorize_resource
 
   # GET /replacement_proposals or /replacement_proposals.json
   def index
-    @replacement_proposals = ReplacementProposal.all
+    #@replacement_proposals = ReplacementProposal.all
   end
 
   # GET /replacement_proposals/1 or /replacement_proposals/1.json
@@ -59,7 +61,7 @@ class ReplacementProposalsController < ApplicationController
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_replacement_proposal
-      @replacement_proposal = ReplacementProposal.find(params[:id])
+      #@replacement_proposal = ReplacementProposal.find(params[:id])
     end
 
     # Only allow a list of trusted parameters through.

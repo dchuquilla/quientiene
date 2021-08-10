@@ -15,6 +15,6 @@ class DashboardController < ApplicationController
     end
     @my_shops = current_user.shops.count
     @pending_requests = ReplacementRequest.pending.count
-    @accepted_requests = ReplacementRequest.accepted.count
+    @accepted_proposals = ReplacementProposal.accepted.count
   end
 end

@@ -5,7 +5,11 @@
       <%= link_to dashboard_path, class:"btn btn-outline-dark btn-lg" do %>
         <i class="material-icons text-dark" style="top: 0;">arrow_back_ios_new</i>
       <% end %>
-      Mis solicitudes
+      <% if current_user.has_role? :customer %>
+        Mis solicitudes
+      <% else %>
+        Solicitudes
+      <% end %>
     </h1>
 
     <% @replacement_requests.each_with_index do |replacement_request, index| %>
@@ -25,18 +29,28 @@
           <h3 class="card-title"><%= replacement_request.short_name %></h3>
         </div>
         <div class="card-body">
-          <h4>P/N: <%= replacement_request.part_number %></h4>
+          <% if replacement_request.part_number.present? %>
+            <h4>P/N: <%= replacement_request.part_number %></h4>
+          <% end %>
           <%= replacement_request.description.html_safe %>
         </div>
         <div class="card-footer">
           <div class="stats align-items-center">
-            <%= link_to edit_replacement_request_path(replacement_request), class:"text-info btn btn-outline-info btn-sm" do %>
-              <i class="material-icons text-dark mr-2" style="top: 0;">mode_edit</i>
-              Editar
+            <% if can? :manage, replacement_request %>
+              <%= link_to edit_replacement_request_path(replacement_request), class:"text-info btn btn-outline-info btn-sm" do %>
+                <i class="material-icons text-dark mr-2" style="top: 0;">mode_edit</i>
+                Editar
+              <% end %>
+              <%= link_to replacement_request, method: :delete, data: { confirm: '¿Está seguro?' }, class:"text-danger btn btn-outline-danger btn-sm" do %>
+                <i class="material-icons mr-2" style="top: 0;">remove_circle_outline</i>
+                Eliminar
+              <% end %>
             <% end %>
-            <%= link_to replacement_request, method: :delete, data: { confirm: '¿Está seguro?' }, class:"text-danger btn btn-outline-danger btn-sm" do %>
-              <i class="material-icons mr-2" style="top: 0;">remove_circle_outline</i>
-              Eliminar
+            <% if can? :create, ReplacementProposal %>
+              <%= link_to new_replacement_proposal_path, class:"text-warning btn btn-outline-warning btn-sm" do %>
+                <i class="material-icons mr-2" style="top: 0;">mark_email_read</i>
+                Agregar propueta
+              <% end %>
             <% end %>
           </div>
         </div>
