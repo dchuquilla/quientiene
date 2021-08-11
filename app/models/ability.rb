@@ -10,6 +10,7 @@ class Ability
       can :manage, Vehicle, user: user
       can :manage, ReplacementRequest, user: user
       can :read, ReplacementProposal
+      can :ignore, ReplacementProposal
     end
 
     # Shop Permissions

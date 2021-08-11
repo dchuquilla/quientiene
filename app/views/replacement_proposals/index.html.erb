@@ -49,6 +49,13 @@
                     Eliminar
                   <% end %>
                 <% end %>
+
+                <% if current_user.has_role?(:customer) %>
+                  <%= link_to ignore_replacement_proposal_path(replacement_proposal, replacement_request_id: replacement_proposal.replacement_request_id), data: { confirm: '¿Está seguro?' }, class:"text-danger btn btn-outline-danger btn-sm" do %>
+                    <i class="material-icons mr-2" style="top: 0;">close</i>
+                    Ignorar
+                  <% end %>
+                <% end %>
               </div>
             </div>
           </div>

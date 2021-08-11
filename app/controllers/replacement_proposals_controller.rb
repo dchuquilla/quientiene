@@ -8,6 +8,9 @@ class ReplacementProposalsController < ApplicationController
     if params[:replacement_request_id].present?
       @replacement_proposals = @replacement_proposals.where(replacement_request_id: params[:replacement_request_id].to_i)
     end
+    if current_user.has_role? :customer
+      @replacement_proposals = @replacement_proposals.where.not(id: IgnoredProposal.mine(current_user).map { |ir| ir.replacement_proposal_id })
+    end
   end
 
   # GET /replacement_proposals/1 or /replacement_proposals/1.json
@@ -63,6 +66,12 @@ class ReplacementProposalsController < ApplicationController
       format.html { redirect_to replacement_proposals_url, notice: "Propuesta eliminada correctamente." }
       format.json { head :no_content }
     end
+  end
+
+  # GET /replacement_proposals/1/ignore or /replacement_proposals/1/ignore.json
+  def ignore
+    IgnoredProposal.create(user: current_user, replacement_proposal: @replacement_proposal)
+    redirect_to replacement_proposals_url(replacement_request_id: params[:replacement_request_id]), warning: "Propuesta ignorada correctamente."
   end
 
   private

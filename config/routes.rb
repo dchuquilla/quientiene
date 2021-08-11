@@ -22,5 +22,9 @@ Rails.application.routes.draw do
   end
   resources :vehicles
   resources :shops
-  resources :replacement_proposals
+  resources :replacement_proposals do
+    member do
+      get :ignore
+    end
+  end
 end
