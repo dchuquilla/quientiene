@@ -6,7 +6,16 @@ class ReplacementRequestsController < ApplicationController
   # GET /replacement_requests or /replacement_requests.json
   def index
     @rr_query = ReplacementRequest.accessible_by(current_ability).order(id: :desc).ransack(params[:q])
-    @replacement_requests = @rr_query.result(distinct: true).includes(:vehicle)
+    @replacement_requests = @rr_query.result(distinct: true).includes(:vehicle).where.not(state: ['closed'])
+    if current_user.has_role? :shop
+      @replacement_requests = @replacement_requests.where.not(id: IgnoredRequest.mine(current_user).map { |ir| ir.replacement_request_id })
+    end
+  end
+
+  # GET /replacement_requests/closed or /replacement_requests/closed.json
+  def closed
+    @rr_query = ReplacementRequest.accessible_by(current_ability).order(id: :desc).ransack(params[:q])
+    @replacement_requests = @rr_query.result(distinct: true).includes(:vehicle).where(state: 'closed')
     if current_user.has_role? :shop
       @replacement_requests = @replacement_requests.where.not(id: IgnoredRequest.mine(current_user).map { |ir| ir.replacement_request_id })
     end

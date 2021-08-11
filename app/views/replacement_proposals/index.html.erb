@@ -51,6 +51,19 @@
                 <% end %>
 
                 <% if current_user.has_role?(:customer) %>
+                  <% if replacement_proposal.state == 'accepted' %>
+                    <%= link_to "javascript: void(0);", class:"text-success btn btn-outline-success btn-sm", disabled: true do %>
+                      <i class="material-icons mr-2" style="top: 0;">done</i>
+                      Propuesta aceptada
+                    <% end %>
+                  <% else %>
+                    <%= link_to accept_replacement_proposal_path(replacement_proposal, replacement_request_id: replacement_proposal.replacement_request_id), data: { confirm: '¿Está seguro?' }, class:"text-success btn btn-outline-success btn-sm" do %>
+                      <i class="material-icons mr-2" style="top: 0;">done</i>
+                      Aceptar
+                    <% end %>
+                  <% end %>
+                <% end %>
+                <% if current_user.has_role?(:customer) && replacement_proposal.state != 'accepted' %>
                   <%= link_to ignore_replacement_proposal_path(replacement_proposal, replacement_request_id: replacement_proposal.replacement_request_id), data: { confirm: '¿Está seguro?' }, class:"text-danger btn btn-outline-danger btn-sm" do %>
                     <i class="material-icons mr-2" style="top: 0;">close</i>
                     Ignorar

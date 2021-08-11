@@ -11,6 +11,7 @@ class Ability
       can :manage, ReplacementRequest, user: user
       can :read, ReplacementProposal
       can :ignore, ReplacementProposal
+      can :accept, ReplacementProposal
     end
 
     # Shop Permissions

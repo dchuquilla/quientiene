@@ -16,6 +16,9 @@ Rails.application.routes.draw do
   # For details on the DSL available within this file, see https://guides.rubyonrails.org/routing.html
   
   resources :replacement_requests do
+    collection do
+      get :closed
+    end
     member do
       get :ignore
     end
@@ -25,6 +28,7 @@ Rails.application.routes.draw do
   resources :replacement_proposals do
     member do
       get :ignore
+      get :accept
     end
   end
 end

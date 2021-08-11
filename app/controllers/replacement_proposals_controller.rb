@@ -74,6 +74,13 @@ class ReplacementProposalsController < ApplicationController
     redirect_to replacement_proposals_url(replacement_request_id: params[:replacement_request_id]), warning: "Propuesta ignorada correctamente."
   end
 
+  # GET /replacement_proposals/1/accept or /replacement_proposals/1/accept.json
+  def accept
+    @replacement_proposal.update(state: 'accepted')
+    @replacement_proposal.replacement_request.update(state: 'closed')
+    redirect_to closed_replacement_requests_path, warning: "Propuesta aceptada correctamente."
+  end
+
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_replacement_proposal
