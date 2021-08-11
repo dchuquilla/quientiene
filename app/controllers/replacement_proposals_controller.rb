@@ -5,7 +5,9 @@ class ReplacementProposalsController < ApplicationController
 
   # GET /replacement_proposals or /replacement_proposals.json
   def index
-    #@replacement_proposals = ReplacementProposal.all
+    if params[:replacement_request_id].present?
+      @replacement_proposals = @replacement_proposals.where(replacement_request_id: params[:replacement_request_id].to_i)
+    end
   end
 
   # GET /replacement_proposals/1 or /replacement_proposals/1.json
@@ -30,6 +32,7 @@ class ReplacementProposalsController < ApplicationController
       if @replacement_proposal.save
 
         current_user.add_role :shop, @replacement_proposal
+        @replacement_proposal.replacement_request.update(state: 'answered')
 
         format.html { redirect_to replacement_proposals_path, notice: "Propuesta creada correctamente." }
         format.json { render :show, status: :created, location: @replacement_proposal }

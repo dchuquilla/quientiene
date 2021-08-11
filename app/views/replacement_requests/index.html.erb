@@ -1,16 +1,36 @@
 <div class="row justify-content-center">
   <div class="col-md-1 col-sm-1"></div>
   <div class="col">
-    <h1>
-      <%= link_to dashboard_path, class:"btn btn-outline-dark btn-lg" do %>
-        <i class="material-icons text-dark" style="top: 0;">arrow_back_ios_new</i>
-      <% end %>
-      <% if current_user.has_role? :customer %>
-        Mis solicitudes
-      <% else %>
-        Solicitudes
-      <% end %>
-    </h1>
+    <div class="row">
+      <div class="col">
+        <h1>
+          <%= link_to dashboard_path, class:"btn btn-outline-dark btn-lg" do %>
+            <i class="material-icons text-dark" style="top: 0;">arrow_back_ios_new</i>
+          <% end %>
+          <% if current_user.has_role? :customer %>
+            Mis solicitudes
+          <% else %>
+            Solicitudes
+          <% end %>
+        </h1>
+      </div>
+      <div class="col">
+        <%= search_form_for @rr_query, class: "form-inline ml-auto justify-content-end" do |f| %>
+          <div class="form-group">
+            <%= f.search_field :short_name_or_description_or_part_number_or_vehicle_brand_or_vehicle_model_cont, class: "form-control text-dark", placeholder: "Buscar" %>
+          </div>
+          <% if params[:q].present? %>
+            <%= link_to replacement_requests_path, class: "btn btn-white btn-raised btn-fab btn-fab-mini btn-round" do %>
+              <i class="material-icons">close</i>
+            <% end %>
+          <% else %>
+            <button type="submit" class="btn btn-white btn-raised btn-fab btn-fab-mini btn-round">
+              <i class="material-icons">search</i>
+            </button>
+          <% end %>
+        <% end %>
+      </div>
+    </div>
 
     <% @replacement_requests.each_with_index do |replacement_request, index| %>
       <div class="card">
@@ -44,6 +64,12 @@
               <%= link_to replacement_request, method: :delete, data: { confirm: '¿Está seguro?' }, class:"text-danger btn btn-outline-danger btn-sm" do %>
                 <i class="material-icons mr-2" style="top: 0;">remove_circle_outline</i>
                 Eliminar
+              <% end %>
+            <% end %>
+            <% if can?(:read, ReplacementProposal) && replacement_request.replacement_proposals.count > 0 %>
+              <%= link_to replacement_proposals_path(replacement_request_id: replacement_request), class:"text-warning btn btn-outline-warning btn-sm" do %>
+                <i class="material-icons mr-2" style="top: 0;">mark_email_read</i>
+                Ver propuestas
               <% end %>
             <% end %>
             <% if can? :create, ReplacementProposal %>

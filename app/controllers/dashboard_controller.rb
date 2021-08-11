@@ -6,7 +6,7 @@ class DashboardController < ApplicationController
     end
     @my_vehicles = current_user.vehicles.count
     @my_requests = current_user.replacement_requests.count
-    @my_c_requests = ReplacementRequest.closed.count
+    @my_c_requests = ReplacementRequest.answered.count
   end
 
   def shop

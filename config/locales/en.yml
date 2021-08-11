@@ -61,7 +61,7 @@ en:
       replacement_proposal:
         user_id: Usuario
         replacement_request_id: Solicitud
-        sho_id: Local
+        shop_id: Local
         name: Nombre de parte
         price: Precio
         original: "Repuesto original"

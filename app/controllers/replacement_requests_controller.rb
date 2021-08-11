@@ -5,7 +5,8 @@ class ReplacementRequestsController < ApplicationController
 
   # GET /replacement_requests or /replacement_requests.json
   def index
-    @replacement_requests = @replacement_requests.all.order(id: :desc)
+    @rr_query = ReplacementRequest.accessible_by(current_ability).order(id: :desc).ransack(params[:q])
+    @replacement_requests = @rr_query.result(distinct: true).includes(:vehicle)
   end
 
   # GET /replacement_requests/1 or /replacement_requests/1.json
