@@ -10,10 +10,19 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_08_10_203931) do
+ActiveRecord::Schema.define(version: 2021_08_11_180405) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
+
+  create_table "ignored_requests", force: :cascade do |t|
+    t.bigint "user_id", null: false
+    t.bigint "replacement_request_id", null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["replacement_request_id"], name: "index_ignored_requests_on_replacement_request_id"
+    t.index ["user_id"], name: "index_ignored_requests_on_user_id"
+  end
 
   create_table "replacement_proposals", force: :cascade do |t|
     t.bigint "user_id", null: false
@@ -131,6 +140,8 @@ ActiveRecord::Schema.define(version: 2021_08_10_203931) do
     t.index ["user_id"], name: "index_vehicles_on_user_id"
   end
 
+  add_foreign_key "ignored_requests", "replacement_requests"
+  add_foreign_key "ignored_requests", "users"
   add_foreign_key "replacement_proposals", "replacement_requests"
   add_foreign_key "replacement_proposals", "shops"
   add_foreign_key "replacement_proposals", "users"

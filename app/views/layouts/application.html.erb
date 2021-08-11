@@ -71,6 +71,9 @@
   <% if alert %>
     <p class="alert alert-danger"><%= alert %></p>
   <% end %>
+  <% if warning %>
+    <p class="alert alert-warning"><%= warning %></p>
+  <% end %>
   <%= yield %>
   
 </body>

@@ -78,6 +78,12 @@
                 Agregar propueta
               <% end %>
             <% end %>
+            <% if current_user.has_role?(:shop) && replacement_request.replacement_proposals.count == 0 %>
+              <%= link_to ignore_replacement_request_path(replacement_request), data: { confirm: '¿Está seguro?' }, class:"text-danger btn btn-outline-danger btn-sm" do %>
+                <i class="material-icons mr-2" style="top: 0;">close</i>
+                Ignorar
+              <% end %>
+            <% end %>
           </div>
         </div>
       </div>

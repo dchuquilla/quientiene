@@ -1,5 +1,5 @@
 class ReplacementRequestsController < ApplicationController
-  before_action :set_replacement_request, only: %i[ show edit update destroy ]
+  before_action :set_replacement_request, only: %i[ ignore ]
   before_action :authenticate_user!
   load_and_authorize_resource
 
@@ -7,6 +7,9 @@ class ReplacementRequestsController < ApplicationController
   def index
     @rr_query = ReplacementRequest.accessible_by(current_ability).order(id: :desc).ransack(params[:q])
     @replacement_requests = @rr_query.result(distinct: true).includes(:vehicle)
+    if current_user.has_role? :shop
+      @replacement_requests = @replacement_requests.where.not(id: IgnoredRequest.mine(current_user).map { |ir| ir.replacement_request_id })
+    end
   end
 
   # GET /replacement_requests/1 or /replacement_requests/1.json
@@ -71,10 +74,16 @@ class ReplacementRequestsController < ApplicationController
     end
   end
 
+  # GET /replacement_requests/1/ignore or /replacement_requests/1/ignore.json
+  def ignore
+    IgnoredRequest.create(user: current_user, replacement_request: @replacement_request)
+    redirect_to replacement_requests_url, warning: "Solicitud ignorada correctamente."
+  end
+
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_replacement_request
-      #@replacement_request = ReplacementRequest.find(params[:id])
+      @replacement_request = ReplacementRequest.find(params[:id])
     end
 
     # Only allow a list of trusted parameters through.

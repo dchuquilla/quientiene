@@ -15,8 +15,10 @@ class Ability
     # Shop Permissions
     if user.has_role?(:shop)
       can :read, ReplacementRequest
+      can :ignore, ReplacementRequest
       can :manage, Shop, user: user
       can :manage, ReplacementProposal, user: user
+      can :manage, IgnoredRequest
     end
 
     if user.has_role?(:administrator)

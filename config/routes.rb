@@ -15,7 +15,11 @@ Rails.application.routes.draw do
   }
   # For details on the DSL available within this file, see https://guides.rubyonrails.org/routing.html
   
-  resources :replacement_requests
+  resources :replacement_requests do
+    member do
+      get :ignore
+    end
+  end
   resources :vehicles
   resources :shops
   resources :replacement_proposals
