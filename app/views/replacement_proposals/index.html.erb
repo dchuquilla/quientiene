@@ -1,47 +1,83 @@
-<p id="notice"><%= notice %></p>
+<div class="row justify-content-center">
+  <div class="col-md-1 col-sm-1"></div>
+  <div class="col">
+    <h1>
+      <%= link_to dashboard_shop_path, class:"btn btn-outline-dark btn-lg" do %>
+        <i class="material-icons text-dark" style="top: 0;">arrow_back_ios_new</i>
+      <% end %>
+      Propuestas de repuestos
+    </h1>
+    <div class="row">
+      <% @replacement_proposals.each do |replacement_proposal| %>
+        <div class="col-md-6 col-sm-1">
+          <div class="card">
+            <div class="card-header card-header-warning card-header-icon">
+              <div class="card-icon">
+                <i class="material-icons">mark_email_read</i>
+              </div>
+              <p class="card-category text-dark"><%= replacement_proposal.replacement_request.vehicle.brand %> <%= replacement_proposal.replacement_request.vehicle.model %> <%= replacement_proposal.replacement_request.vehicle.year %></p>
+              <h4 class="card-title"><%= replacement_proposal.replacement_request.vehicle.plate %> <small><%= replacement_proposal.replacement_request.vehicle.chasis %></small></h4>
+            </div>
+            <div class="card-body">
+              <h3 class="card-title">
+                <%= replacement_proposal.name %> | <%= replacement_proposal.brand %>
+              </h3>
+              <h4 class="text-dark">Detalles</h4>
+              <ul>
+                <li class="text-dark"><strong>Pais de origen:</strong> <%= replacement_proposal.origin %></li>
+                <li class="text-dark"><strong>Vida útil:</strong> <%= replacement_proposal.life_time %></li>
+                <% if replacement_proposal.target.present? %>
+                  <li class="text-dark"><strong>Aplica para:</strong> <%= replacement_proposal.target %></li>
+                <% end %>
+                <li class="text-dark"><strong>Tiempo de entrega:</strong> <%= replacement_proposal.delivery_time %></li>
+              </ul>
+              <h4 class="text-dark">Condiciones de entrega</h4>
+              <p class="text-dark"><%= replacement_proposal.conditions.html_safe %></p>
+              <a class="btn btn-outline-warning btn-block disabled text-warning h2" role="button" aria-disabled="true">
+                <strong>$<%= replacement_proposal.price %></strong>
+              </a>
+            </div>
+            <div class="card-footer">
+              <div class="stats align-items-center">
+                <% if can? :manage, replacement_proposal %>
+                  <%= link_to edit_replacement_proposal_path(replacement_proposal), class:"text-info btn btn-outline-info btn-sm" do %>
+                    <i class="material-icons text-dark mr-2" style="top: 0;">mode_edit</i>
+                    Editar
+                  <% end %>
+                  <%= link_to replacement_proposal, method: :delete, data: { confirm: '¿Está seguro?' }, class:"text-danger btn btn-outline-danger btn-sm" do %>
+                    <i class="material-icons mr-2" style="top: 0;">remove_circle_outline</i>
+                    Eliminar
+                  <% end %>
+                <% end %>
+              </div>
+            </div>
+          </div>
+        </div>
+      <% end %>
+    </div>
 
-<h1>Replacement Proposals</h1>
+    <br>
 
-<table>
-  <thead>
+  </div>
+  <div class="col-md-1 col-sm-1"></div>
+</div>
+
+<div class="row justify-content-center">
+  <div class="col-md-1 col-sm-1"></div>
+    <div class="col">
+      Publicidad Aqúi
+    </div>
+  <div class="col-md-1 col-sm-1"></div>
+</div>
+
+<% if false %>
+  <% @replacement_proposals.each do |replacement_proposal| %>
     <tr>
-      <th>User</th>
-      <th>Shop</th>
-      <th>Name</th>
-      <th>Price</th>
-      <th>Original</th>
-      <th>Brand</th>
-      <th>Origin</th>
-      <th>Life time</th>
-      <th>Target</th>
-      <th>Delivery time</th>
-      <th>Conditions</th>
-      <th colspan="3"></th>
+      <td><%= replacement_proposal.price %></td>
+      <td><%= replacement_proposal.original %></td>
+      <td></td>
+      
+      <td><%= link_to 'Show', replacement_proposal %></td>
     </tr>
-  </thead>
-
-  <tbody>
-    <% @replacement_proposals.each do |replacement_proposal| %>
-      <tr>
-        <td><%= replacement_proposal.user_id %></td>
-        <td><%= replacement_proposal.shop_id %></td>
-        <td><%= replacement_proposal.name %></td>
-        <td><%= replacement_proposal.price %></td>
-        <td><%= replacement_proposal.original %></td>
-        <td><%= replacement_proposal.brand %></td>
-        <td><%= replacement_proposal.origin %></td>
-        <td><%= replacement_proposal.life_time %></td>
-        <td><%= replacement_proposal.target %></td>
-        <td><%= replacement_proposal.delivery_time %></td>
-        <td><%= replacement_proposal.conditions %></td>
-        <td><%= link_to 'Show', replacement_proposal %></td>
-        <td><%= link_to 'Edit', edit_replacement_proposal_path(replacement_proposal) %></td>
-        <td><%= link_to 'Destroy', replacement_proposal, method: :delete, data: { confirm: 'Are you sure?' } %></td>
-      </tr>
-    <% end %>
-  </tbody>
-</table>
-
-<br>
-
-<%= link_to 'New Replacement Proposal', new_replacement_proposal_path %>
+  <% end %>
+<% end %>

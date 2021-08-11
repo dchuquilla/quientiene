@@ -67,9 +67,11 @@ en:
         original: "Repuesto original"
         brand: Marca
         model: Modelo
-        origin: "Pais de origen"
+        origin: "País de origen"
         life_time: "Vida útil"
-        
+        delivery_time: "Tiempo de entrega"
+        target: "Aplica para"
+        conditions: "Condiciones de entrega"
     models:
       shop: "Local"
       shops: "Locales"

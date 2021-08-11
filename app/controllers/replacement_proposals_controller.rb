@@ -1,5 +1,5 @@
 class ReplacementProposalsController < ApplicationController
-  before_action :set_replacement_request, only: %i[ show edit update new ]
+  before_action :set_replacement_request, only: %i[ show edit update new create ]
   before_action :authenticate_user!
   load_and_authorize_resource
 
@@ -31,7 +31,7 @@ class ReplacementProposalsController < ApplicationController
 
         current_user.add_role :shop, @replacement_proposal
 
-        format.html { redirect_to @replacement_proposal, notice: "Propuesta creada correctamente." }
+        format.html { redirect_to replacement_proposals_path, notice: "Propuesta creada correctamente." }
         format.json { render :show, status: :created, location: @replacement_proposal }
       else
         format.html { render :new, status: :unprocessable_entity }
@@ -69,11 +69,16 @@ class ReplacementProposalsController < ApplicationController
     end
 
     def set_replacement_request
-      @replacement_request = ReplacementRequest.find(params[:request])
+      if params[:replacement_proposal].present?
+        request_id = params[:replacement_proposal][:replacement_request_id]
+      else
+        request_id = params[:replacement_request_id]
+      end
+      @replacement_request = ReplacementRequest.find(request_id)
     end
 
     # Only allow a list of trusted parameters through.
     def replacement_proposal_params
-      params.require(:replacement_proposal).permit(:user_id, :shop_id, :name, :price, :original, :brand, :origin, :life_time, :target, :delivery_time, :conditions)
+      params.require(:replacement_proposal).permit(:user_id, :shop_id, :replacement_request_id, :name, :price, :original, :brand, :origin, :life_time, :target, :delivery_time, :conditions)
     end
 end

@@ -47,7 +47,7 @@
               <% end %>
             <% end %>
             <% if can? :create, ReplacementProposal %>
-              <%= link_to new_replacement_proposal_path(request: replacement_request), class:"text-warning btn btn-outline-warning btn-sm" do %>
+              <%= link_to new_replacement_proposal_path(replacement_request_id: replacement_request), data: { turbolinks: false }, class:"text-warning btn btn-outline-warning btn-sm" do %>
                 <i class="material-icons mr-2" style="top: 0;">mark_email_read</i>
                 Agregar propueta
               <% end %>
