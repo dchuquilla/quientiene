@@ -6618,17 +6618,17 @@
 * Copyright 2013-2018 David Deutsch
 * Licensed under: SEE LICENSE IN https://github.com/OwlCarousel2/OwlCarousel2/blob/master/LICENSE
 */
+/*
+*  Owl Carousel - Core
+*/
+
   .owl-carousel {
-    -webkit-tap-highlight-color: transparent;
-    position: relative;
-
-    .owl-item {
-      -webkit-tap-highlight-color: transparent;
-      position: relative;
-    }
-
     display: none;
     width: 100%;
+    -webkit-tap-highlight-color: transparent;
+
+    /* position relative and z-index fix webkit rendering fonts issue */
+    position: relative;
     z-index: 1;
 
     .owl-stage {
@@ -6636,6 +6636,8 @@
       -ms-touch-action: pan-Y;
       touch-action: manipulation;
       -moz-backface-visibility: hidden;
+
+      /* fix firefox animation glitch */
 
       &:after {
         content: ".";
@@ -6650,10 +6652,12 @@
     .owl-stage-outer {
       position: relative;
       overflow: hidden;
-      -webkit-transform: translate3d(0, 0, 0);
+
+      /* fix for flashing background */
+      -webkit-transform: translate3d(0px, 0px, 0px);
     }
 
-    .owl-item, .owl-wrapper {
+    .owl-wrapper {
       -webkit-backface-visibility: hidden;
       -moz-backface-visibility: hidden;
       -ms-backface-visibility: hidden;
@@ -6663,9 +6667,17 @@
     }
 
     .owl-item {
+      -webkit-backface-visibility: hidden;
+      -moz-backface-visibility: hidden;
+      -ms-backface-visibility: hidden;
+      -webkit-transform: translate3d(0, 0, 0);
+      -moz-transform: translate3d(0, 0, 0);
+      -ms-transform: translate3d(0, 0, 0);
+      position: relative;
       min-height: 1px;
       float: left;
       -webkit-backface-visibility: hidden;
+      -webkit-tap-highlight-color: transparent;
       -webkit-touch-callout: none;
 
       img {
@@ -6674,18 +6686,19 @@
       }
     }
 
-    .owl-dots.disabled, .owl-nav.disabled {
+    .owl-nav.disabled, .owl-dots.disabled {
       display: none;
     }
-  }
 
-  .no-js .owl-carousel {
-    display: block;
-  }
-
-  .owl-carousel {
-    &.owl-loaded {
-      display: block;
+    .owl-nav {
+      .owl-prev, .owl-next {
+        cursor: pointer;
+        -webkit-user-select: none;
+        -khtml-user-select: none;
+        -moz-user-select: none;
+        -ms-user-select: none;
+        user-select: none;
+      }
     }
 
     .owl-dot {
@@ -6697,33 +6710,26 @@
       user-select: none;
     }
 
-    .owl-nav {
-      .owl-next, .owl-prev {
-        cursor: pointer;
-        -webkit-user-select: none;
-        -khtml-user-select: none;
-        -moz-user-select: none;
-        -ms-user-select: none;
-        user-select: none;
-      }
-
-      button {
-        &.owl-next, &.owl-prev {
-          background: 0 0;
-          color: inherit;
-          border: none;
-          padding: 0 !important;
-          font: inherit;
-        }
+    .owl-nav button {
+      &.owl-prev, &.owl-next {
+        background: none;
+        color: inherit;
+        border: none;
+        padding: 0 !important;
+        font: inherit;
       }
     }
 
     button.owl-dot {
-      background: 0 0;
+      background: none;
       color: inherit;
       border: none;
       padding: 0 !important;
       font: inherit;
+    }
+
+    &.owl-loaded {
+      display: block;
     }
 
     &.owl-loading {
@@ -6760,9 +6766,21 @@
         float: right;
       }
     }
+  }
 
+  /* No Js */
+
+  .no-js .owl-carousel {
+    display: block;
+  }
+
+  /*
+   *  Owl Carousel - Animate Plugin
+   */
+
+  .owl-carousel {
     .animated {
-      animation-duration: 1s;
+      animation-duration: 1000ms;
       animation-fill-mode: both;
     }
 
@@ -6789,17 +6807,30 @@
     }
   }
 
+  /*
+   *  Owl Carousel - Auto Height Plugin
+   */
+
   .owl-height {
-    transition: height .5s ease-in-out;
+    transition: height 500ms ease-in-out;
   }
+
+  /*
+   *  Owl Carousel - Lazy Load Plugin
+   */
 
   .owl-carousel {
     .owl-item {
+    /**
+        This is introduced due to a bug in IE11 where lazy loading combined with autoheight plugin causes a wrong
+        calculation of the height of the owl-item that breaks page layouts
+       */
+
       .owl-lazy {
         opacity: 0;
-        transition: opacity .4s ease;
+        transition: opacity 400ms ease;
 
-        &:not([src]), &[src^=""] {
+        &[src^=""], &:not([src]) {
           max-height: 0;
         }
       }
@@ -6823,11 +6854,11 @@
       top: 50%;
       margin-left: -40px;
       margin-top: -40px;
-      background: url(css/owl.video.play.png) no-repeat;
+      background: url("<%= asset_path 'owl.video.play.png' %>") no-repeat;
       cursor: pointer;
       z-index: 1;
       -webkit-backface-visibility: hidden;
-      transition: transform .1s ease;
+      transition: transform 100ms ease;
 
       &:hover {
         -ms-transform: scale(1.3, 1.3);
@@ -6836,7 +6867,7 @@
     }
 
     .owl-video-playing {
-      .owl-video-play-icon, .owl-video-tn {
+      .owl-video-tn, .owl-video-play-icon {
         display: none;
       }
     }
@@ -6847,7 +6878,7 @@
       background-position: center center;
       background-repeat: no-repeat;
       background-size: contain;
-      transition: opacity .4s ease;
+      transition: opacity 400ms ease;
     }
 
     .owl-video-frame {
@@ -6855,6 +6886,74 @@
       z-index: 1;
       height: 100%;
       width: 100%;
+    }
+  }
+
+  /*
+   *  Owl Carousel - Video Plugin
+   */
+
+/*
+*  Default theme - Owl Carousel CSS File
+*/
+
+  .owl-theme {
+    .owl-nav {
+      margin-top: 10px;
+      text-align: center;
+      -webkit-tap-highlight-color: transparent;
+
+      [class*='owl-'] {
+        color: #FFF;
+        font-size: 14px;
+        margin: 5px;
+        padding: 4px 7px;
+        background: #D6D6D6;
+        display: inline-block;
+        cursor: pointer;
+        border-radius: 3px;
+
+        &:hover {
+          background: #869791;
+          color: #FFF;
+          text-decoration: none;
+        }
+      }
+
+      .disabled {
+        opacity: 0.5;
+        cursor: default;
+      }
+
+      &.disabled + .owl-dots {
+        margin-top: 10px;
+      }
+    }
+
+    .owl-dots {
+      text-align: center;
+      -webkit-tap-highlight-color: transparent;
+
+      .owl-dot {
+        display: inline-block;
+        zoom: 1;
+        *display: inline;
+
+        span {
+          width: 10px;
+          height: 10px;
+          margin: 5px 7px;
+          background: #D6D6D6;
+          display: block;
+          -webkit-backface-visibility: visible;
+          transition: opacity 200ms ease;
+          border-radius: 30px;
+        }
+
+        &.active span, &:hover span {
+          background: #869791;
+        }
+      }
     }
   }
 
@@ -30309,7 +30408,7 @@ fieldset[disabled][disabled] {
 
 .btn {
   &.btn-sm {
-    padding: .40625rem 1.25rem;
+    padding: .40625rem 1.1rem;
     font-size: .6875rem;
     line-height: 1.5;
     border-radius: .2rem;

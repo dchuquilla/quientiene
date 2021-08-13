@@ -33,6 +33,16 @@
               </ul>
               <h4 class="text-dark">Condiciones de entrega</h4>
               <p class="text-dark"><%= replacement_proposal.conditions.html_safe %></p>
+              <% if replacement_proposal.photos.any? %>
+                <h4>Fotos del repuesto</h4>
+                <div class="owl-carousel">
+                  <% replacement_proposal.photos.each_with_index do |photo, index| %>
+                    <div>
+                      <%= image_tag photo, class: "img-fluid rounded mx-auto d-block" %>
+                    </div>
+                  <% end %>
+                </div>
+              <% end %>
               <a class="btn btn-outline-warning btn-block disabled text-warning h2" role="button" aria-disabled="true">
                 <strong>$<%= replacement_proposal.price %></strong>
               </a>
@@ -40,12 +50,12 @@
             <div class="card-footer">
               <div class="stats align-items-center">
                 <% if can? :manage, replacement_proposal %>
-                  <%= link_to edit_replacement_proposal_path(replacement_proposal), class:"text-info btn btn-outline-info btn-sm" do %>
+                  <%= link_to edit_replacement_proposal_path(replacement_proposal, replacement_request_id: replacement_proposal.replacement_request.id), class:"text-info btn btn-outline-info btn-sm" do %>
                     <i class="material-icons text-dark mr-2" style="top: 0;">mode_edit</i>
                     Editar
                   <% end %>
                   <%= link_to replacement_proposal, method: :delete, data: { confirm: '¿Está seguro?' }, class:"text-danger btn btn-outline-danger btn-sm" do %>
-                    <i class="material-icons mr-2" style="top: 0;">remove_circle_outline</i>
+                    <i class="material-icons mr-1" style="top: 0;">remove_circle_outline</i>
                     Eliminar
                   <% end %>
                 <% end %>
@@ -53,19 +63,19 @@
                 <% if current_user.has_role?(:customer) %>
                   <% if replacement_proposal.state == 'accepted' %>
                     <%= link_to "javascript: void(0);", class:"text-success btn btn-outline-success btn-sm", disabled: true do %>
-                      <i class="material-icons mr-2" style="top: 0;">done</i>
+                      <i class="material-icons mr-1" style="top: 0;">done</i>
                       Propuesta aceptada
                     <% end %>
                   <% else %>
                     <%= link_to accept_replacement_proposal_path(replacement_proposal, replacement_request_id: replacement_proposal.replacement_request_id), data: { confirm: '¿Está seguro?' }, class:"text-success btn btn-outline-success btn-sm" do %>
-                      <i class="material-icons mr-2" style="top: 0;">done</i>
+                      <i class="material-icons mr-1" style="top: 0;">done</i>
                       Aceptar
                     <% end %>
                   <% end %>
                 <% end %>
                 <% if current_user.has_role?(:customer) && replacement_proposal.state != 'accepted' %>
                   <%= link_to ignore_replacement_proposal_path(replacement_proposal, replacement_request_id: replacement_proposal.replacement_request_id), data: { confirm: '¿Está seguro?' }, class:"text-danger btn btn-outline-danger btn-sm" do %>
-                    <i class="material-icons mr-2" style="top: 0;">close</i>
+                    <i class="material-icons mr-1" style="top: 0;">close</i>
                     Ignorar
                   <% end %>
                 <% end %>

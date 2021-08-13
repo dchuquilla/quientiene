@@ -4,6 +4,7 @@ class ReplacementRequest < ApplicationRecord
   belongs_to :user
   belongs_to :vehicle
   has_many :replacement_proposals
+  has_many_attached :photos
 
   validates :short_name, presence: true
 

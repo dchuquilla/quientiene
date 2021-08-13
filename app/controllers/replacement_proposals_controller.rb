@@ -11,10 +11,12 @@ class ReplacementProposalsController < ApplicationController
     if current_user.has_role? :customer
       @replacement_proposals = @replacement_proposals.where.not(id: IgnoredProposal.mine(current_user).map { |ir| ir.replacement_proposal_id })
     end
+    @replacement_proposals = @replacement_proposals.order(id: :desc)
   end
 
   # GET /replacement_proposals/1 or /replacement_proposals/1.json
   def show
+    redirect_to replacement_proposals_path(replacement_request_id: @replacement_proposal.replacement_request.id)
   end
 
   # GET /replacement_proposals/new
@@ -37,7 +39,7 @@ class ReplacementProposalsController < ApplicationController
         current_user.add_role :shop, @replacement_proposal
         @replacement_proposal.replacement_request.update(state: 'answered')
 
-        format.html { redirect_to replacement_proposals_path, notice: "Propuesta creada correctamente." }
+        format.html { redirect_to replacement_proposals_path(replacement_request_id: @replacement_proposal.replacement_request.id), notice: "Propuesta creada correctamente." }
         format.json { render :show, status: :created, location: @replacement_proposal }
       else
         format.html { render :new, status: :unprocessable_entity }
@@ -50,7 +52,7 @@ class ReplacementProposalsController < ApplicationController
   def update
     respond_to do |format|
       if @replacement_proposal.update(replacement_proposal_params)
-        format.html { redirect_to @replacement_proposal, notice: "Propuesta actualizada correctamente." }
+        format.html { redirect_to replacement_proposals_path(replacement_request_id: @replacement_proposal.replacement_request.id), notice: "Propuesta actualizada correctamente." }
         format.json { render :show, status: :ok, location: @replacement_proposal }
       else
         format.html { render :edit, status: :unprocessable_entity }
@@ -98,6 +100,6 @@ class ReplacementProposalsController < ApplicationController
 
     # Only allow a list of trusted parameters through.
     def replacement_proposal_params
-      params.require(:replacement_proposal).permit(:user_id, :shop_id, :replacement_request_id, :name, :price, :original, :brand, :origin, :life_time, :target, :delivery_time, :conditions)
+      params.require(:replacement_proposal).permit(:user_id, :shop_id, :replacement_request_id, :name, :price, :original, :brand, :origin, :life_time, :target, :delivery_time, :conditions, photos: [])
     end
 end

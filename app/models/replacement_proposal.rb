@@ -4,6 +4,8 @@ class ReplacementProposal < ApplicationRecord
   belongs_to :user
   belongs_to :shop
   belongs_to :replacement_request
+  
+  has_many_attached :photos
 
   validates :name, :price, :brand, :origin, :delivery_time, :conditions, presence: true
 

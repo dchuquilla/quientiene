@@ -15,6 +15,7 @@
   <script src="/js_core/20popper.min.js" data-turbolinks-track="reload"></script>
   <script src="/js_core/35bootstrap-material-design.min.js" data-turbolinks-track="reload"></script>
   <script src="/js_core/40material-dashboard.js" data-turbolinks-track="reload"></script>
+  <script src="/js_core/50owl.carousel.min.js" data-turbolinks-track="reload"></script>
   <%= javascript_pack_tag 'application', 'data-turbolinks-track': 'reload' %>
 
 </head>
@@ -36,10 +37,10 @@
                 <%= link_to "Panel de control", dashboard_path, class:"nav-link" %>
               </li>
               <li class="nav-item">
-                <%= link_to "Solicitudes", replacement_requests_path, class: "nav-link" %>
+                <%= link_to "Solicitudes", replacement_requests_path, data: { turbolinks: false }, class: "nav-link" %>
               </li>
               <li class="nav-item">
-                <%= link_to "Vehículos", replacement_requests_path, class: "nav-link" %>
+                <%= link_to "Vehículos", replacement_requests_path, data: { turbolinks: false }, class: "nav-link" %>
               </li>
             <% end %>
             <% if current_user.has_role?(:shop) %>

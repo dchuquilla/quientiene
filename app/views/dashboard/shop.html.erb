@@ -30,7 +30,7 @@
       </div>
       <div class="card-footer">
         <div class="stats align-items-center">
-          <%= link_to replacement_requests_path, class: "text-info btn btn-outline-info btn-sm" do %>
+          <%= link_to replacement_requests_path, data: { turbolinks: false }, class: "text-info btn btn-outline-info btn-sm" do %>
             <i class="material-icons text-dark mr-2" style="top: 0;">summarize</i>
             Ver solicitudes
           <% end %>
@@ -50,9 +50,9 @@
       </div>
       <div class="card-footer">
         <div class="stats align-items-center">
-          <%= link_to replacement_proposals_path, class:"text-info btn btn-outline-info btn-sm" do %>
+          <%= link_to replacement_proposals_path, data: { turbolinks: false }, class:"text-info btn btn-outline-info btn-sm" do %>
             <i class="material-icons text-dark mr-2" style="top: 0;">fact_check</i>
-            Ver propuestas
+            Propuestas
           <% end %>
         </div>
       </div>
@@ -64,7 +64,7 @@
 <div class="row justify-content-center">
   <div class="col-md-1 col-sm-1"></div>
   <div class="col">
-    <%= link_to replacement_requests_path, class:"btn btn-outline-primary btn-lg btn-block" do %>
+    <%= link_to replacement_requests_path, data: { turbolinks: false }, class:"btn btn-outline-primary btn-lg btn-block" do %>
       <i class="material-icons text-dark mr-3" style="top: 0;">flare</i>
       Ver solicitudes pendientes
     <% end %>

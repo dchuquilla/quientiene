@@ -30,7 +30,7 @@
       </div>
       <div class="card-footer">
         <div class="stats align-items-center">
-          <%= link_to replacement_requests_path, class:"text-info btn btn-outline-info btn-sm" do %>
+          <%= link_to replacement_requests_path, data: { turbolinks: false }, class:"text-info btn btn-outline-info btn-sm" do %>
             <i class="material-icons text-dark mr-2" style="top: 0;">fact_check</i>
             Ver solicitudes
           <% end %>
@@ -50,7 +50,7 @@
       </div>
       <div class="card-footer">
         <div class="stats align-items-center">
-          <%= link_to closed_replacement_requests_path, class: "text-info btn btn-outline-info btn-sm" do %>
+          <%= link_to closed_replacement_requests_path, data: { turbolinks: false }, class: "text-info btn btn-outline-info btn-sm" do %>
             <i class="material-icons text-dark mr-2" style="top: 0;">summarize</i>
             Ver solicitudes cerradas
           <% end %>

@@ -97,6 +97,6 @@ class ReplacementRequestsController < ApplicationController
 
     # Only allow a list of trusted parameters through.
     def replacement_request_params
-      params.require(:replacement_request).permit(:user_id, :vehicle_id, :part_number, :short_name, :description)
+      params.require(:replacement_request).permit(:user_id, :vehicle_id, :part_number, :short_name, :description, photos: [])
     end
 end
