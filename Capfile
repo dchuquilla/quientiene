@@ -40,6 +40,12 @@ Dir.glob("lib/capistrano/tasks/*.rake").each { |r| import r }
 require 'capistrano/rails'
 require 'capistrano/passenger'
 require 'capistrano/rbenv'
+require "capistrano/bundler"
+
+require 'capistrano/sidekiq'
+
+require "airbrussh/capistrano"
 
 set :rbenv_type, :user
-set :rbenv_ruby, '3.0.1'
+set :rbenv_ruby, '2.7.2'
+set :bundle_without, %w{development test}.join(' ')
