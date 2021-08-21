@@ -18,6 +18,20 @@
   <script src="/js_core/50owl.carousel.min.js" data-turbolinks-track="reload"></script>
   <%= javascript_pack_tag 'application', 'data-turbolinks-track': 'reload' %>
 
+  <% if user_signed_in? %>
+    <!-- OneSignal code -->
+    <script src="https://cdn.onesignal.com/sdks/OneSignalSDK.js" async=""></script>
+    <script>
+      window.OneSignal = window.OneSignal || [];
+      OneSignal.push(function() {
+        OneSignal.init({
+          appId: "19562cd9-e931-441f-b7ca-171be04a5224",
+        });
+      });
+    </script>
+    <!-- ENDOneSignal code -->
+  <% end %>
+
 </head>
 
 <body class="<%= params[:action] == 'index' && ['home'].include?(params[:controller]) ? 'is-boxed' : '' %>">
