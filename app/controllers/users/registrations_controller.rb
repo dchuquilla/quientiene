@@ -14,6 +14,7 @@ class Users::RegistrationsController < Devise::RegistrationsController
     super
     resource.remove_role :customer
     resource.add_role :shop
+    UserMailer.signup_email(@user).deliver_later
   end
 
   # GET /resource/edit

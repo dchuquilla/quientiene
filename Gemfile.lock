@@ -84,6 +84,9 @@ GEM
       aws-sdk-core (~> 3, >= 3.119.0)
       aws-sdk-kms (~> 1)
       aws-sigv4 (~> 1.1)
+    aws-sdk-ses (1.40.0)
+      aws-sdk-core (~> 3, >= 3.119.0)
+      aws-sigv4 (~> 1.1)
     aws-sigv4 (1.2.4)
       aws-eventstream (~> 1, >= 1.0.2)
     bcrypt (3.1.16)
@@ -133,6 +136,9 @@ GEM
       warden (~> 1.2.3)
     dotenv (2.7.6)
     erubi (1.10.0)
+    exception_notification (4.4.3)
+      actionmailer (>= 4.0, < 7)
+      activesupport (>= 4.0, < 7)
     faraday (1.7.0)
       faraday-em_http (~> 1.0)
       faraday-em_synchrony (~> 1.0)
@@ -365,6 +371,7 @@ DEPENDENCIES
   activerecord-session_store
   airbrussh
   aws-sdk-s3
+  aws-sdk-ses
   bootsnap (>= 1.4.4)
   byebug
   cancancan
@@ -377,6 +384,7 @@ DEPENDENCIES
   capybara (>= 3.26)
   devise
   dotenv
+  exception_notification
   jbuilder (~> 2.7)
   listen (~> 3.3)
   omniauth-facebook

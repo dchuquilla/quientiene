@@ -39,7 +39,6 @@ Rails.application.configure do
 
   # Store uploaded files on the local file system (see config/storage.yml for options).
   config.active_storage.service = :amazon
-  config.action_mailer.default_url_options = { host: 'quientiene.com' }
 
   # Mount Action Cable outside main process or domain.
   # config.action_cable.mount_path = nil
@@ -68,6 +67,27 @@ Rails.application.configure do
   # Ignore bad email addresses and do not raise email delivery errors.
   # Set this to true and configure the email server for immediate delivery to raise delivery errors.
   # config.action_mailer.raise_delivery_errors = false
+  
+  config.action_mailer.default_url_options = { host: 'quientiene.com' }
+
+  config.action_mailer.delivery_method = :smtp
+  config.action_mailer.smtp_settings = {
+    :authentication => :plain,
+    :address => "smtp.mailgun.org",
+    :port => 587,
+    :domain => "asistentedeautos.com",
+    :user_name => "postmaster@asistentedeautos.com",
+    :password => "3cd411814f75f8cebac3b7049f417a6e"
+  }
+
+  # Errors and exceptions email notification.
+  Rails.application.config.middleware.use ExceptionNotification::Rack,
+  :email => {
+    :email_prefix => "[PRODUCTION] ",
+    :sender_address => %{"AV Notifier" <notifier@asistentedeautos.com>},
+    :exception_recipients => ["dario.chuquilla@gmail.com", "wilman_wn@hotmail.com"]
+  }
+
 
   # Enable locale fallbacks for I18n (makes lookups for any locale fall back to
   # the I18n.default_locale when a translation cannot be found).

@@ -4,6 +4,7 @@ class Users::OmniauthController < ApplicationController
   def facebook
     @user = User.create_from_provider_data(request.env['omniauth.auth'])
     if @user.persisted?
+      UserMailer.signup_email(@user).deliver_later
       sign_in @user
       redirect_to dashboard_path
       flash[:notice] = 'Acceso exitoso mediante Facebook' if is_navigational_format?
@@ -17,6 +18,7 @@ class Users::OmniauthController < ApplicationController
   def google_oauth2
     @user = User.create_from_provider_data(request.env['omniauth.auth'])
     if @user.persisted?
+      UserMailer.signup_email(@user).deliver_later
       sign_in @user
       redirect_to dashboard_path
       flash[:notice] = 'Acceso exitoso mediante Google' if is_navigational_format?
@@ -30,6 +32,7 @@ class Users::OmniauthController < ApplicationController
   def twitter
     @user = User.create_from_provider_data(request.env['omniauth.auth'])
     if @user.persisted?
+      UserMailer.signup_email(@user).deliver_later
       sign_in @user
       redirect_to dashboard_path
       flash[:notice] = 'Acceso exitoso mediante Twitter' if is_navigational_format?
