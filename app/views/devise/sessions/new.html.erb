@@ -27,12 +27,12 @@
             <span class="d-block text-center my-4 text-muted">&mdash; o &mdash;</span>
 
             <div class="form-group first">
-              <%= f.label :email, "Correo electrónico" %>
+              <%= f.label :email, "Correo electrónico", class: "bmd-label-floating" %>
               <%= f.email_field :email, autofocus: true, autocomplete: "email", class:"form-control" %>
             </div>
 
             <div class="form-group last mb-3">
-              <%= f.label :password, 'Constraseñña' %>
+              <%= f.label :password, 'Constraseñña', class: "bmd-label-floating" %>
               <%= f.password_field :password, autocomplete: "current-password", class:"form-control" %>
             </div>
 
