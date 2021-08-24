@@ -71,21 +71,23 @@ Rails.application.configure do
   config.action_mailer.default_url_options = { host: 'https://quientiene.com' }
 
   config.action_mailer.delivery_method = :smtp
+  
   config.action_mailer.smtp_settings = {
-    :authentication => :plain,
-    :address => "smtp.mailgun.org",
-    :port => 587,
-    :domain => "asistentedeautos.com",
-    :user_name => "postmaster@asistentedeautos.com",
-    :password => "3cd411814f75f8cebac3b7049f417a6e"
+    address: ENV['SMTP_SERVER'],
+    port: ENV['SMTP_SERVER'],
+    domain: "quientiene.com",
+    user_name: ENV['SMTP_USERNAME'],
+    password: ENV['SMTP_PASSWORD'],
+    authentication: :plain,
+    enable_starttls_auto: ENV['SMTP_USE_TLS']
   }
 
   # Errors and exceptions email notification.
   Rails.application.config.middleware.use ExceptionNotification::Rack,
-  :email => {
-    :email_prefix => "[PRODUCTION] ",
-    :sender_address => %{"AV Notifier" <notifier@asistentedeautos.com>},
-    :exception_recipients => ["dario.chuquilla@gmail.com", "wilman_wn@hotmail.com"]
+  email: {
+    email_prefix: "[PRODUCTION] ",
+    sender_address: %{QuienTiene Notifier <notifier@asistentedeautos.com>},
+    exception_recipients: ["dario.chuquilla@gmail.com"]
   }
 
 
