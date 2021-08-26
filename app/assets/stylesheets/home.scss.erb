@@ -6621,10 +6621,13 @@
 /*
 *  Owl Carousel - Core
 */
-
+  $owl_w: 100%;
+  $owl_h: 350px;
   .owl-carousel {
     display: none;
-    width: 100%;
+    width: $owl_w;
+    height: $owl_h;
+    margin: 0 auto;
     -webkit-tap-highlight-color: transparent;
 
     /* position relative and z-index fix webkit rendering fonts issue */
@@ -6682,7 +6685,8 @@
 
       img {
         display: block;
-        width: 100%;
+        width: auto;
+        height: $owl_h;
       }
     }
 

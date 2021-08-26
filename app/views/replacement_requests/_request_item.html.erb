@@ -23,14 +23,20 @@
       </div>
       <% if replacement_request.photos.any? %>
         <div class="col-sm-12 col-md-7">
-          <h4>Fotos de la parte solicitada</h4>
-          <div class="owl-carousel">
-            <% replacement_request.photos.each_with_index do |photo, index| %>
-              <div>
-                <%= image_tag photo, class: "img-fluid rounded mx-auto d-block" %>
-              </div>
-            <% end %>
-          </div>
+          <h4>Fotos de la parte solicitada (<%= replacement_request.photos.count %>)</h4>
+          <% if replacement_request.photos.count == 1 %>
+            <div>
+              <%= image_tag replacement_request.photos.first.variant(resize_to_limit: [350, 350]), class: "img-fluid rounded mx-auto d-block" %>
+            </div>
+          <% else %>
+            <div class="owl-carousel">
+              <% replacement_request.photos.each_with_index do |photo, index| %>
+                <div>
+                  <%= image_tag photo.variant(resize_to_limit: [350, 350]), class: "img-fluid rounded mx-auto d-block" %>
+                </div>
+              <% end %>
+            </div>
+          <% end %>
         </div>
       <% end %>
     </div>
