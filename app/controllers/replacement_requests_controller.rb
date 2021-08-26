@@ -51,6 +51,7 @@ class ReplacementRequestsController < ApplicationController
       if @replacement_request.save
         
         current_user.add_role :customer, @replacement_request
+        PushNotificationsHelper::new_request_created(@replacement_request, new_replacement_proposal_path(replacement_request_id: @replacement_request.id))
 
         format.html { redirect_to replacement_requests_url, notice: "Solicitud creada correctamente." }
         format.json { render :show, status: :created, location: @replacement_request }

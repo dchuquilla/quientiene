@@ -6,6 +6,7 @@ Rails.application.routes.draw do
   get 'empresas', to: 'home#business'
   get 'dashboard', to: "dashboard#index"
   get 'dashboard_shop', to: "dashboard#shop"
+  put 'users_add_onesignal_id', to: 'users#add_onesignal_id', defaults: { format: 'json' }
   
   #devise_for :users
   devise_for :users, controllers: { 
