@@ -2,7 +2,7 @@ module PushNotificationsHelper
   include HTTParty
   include Rails.application.routes.url_helpers
 
-  HEADERS = { "Authorization" => "Basic "+ENV['ONESIGNAL_REST_APY_KEY'], "Content-Type" => "application/json" }
+  HEADERS = { "Authorization" => "Basic #{ENV['ONESIGNAL_REST_APY_KEY']}", "Content-Type" => "application/json" }
 
   # Create new file to storage log of pushes.
   @push_logger = ::Logger.new(Rails.root.join('log', 'push.log'))
