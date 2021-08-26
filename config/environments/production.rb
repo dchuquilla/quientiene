@@ -70,16 +70,10 @@ Rails.application.configure do
   
   config.action_mailer.default_url_options = { host: 'https://quientiene.com' }
 
-  config.action_mailer.delivery_method = :smtp
-  
-  config.action_mailer.smtp_settings = {
-    address: ENV['SMTP_SERVER'],
-    port: ENV['SMTP_SERVER'],
-    domain: "quientiene.com",
-    user_name: ENV['SMTP_USERNAME'],
-    password: ENV['SMTP_PASSWORD'],
-    authentication: :plain,
-    enable_starttls_auto: ENV['SMTP_USE_TLS']
+  config.action_mailer.delivery_method = :mailgun
+  config.action_mailer.mailgun_settings = {
+    api_key: ENV['MAILGUN_API_KEY'],
+    domain: 'quientiene.com',
   }
 
   # Errors and exceptions email notification.

@@ -12,9 +12,10 @@ class Users::RegistrationsController < Devise::RegistrationsController
   # POST /resource
   def create
     super
-    resource.remove_role :customer
-    resource.add_role :shop
-    UserMailer.signup_email(resource).deliver_later
+    if params[:empresa].present? && params[:empresa] = 'si'
+      resource.remove_role :customer
+      resource.add_role :shop
+    end
   end
 
   # GET /resource/edit
