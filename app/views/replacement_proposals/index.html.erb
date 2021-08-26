@@ -43,6 +43,18 @@
                   <% end %>
                 </div>
               <% end %>
+              <% if current_user.has_role?(:customer) %>
+                <h4 class="text-dark">Empresa</h4>
+                <p class="text-dark">
+                  <strong><%= replacement_proposal.shop.name.upcase %></strong> <%= replacement_proposal.shop.ruc %><br>
+                  <%= replacement_proposal.shop.address %> - <%= replacement_proposal.shop.sector %> - <%= replacement_proposal.shop.phone2 %><br>
+                  <a href="https://api.whatsapp.com/send?<%= URI.encode_www_form(phone: replacement_proposal.shop.phone1, text: "Quisiera comprar el repuesto de su propuesta en https://quientiene.com#{replacement_proposals_path(replacement_request_id: replacement_proposal.replacement_request_id)}") %>" class="text-info btn btn-outline-info btn-sm" target="_blank">
+                    <i class="material-icons text-info mr-2" style="top: 0;">textsms</i> Contactar con la empresa
+                  </a>
+                  
+                </p>
+              <% end %>
+
               <a class="btn btn-outline-warning btn-block disabled text-warning h2" role="button" aria-disabled="true">
                 <strong>$<%= replacement_proposal.price %></strong>
               </a>
