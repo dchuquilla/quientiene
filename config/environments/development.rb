@@ -47,12 +47,12 @@ Rails.application.configure do
   }
 
   # Errors and exceptions email notification.
-  Rails.application.config.middleware.use ExceptionNotification::Rack,
-  email: {
-    email_prefix: "[PRODUCTION] ",
-    sender_address: %{"QuienTiene Notifier" <notifier@asistentedeautos.com>},
-    exception_recipients: ["dario.chuquilla@quientiene.com"]
-  }
+  # Rails.application.config.middleware.use ExceptionNotification::Rack,
+  # email: {
+  #   email_prefix: "[PRODUCTION] ",
+  #   sender_address: %{"QuienTiene Notifier" <notifier@asistentedeautos.com>},
+  #   exception_recipients: ["dario.chuquilla@quientiene.com"]
+  # }
 
 
   # Print deprecation notices to the Rails logger.
