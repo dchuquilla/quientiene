@@ -19,4 +19,9 @@ $(document).ready(function(){
     margin:10,
     items:1
   });
+  if ($('.alert').length > 0) {
+    setTimeout(function(){
+      $('.alert').fadeOut('slow');
+    }, 5000)
+  }
 });

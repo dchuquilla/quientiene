@@ -134,14 +134,15 @@
     </nav>
   <% end %>
   <% if notice %>
-    <p class="alert alert-success"><%= notice %></p>
+    <p class="alert fixed-position alert-success"><%= notice %></p>
   <% end %>
   <% if alert %>
-    <p class="alert alert-danger"><%= alert %></p>
+    <p class="alert fixed-position alert-danger"><%= alert %></p>
   <% end %>
   <% if warning %>
-    <p class="alert alert-warning"><%= warning %></p>
+    <p class="alert fixed-position alert-warning"><%= warning %></p>
   <% end %>
+  
   <%= yield %>
   
 </body>
