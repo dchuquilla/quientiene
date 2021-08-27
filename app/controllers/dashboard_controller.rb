@@ -5,8 +5,8 @@ class DashboardController < ApplicationController
       redirect_to dashboard_shop_path
     end
     @my_vehicles = current_user.vehicles.count
-    @my_requests = current_user.replacement_requests.count
-    @my_c_requests = ReplacementRequest.answered.count
+    @my_requests = current_user.replacement_requests.pending.count
+    @my_c_requests = current_user.replacement_requests.closed.count
   end
 
   def shop
