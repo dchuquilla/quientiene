@@ -16,8 +16,8 @@
         <p class="card-category"></p>
         <h3 class="card-title">Configurar mi cuenta<small></small></h3>
         <div class="card-body">
-          <%= form_for(resource, as: resource_name, url: registration_path(resource_name), html: { method: :put }) do |f| %>
-            <%= render "devise/shared/error_messages", resource: resource %>
+          <%= form_for(@user, url: update_account_path, html: { method: :put }) do |f| %>
+            <%= render "devise/shared/error_messages", resource: @user %>
 
             <div class="form-group">
               <%= f.label :email %><br />
@@ -29,8 +29,8 @@
               <%= f.text_field :name, class:"form-control" %>
             </div><br><br>
 
-            <% if devise_mapping.confirmable? && resource.pending_reconfirmation? %>
-              <div class="text-secondary">Esperando confirmación para: <%= resource.unconfirmed_email %></div>
+            <% if @user.pending_reconfirmation? %>
+              <div class="text-secondary">Esperando confirmación para: <%= @user.unconfirmed_email %></div>
             <% end %>
 
             <div class="form-group">
@@ -47,17 +47,11 @@
               <%= f.password_field :password_confirmation, autocomplete: "new-password", class:"form-control" %>
             </div><br><br>
 
-            <div class="form-group">
-              <%= f.label :current_password %> <i class="text-secondary">(necesitamos su contraseña actual para confirmar los cambios)</i><br />
-              <%= f.password_field :current_password, autocomplete: "current-password", class:"form-control" %>
-            </div><br><br>
-
             <div class="actions">
               <%= f.submit "Guardar", class: "btn btn-block btn-primary" %>
             </div>
           <% end %>
-          <p>
-            <%= button_to "Cancelar mi cuenta", registration_path(resource_name), data: { confirm: "¿Está seguro?" }, method: :delete, class: "btn btn-danger" %></p>
+          <p><%= button_to "Cancelar mi cuenta", registration_path(:user), data: { confirm: "¿Está seguro?" }, method: :delete, class: "btn btn-danger" %></p>
         </div>
       </div>
     </div>

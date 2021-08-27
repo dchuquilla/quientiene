@@ -19,9 +19,10 @@ class Users::RegistrationsController < Devise::RegistrationsController
   end
 
   # GET /resource/edit
-  # def edit
-  #   super
-  # end
+  def edit
+    redirect_to my_account_url
+    #super
+  end
 
   # PUT /resource
   # def update

@@ -1,5 +1,6 @@
 class ShopsController < ApplicationController
   before_action :set_shop, only: %i[ show edit update destroy ]
+  before_action :authenticate_user!
   load_and_authorize_resource
 
   # GET /shops or /shops.json

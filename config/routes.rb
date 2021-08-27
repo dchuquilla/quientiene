@@ -7,6 +7,8 @@ Rails.application.routes.draw do
   get 'dashboard', to: "dashboard#index"
   get 'dashboard_shop', to: "dashboard#shop"
   put 'users_add_onesignal_id', to: 'users#add_onesignal_id', defaults: { format: 'json' }
+  get 'my_account', to: 'users#my_account'
+  put 'update_account', to: 'users#update_account'
   
   #devise_for :users
   devise_for :users, controllers: { 
