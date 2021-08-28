@@ -7,4 +7,6 @@ class Vehicle < ApplicationRecord
   validates :plate, :brand, :model, :year, presence: true
   validates :year, format: { with: /\A[0-9]+\z/, message: "solo admite números" }
 
+  scope :recent, ->(number) { order(id: :desc).limit(number) }
+
 end

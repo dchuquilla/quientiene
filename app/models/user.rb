@@ -13,6 +13,8 @@ class User < ApplicationRecord
   has_many :shops, dependent: :destroy
   has_many :replacement_proposals, dependent: :destroy
 
+  scope :recent, ->(number) { order(id: :desc).limit(number) }
+  
   after_create :assign_default_role
 
   def assign_default_role

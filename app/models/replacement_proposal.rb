@@ -10,4 +10,5 @@ class ReplacementProposal < ApplicationRecord
   validates :name, :price, :brand, :origin, :delivery_time, :conditions, presence: true
 
   scope :accepted, ->() {where(state: 'accepted')}
+  scope :recent, ->(number) { order(id: :desc).limit(number) }
 end

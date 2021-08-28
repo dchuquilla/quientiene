@@ -11,4 +11,5 @@ class ReplacementRequest < ApplicationRecord
   scope :pending, ->() {where(state: 'created')}
   scope :closed, ->() {where(state: 'closed')}
   scope :answered, ->() {where(state: 'answered')}
+  scope :recent, ->(number) { order(id: :desc).limit(number) }
 end
