@@ -1,16 +1,22 @@
-<% x = (1..2).to_a %>
+<% x = (1..3).to_a %>
 
 <% case x.sample %>
   <% when 1 %>
     <div>
-      <a target="_blank" href="https://www.ambacar.ec/test-drive?marca_testdrive=2&amp;modelo_testdrive=40610">
+      <a target="_blank"  rel="nofollow" href="https://www.ambacar.ec/test-drive?marca_testdrive=2&amp;modelo_testdrive=40610">
         <img style="width:100%" title="Camioneta Ambacar Great Wall POER" src="https://www.ambacar.ec/wp-content/uploads/2019/11/ambacar-great-wall-wingle7-test-drive.gif" alt="Camioneta Ambacar Great Wall POER" >
       </a>
     </div>
   <% when 2 %>
     <div>
-      <a target="_blank" href="https://mansueraecosistema.com/">
+      <a target="_blank"  rel="nofollow" href="https://mansueraecosistema.com/">
         <img style="width:100%" src="https://www.mansuera.com/bundles/app/images/necesitas_un_taller_web.jpg?v20210614">
       </a>  
+    </div>
+  <% when 3 %>
+    <div>
+      <a href="http://automagazine.ec/gn-automotores-como-nuevos-3/" target="_blank" rel="nofollow">
+        <img style="width:100%" src="http://automagazine.ec/wp-content/uploads/2019/08/GIFT-Final-GN-Automotores-copia-2.gif">
+      </a>
     </div>
 <%end %>
