@@ -80,9 +80,11 @@
           }
         });
       });
-
     </script>
     <!-- ENDOneSignal code -->
+    <% if params[:controller] == 'Admin::DashboardController' %>
+      <link rel="stylesheet" media="screen" href="/active_admin.css" />
+    <% end %>
   <% end %>
 
 </head>
