@@ -42,7 +42,7 @@ class ReplacementProposalsController < ApplicationController
         if @replacement_proposal.replacement_request.user.onesignal_id.present?
           PushNotificationsHelper::new_proposal_created(@replacement_proposal, replacement_proposals_path(replacement_request_id: @replacement_proposal.replacement_request_id))
         else
-          ReplacementMailer.new_proposal @replacement_proposal.replacement_request.user, @replacement_proposal
+          ReplacementMailer.new_proposal(@replacement_proposal.replacement_request.user, @replacement_proposal).deliver_later
         end
 
 
@@ -90,7 +90,7 @@ class ReplacementProposalsController < ApplicationController
     if @replacement_proposal.shop.user.onesignal_id.present?
       PushNotificationsHelper::proposal_accepted(@replacement_proposal, replacement_proposals_path(replacement_request_id: @replacement_proposal.replacement_request_id))
     else
-      ReplacementMailer.proposal_accepted @replacement_proposal.shop.user, @replacement_proposal
+      ReplacementMailer.proposal_accepted(@replacement_proposal.shop.user, @replacement_proposal).deliver_later
     end
     redirect_to closed_replacement_requests_path, warning: "Propuesta aceptada correctamente."
   end

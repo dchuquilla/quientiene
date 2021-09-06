@@ -57,7 +57,7 @@ class ReplacementRequestsController < ApplicationController
         shops_users = User.with_role(:shop).where(onesignal_id: nil);
         if shops_users.count > 0
           shops_users.each do |user|
-            ReplacementMailer.new_request user, @replacement_request
+            ReplacementMailer.new_request(user, @replacement_request).deliver_later
           end
         end
 
