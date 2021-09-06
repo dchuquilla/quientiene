@@ -38,7 +38,7 @@ Rails.application.configure do
 
   config.action_mailer.perform_caching = false
 
-  config.action_mailer.default_url_options = { host: 'https://quientiene.com' }
+  config.action_mailer.default_url_options = { host: 'localhost:3001' }
 
   config.action_mailer.delivery_method = :mailgun
   config.action_mailer.mailgun_settings = {

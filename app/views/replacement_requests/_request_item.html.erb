@@ -26,13 +26,25 @@
           <h4>Fotos de la parte solicitada (<%= replacement_request.photos.count %>)</h4>
           <% if replacement_request.photos.count == 1 %>
             <div>
-              <%= image_tag replacement_request.photos.first.variant(resize_to_limit: [350, 350]), class: "img-fluid rounded mx-auto d-block" %>
+              <% if replacement_request.photos.first.representable? %>
+                <%= image_tag replacement_request.photos.first.variant(resize_to_limit: [350, 350]), class: "img-fluid rounded mx-auto d-block" %>
+              <% else %>
+                <%= link_to rails_blob_path(replacement_request.photos.first, disposition: "attachment") do %>
+                  <%= image_tag "quien_tiene_logo_n.png", alt: "Descargue el archivo" %>
+                <% end %>
+              <% end %>
             </div>
           <% else %>
             <div class="owl-carousel">
               <% replacement_request.photos.each_with_index do |photo, index| %>
                 <div>
-                  <%= image_tag photo.variant(resize_to_limit: [350, 350]), class: "img-fluid rounded mx-auto d-block" %>
+                  <% if photo.representable? %>
+                    <%= image_tag photo.variant(resize_to_limit: [350, 350]), class: "img-fluid rounded mx-auto d-block" %>
+                  <% else %>
+                    <%= link_to rails_blob_path(photo, disposition: "attachment") do %>
+                      <%= image_tag "quien_tiene_logo_n.png", alt: "Descargue el archivo" %>
+                    <% end %>
+                  <% end %>
                 </div>
               <% end %>
             </div>

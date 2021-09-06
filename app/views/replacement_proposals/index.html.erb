@@ -38,7 +38,13 @@
                 <div class="owl-carousel">
                   <% replacement_proposal.photos.each_with_index do |photo, index| %>
                     <div>
-                      <%= image_tag photo, class: "img-fluid rounded mx-auto d-block" %>
+                      <% if photo.representable? %>
+                        <%= image_tag photo.variant(resize_to_limit: [350, 350]), class: "img-fluid rounded mx-auto d-block" %>
+                      <% else %>
+                        <%= link_to rails_blob_path(photo, disposition: "attachment") do %>
+                          <%= image_tag "quien_tiene_logo_n.png", alt: "Descargue el archivo" %>
+                        <% end %>
+                      <% end %>
                     </div>
                   <% end %>
                 </div>

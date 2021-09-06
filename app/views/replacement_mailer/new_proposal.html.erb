@@ -1,0 +1,94 @@
+<div class="u-row-container" style="padding: 0px;background-color: transparent">
+  <div class="u-row" style="Margin: 0 auto;min-width: 320px;max-width: 600px;overflow-wrap: break-word;word-wrap: break-word;word-break: break-word;background-color: #64d8ae;">
+    <div style="border-collapse: collapse;display: table;width: 100%;background-color: transparent;">
+      <!--[if (mso)|(IE)]><table width="100%" cellpadding="0" cellspacing="0" border="0"><tr><td style="padding: 0px;background-color: transparent;" align="center"><table cellpadding="0" cellspacing="0" border="0" style="width:600px;"><tr style="background-color: #64d8ae;"><![endif]-->
+      
+      <!--[if (mso)|(IE)]><td align="center" width="600" style="width: 600px;padding: 0px;border-top: 0px solid transparent;border-left: 0px solid transparent;border-right: 0px solid transparent;border-bottom: 0px solid transparent;" valign="top"><![endif]-->
+      <div class="u-col u-col-100" style="max-width: 320px;min-width: 600px;display: table-cell;vertical-align: top;">
+        <div style="width: 100% !important;">
+        <!--[if (!mso)&(!IE)]><!--><div style="padding: 0px;border-top: 0px solid transparent;border-left: 0px solid transparent;border-right: 0px solid transparent;border-bottom: 0px solid transparent;"><!--<![endif]-->
+  
+        <table style="font-family:arial,helvetica,sans-serif;" role="presentation" cellpadding="0" cellspacing="0" width="100%" border="0">
+          <tbody>
+            <tr>
+              <td style="overflow-wrap:break-word;word-break:break-word;padding:10px;font-family:arial,helvetica,sans-serif;" align="left">
+                
+                
+                <h1 class="v-text-align" style="margin: 0px; line-height: 140%; text-align: center; word-wrap: break-word; font-weight: normal; font-family: arial black,avant garde,arial; font-size: 20px;">
+                  <%= @replacement_proposal.name %>
+                </h1>
+                <br></br>
+                <table style="font-family:arial,helvetica,sans-serif;" role="presentation" cellpadding="0" cellspacing="0" width="100%" border="0">
+                  <tbody>
+                    <tr>
+                      <td style="overflow-wrap:break-word;word-break:break-word;padding:10px;font-family:arial,helvetica,sans-serif;" align="right" rowspan="4">
+                        <% if @replacement_proposal.photos.any? && @replacement_proposal.photos.last.representable? %>
+                          <%= image_tag @replacement_proposal.photos.last.variant(resize_to_limit: [200, 200]), class: "img-fluid rounded mx-auto d-block" %>
+                        <% end %>
+                      </td>
+                      <td style="overflow-wrap:break-word;word-break:break-word;padding:10px;font-family:arial,helvetica,sans-serif;" align="right">
+                        Local comercial
+                      </td>
+                      <td style="overflow-wrap:break-word;word-break:break-word;padding:10px;font-family:arial,helvetica,sans-serif;" align="left">
+                        <%= @replacement_proposal.shop.name %>
+                      </td>
+                    </tr>
+                    <tr>
+                      <td style="overflow-wrap:break-word;word-break:break-word;padding:10px;font-family:arial,helvetica,sans-serif;" align="right">
+                        RUC
+                      </td>
+                      <td style="overflow-wrap:break-word;word-break:break-word;padding:10px;font-family:arial,helvetica,sans-serif;" align="left">
+                        <%= @replacement_proposal.shop.ruc %>
+                      </td>
+                    </tr>
+                    <tr>
+                      <td style="overflow-wrap:break-word;word-break:break-word;padding:10px;font-family:arial,helvetica,sans-serif;" align="right">
+                        Dirección
+                      </td>
+                      <td style="overflow-wrap:break-word;word-break:break-word;padding:10px;font-family:arial,helvetica,sans-serif;" align="left">
+                        <%= @replacement_proposal.shop.address %>
+                      </td>
+                    </tr>
+                    <tr>
+                      <td style="overflow-wrap:break-word;word-break:break-word;padding:10px;font-family:arial,helvetica,sans-serif;" align="right">
+                        Precio
+                      </td>
+                      <td style="overflow-wrap:break-word;word-break:break-word;padding:10px;font-family:arial,helvetica,sans-serif;" align="left">
+                        <%= number_to_currency(@replacement_proposal.price, unit: "$", precision: 2, format: "%u %n") %>
+                      </td>
+                    </tr>
+                  </tbody>
+                </table>
+                <br></br>
+                <p style="text-align:center;">
+                  <%= link_to 'Ver la propuesta', replacement_proposals_url(replacement_request_id: @replacement_proposal.replacement_request_id), target: "-blank", style: "color: #ffffff; font-wieght: bold; text-decoration: underline; font-size: 18px;" %>
+                </p>
+
+
+              </td>
+            </tr>
+          </tbody>
+        </table>
+
+        <table style="font-family:arial,helvetica,sans-serif;" role="presentation" cellpadding="0" cellspacing="0" width="100%" border="0">
+          <tbody>
+            <tr>
+              <td style="overflow-wrap:break-word;word-break:break-word;padding:10px 30px;font-family:arial,helvetica,sans-serif;" align="left">
+                
+                <div class="v-text-align" style="line-height: 140%; text-align: center; word-wrap: break-word;">
+                  
+                </div>
+
+              </td>
+            </tr>
+          </tbody>
+        </table>
+
+        <!--[if (!mso)&(!IE)]><!--></div><!--<![endif]-->
+        </div>
+      </div>
+      <!--[if (mso)|(IE)]></td><![endif]-->
+      <!--[if (mso)|(IE)]></tr></table></td></tr></table><![endif]-->
+    </div>
+  </div>
+</div>

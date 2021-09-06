@@ -38,7 +38,13 @@ class ReplacementProposalsController < ApplicationController
 
         current_user.add_role :shop, @replacement_proposal
         @replacement_proposal.replacement_request.update(state: 'answered')
-        PushNotificationsHelper::new_proposal_created(@replacement_proposal, replacement_proposals_path(replacement_request_id: @replacement_proposal.replacement_request_id))
+
+        if @replacement_proposal.replacement_request.user.onesignal_id.present?
+          PushNotificationsHelper::new_proposal_created(@replacement_proposal, replacement_proposals_path(replacement_request_id: @replacement_proposal.replacement_request_id))
+        else
+          ReplacementMailer.new_proposal @replacement_proposal.replacement_request.user, @replacement_proposal
+        end
+
 
         format.html { redirect_to replacement_proposals_path(replacement_request_id: @replacement_proposal.replacement_request.id), notice: "Propuesta creada correctamente." }
         format.json { render :show, status: :created, location: @replacement_proposal }
@@ -81,7 +87,11 @@ class ReplacementProposalsController < ApplicationController
   def accept
     @replacement_proposal.update(state: 'accepted')
     @replacement_proposal.replacement_request.update(state: 'closed')
-    PushNotificationsHelper::proposal_accepted(@replacement_proposal, replacement_proposals_path(replacement_request_id: @replacement_proposal.replacement_request_id))
+    if @replacement_proposal.shop.user.onesignal_id.present?
+      PushNotificationsHelper::proposal_accepted(@replacement_proposal, replacement_proposals_path(replacement_request_id: @replacement_proposal.replacement_request_id))
+    else
+      ReplacementMailer.proposal_accepted @replacement_proposal.shop.user, @replacement_proposal
+    end
     redirect_to closed_replacement_requests_path, warning: "Propuesta aceptada correctamente."
   end
 

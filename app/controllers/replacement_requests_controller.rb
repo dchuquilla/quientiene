@@ -53,6 +53,14 @@ class ReplacementRequestsController < ApplicationController
         current_user.add_role :customer, @replacement_request
         PushNotificationsHelper::new_request_created(@replacement_request, new_replacement_proposal_path(replacement_request_id: @replacement_request.id))
 
+        # send emails to users without push
+        shops_users = User.with_role(:shop).where(onesignal_id: nil);
+        if shops_users.count > 0
+          shops_users.each do |user|
+            ReplacementMailer.new_request user, @replacement_request
+          end
+        end
+
         format.html { redirect_to replacement_requests_url, notice: "Solicitud creada correctamente." }
         format.json { render :show, status: :created, location: @replacement_request }
       else
