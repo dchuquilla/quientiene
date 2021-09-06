@@ -26,11 +26,14 @@
           <h4>Fotos de la parte solicitada (<%= replacement_request.photos.count %>)</h4>
           <% if replacement_request.photos.count == 1 %>
             <div>
-              <% if replacement_request.photos.first.representable? %>
+              <% if replacement_request.photos.first.representable? && (["image/png", "image/jpeg", "image/png", "image/gif"].include?(replacement_request.photos.first.content_type)) %>
                 <%= image_tag replacement_request.photos.first.variant(resize_to_limit: [350, 350]), class: "img-fluid rounded mx-auto d-block" %>
               <% else %>
                 <%= link_to rails_blob_path(replacement_request.photos.first, disposition: "attachment") do %>
-                  <%= image_tag "quien_tiene_logo_n.png", alt: "Descargue el archivo" %>
+                  <div class="download-icon">
+                    <span class="material-icons"> cloud_download </span>
+                  </div>
+                  <%= image_tag "quien_tiene_logo_n.png", alt: "Descargue el archivo", width: 350 %>
                 <% end %>
               <% end %>
             </div>
@@ -38,11 +41,14 @@
             <div class="owl-carousel">
               <% replacement_request.photos.each_with_index do |photo, index| %>
                 <div>
-                  <% if photo.representable? %>
+                  <% if photo.representable? && (["image/png", "image/jpeg", "image/png", "image/gif"].include?(photo.content_type)) %>
                     <%= image_tag photo.variant(resize_to_limit: [350, 350]), class: "img-fluid rounded mx-auto d-block" %>
                   <% else %>
                     <%= link_to rails_blob_path(photo, disposition: "attachment") do %>
-                      <%= image_tag "quien_tiene_logo_n.png", alt: "Descargue el archivo" %>
+                      <div class="download-icon">
+                        <span class="material-icons"> cloud_download </span>
+                      </div>
+                      <%= image_tag "quien_tiene_logo_n.png", alt: "Descargue el archivo", width: 350 %>
                     <% end %>
                   <% end %>
                 </div>
