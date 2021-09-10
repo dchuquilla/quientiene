@@ -32,57 +32,59 @@
       </div>
     </div>
 
-    <div id="accordion request-filters">
-      <div class="card">
-        <div class="card-header p-0" id="headingTwo">
-          <h5 class="mb-0">
-            <button class="btn btn-link px-2 py-1 btn-block d-flex justify-content-between collapsed" data-toggle="collapse" data-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
-              Filtros
-              <span class="material-icons m-0"> control_point </span>
-            </button>
-          </h5>
-        </div>
-        <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordion">
-          <div class="card-body p-1 p-lg-3">
-            <form action="<%= replacement_requests_path %>" metho="get">
-              <div class="row p-0">
-                <div class="d-flex align-items-center col-lg-1 px-lg-0 py-lg-1 col-3">Marcas</div>
-                <div class="col-lg-11 px-lg-0 py-lg-1 col-9 ">
-                  <div class="btn-group-toggle" data-toggle="buttons">
-                    <% @all_brands.each_with_index do |brand, index| %>
-                      <% is_active_brand = params[:filters].present? && params[:filters][:brands].present? && params[:filters][:brands].include?(brand) %>
-                      <label class="btn btn-outline-info px-2 py-1 <%= is_active_brand ? 'active' : '' %>">
-                        <input type="checkbox" autocomplete="off" <%= is_active_brand ? 'checked' : '' %> value="<%= brand %>" name="filters[brands][]" id="filters_brands"> <%= brand.upcase %>
-                      </label>
-                    <% end %>
+    <% if current_user.has_role? :shop %>
+      <div id="accordion request-filters">
+        <div class="card">
+          <div class="card-header p-0" id="headingTwo">
+            <h5 class="mb-0">
+              <button class="btn btn-link px-2 py-1 btn-block d-flex justify-content-between collapsed" data-toggle="collapse" data-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
+                Filtros
+                <span class="material-icons m-0"> control_point </span>
+              </button>
+            </h5>
+          </div>
+          <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordion">
+            <div class="card-body p-1 p-lg-3">
+              <form action="<%= replacement_requests_path %>" metho="get">
+                <div class="row p-0">
+                  <div class="d-flex align-items-center col-lg-1 px-lg-0 py-lg-1 col-3">Marcas</div>
+                  <div class="col-lg-11 px-lg-0 py-lg-1 col-9 ">
+                    <div class="btn-group-toggle" data-toggle="buttons">
+                      <% @all_brands.each_with_index do |brand, index| %>
+                        <% is_active_brand = params[:filters].present? && params[:filters][:brands].present? && params[:filters][:brands].include?(brand) %>
+                        <label class="btn btn-outline-info px-2 py-1 <%= is_active_brand ? 'active' : '' %>">
+                          <input type="checkbox" autocomplete="off" <%= is_active_brand ? 'checked' : '' %> value="<%= brand %>" name="filters[brands][]" id="filters_brands"> <%= brand.upcase %>
+                        </label>
+                      <% end %>
+                    </div>
                   </div>
                 </div>
-              </div>
-              <div class="row">
-                <div class="d-flex align-items-center col-lg-1 px-lg-0 py-lg-1 col-3">Años</div>
-                <div class="col-lg-11 px-lg-0 py-lg-1 col-9 ">
-                  <div class="btn-group-toggle" data-toggle="buttons">
-                    <% @all_years.each_with_index do |year, index| %>
-                      <% is_active_year = params[:filters].present? && params[:filters][:years].present? && params[:filters][:years].include?(year.to_s) %>
-                      <label class="btn btn-outline-info px-2 py-1 <%= is_active_year ? 'active' : '' %>">
-                        <input type="checkbox" autocomplete="off" <%= is_active_year ? 'checked' : '' %> value="<%= year %>" name="filters[years][]" id="filters_years"> <%= year %>
-                      </label>
-                    <% end %>
+                <div class="row">
+                  <div class="d-flex align-items-center col-lg-1 px-lg-0 py-lg-1 col-3">Años</div>
+                  <div class="col-lg-11 px-lg-0 py-lg-1 col-9 ">
+                    <div class="btn-group-toggle" data-toggle="buttons">
+                      <% @all_years.each_with_index do |year, index| %>
+                        <% is_active_year = params[:filters].present? && params[:filters][:years].present? && params[:filters][:years].include?(year.to_s) %>
+                        <label class="btn btn-outline-info px-2 py-1 <%= is_active_year ? 'active' : '' %>">
+                          <input type="checkbox" autocomplete="off" <%= is_active_year ? 'checked' : '' %> value="<%= year %>" name="filters[years][]" id="filters_years"> <%= year %>
+                        </label>
+                      <% end %>
+                    </div>
                   </div>
                 </div>
-              </div>
-              <div class="row">
-                <div class="col p-1 p-lg-3">
-                  <button type="submit" class="btn btn-block btn-info">
-                    Continuar
-                  </button>
+                <div class="row">
+                  <div class="col p-1 p-lg-3">
+                    <button type="submit" class="btn btn-block btn-info">
+                      Continuar
+                    </button>
+                  </div>
                 </div>
-              </div>
-            </form>
+              </form>
+            </div>
           </div>
         </div>
       </div>
-    </div>
+    <% end %>
 
     <div class="row">
       <% @replacement_requests.each_with_index do |replacement_request, index| %>
