@@ -7,9 +7,22 @@ class ReplacementRequestsController < ApplicationController
   def index
     @rr_query = ReplacementRequest.accessible_by(current_ability).order(id: :desc).ransack(params[:q])
     @replacement_requests = @rr_query.result(distinct: true).includes(:vehicle).where.not(state: ['closed'])
+    
     if current_user.has_role? :shop
       @replacement_requests = @replacement_requests.where.not(id: IgnoredRequest.mine(current_user).map { |ir| ir.replacement_request_id })
     end
+
+    if params[:filters].present?
+      if filters_params[:brands].present?
+        @replacement_requests = @replacement_requests.joins(:vehicle).where('vehicles.brand IN (?)', filters_params[:brands])
+      end
+      if filters_params['years'].present?
+        @replacement_requests = @replacement_requests.joins(:vehicle).where('vehicles.year IN (?)', filters_params['years'])
+      end
+    end
+
+    @all_brands = Vehicle.all_brands
+    @all_years = Vehicle.all_years
   end
 
   # GET /replacement_requests/closed or /replacement_requests/closed.json
@@ -107,5 +120,8 @@ class ReplacementRequestsController < ApplicationController
     # Only allow a list of trusted parameters through.
     def replacement_request_params
       params.require(:replacement_request).permit(:user_id, :vehicle_id, :part_number, :short_name, :description, photos: [])
+    end
+    def filters_params
+      params.require(:filters).permit(brands: [], years: [])
     end
 end

@@ -37,7 +37,7 @@
                 <h4>Fotos del repuesto</h4>
                 <div class="owl-carousel">
                   <% replacement_proposal.photos.each_with_index do |photo, index| %>
-                    <div>
+                    <div class="image-element">
                       <% if photo.representable? && (["image/png", "image/jpeg", "image/png", "image/gif"].include?(photo.content_type)) %>
                         <%= image_tag photo.variant(resize_to_limit: [350, 350]), class: "img-fluid rounded mx-auto d-block" %>
                       <% else %>
