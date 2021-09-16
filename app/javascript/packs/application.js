@@ -12,7 +12,6 @@ Rails.start()
 Turbolinks.start()
 ActiveStorage.start()
 
-
 $(document).ready(function(){
   $(".owl-carousel").owlCarousel({
     loop:true,
@@ -24,4 +23,13 @@ $(document).ready(function(){
       $('.alert').fadeOut('slow');
     }, 5000)
   }
+
+  return $("#replacement_proposal_search").on("ajax:success", function(event) {
+    var data, status, xhr;
+    [data, status, xhr] = event.detail;
+    return $("#previous-proposals").html(xhr.responseText);
+  }).on("ajax:error", function(event) {
+    return $("#replacement_proposal_search").append("<p>ERROR</p>");
+  });
+
 });

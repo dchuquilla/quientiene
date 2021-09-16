@@ -36,4 +36,8 @@ Rails.application.routes.draw do
       get :accept
     end
   end
+  defaults format: :json do
+    get :search, to: 'replacement_proposals#search', as: 'replacement_proposal_search'
+  end
 end
+

@@ -1,4 +1,4 @@
-<div class="card col-sm-12 col-lg-4">
+<div class="card col-sm-12 <%= params[:replacement_request_id].present? ? 'col-lg-12' : 'col-lg-4' %>">
   <div class="card-header card-header-success card-header-icon">
     <div class="card-icon p-1 ">
       <i class="material-icons">email</i>

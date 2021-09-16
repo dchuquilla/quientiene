@@ -1,5 +1,6 @@
 class ReplacementProposalsController < ApplicationController
   before_action :set_replacement_request, only: %i[ show edit update new create ]
+  before_action :set_searchable_resource, only: %i[ search new ]
   before_action :authenticate_user!
   load_and_authorize_resource
 
@@ -14,6 +15,16 @@ class ReplacementProposalsController < ApplicationController
     @replacement_proposals = @replacement_proposals.order(id: :desc)
   end
 
+  # GET /replacement_proposals or /replacement_proposals.json
+  def search
+    @replacement_proposals = @replacement_proposals.order(id: :desc)
+
+    respond_to do |format|
+      format.html
+      format.json { render 'replacement_proposals/search_results', location: @replacement_proposals.to_json, status: :ok }
+    end
+  end
+
   # GET /replacement_proposals/1 or /replacement_proposals/1.json
   def show
     redirect_to replacement_proposals_path(replacement_request_id: @replacement_proposal.replacement_request.id)
@@ -22,6 +33,9 @@ class ReplacementProposalsController < ApplicationController
   # GET /replacement_proposals/new
   def new
     @replacement_proposal = ReplacementProposal.new
+    if params[:replacement_proposal_id].present?
+      @replacement_proposal = ReplacementProposal.find params[:replacement_proposal_id]
+    end
   end
 
   # GET /replacement_proposals/1/edit
@@ -113,5 +127,10 @@ class ReplacementProposalsController < ApplicationController
     # Only allow a list of trusted parameters through.
     def replacement_proposal_params
       params.require(:replacement_proposal).permit(:user_id, :shop_id, :replacement_request_id, :name, :price, :original, :brand, :origin, :life_time, :target, :delivery_time, :conditions, photos: [])
+    end
+
+    def set_searchable_resource
+      @rp_query = ReplacementProposal.accessible_by(current_ability).order(id: :desc).ransack(params[:q])
+      @replacement_proposals = @rp_query.result(distinct: true).includes(:replacement_request)
     end
 end
