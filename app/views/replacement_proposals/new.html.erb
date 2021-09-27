@@ -29,31 +29,32 @@
 <div class="row justify-content-center">
   <div class="col-md-1 col-sm-1"></div>
   <div class="col">
-    <h2>
-      Propuestas similares
-    </h2>
-
-    <%= search_form_for @rp_query, url: replacement_proposal_search_path, remote: true, :html => {:'data-type' => 'json'}, class: "justify-content-sm-center justify-content-lg-end" do |f| %>
-      <%= hidden_field_tag :replacement_request_id, params[:replacement_request_id].to_s %>
-      <div class="form-group">
-        <%= f.search_field :name_or_brand_or_target_or_origin_cont, class: "form-control text-dark", placeholder: "Buscar" %>
-      </div>
-      <% if params[:q].present? %>
-        <%= link_to replacement_requests_path, data: { turbolinks: false }, class: "btn btn-white btn-raised btn-fab btn-fab-mini btn-round" do %>
-          <i class="material-icons">close</i>
+    <% if @rp_query.present? %>
+      <h2>
+        Propuestas similares
+      </h2>
+      <%= search_form_for @rp_query, url: replacement_proposal_search_path(replacement_request_id: params[:replacement_request_id]), remote: true, :html => {:'data-type' => 'json'}, class: "justify-content-sm-center justify-content-lg-end" do |f| %>
+        <%= hidden_field_tag :replacement_request_id, params[:replacement_request_id].to_s %>
+        <div class="form-group">
+          <%= f.search_field :name_or_brand_or_target_or_origin_cont, class: "form-control text-dark", placeholder: "Buscar" %>
+        </div>
+        <% if params[:q].present? %>
+          <%= link_to replacement_requests_path, data: { turbolinks: false }, class: "btn btn-white btn-raised btn-fab btn-fab-mini btn-round" do %>
+            <i class="material-icons">close</i>
+          <% end %>
+        <% else %>
+          <button type="submit" class="btn btn-white btn-raised btn-fab btn-fab-mini btn-round d-none">
+            <i class="material-icons">search</i>
+          </button>
         <% end %>
-      <% else %>
-        <button type="submit" class="btn btn-white btn-raised btn-fab btn-fab-mini btn-round d-none">
-          <i class="material-icons">search</i>
-        </button>
       <% end %>
+      
+      <div class="row" id="previous-proposals">
+        <% @replacement_proposals.each do |replacement_proposal| %>
+          <%= render 'proposal_item', replacement_proposal: replacement_proposal %>
+        <% end %>
+      </div>
     <% end %>
-    
-    <div class="row" id="previous-proposals">
-      <% @replacement_proposals.each do |replacement_proposal| %>
-        <%= render 'proposal_item', replacement_proposal: replacement_proposal %>
-      <% end %>
-    </div>
   </div>
   <div class="col-md-1 col-sm-1"></div>
 </div>
