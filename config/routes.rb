@@ -4,6 +4,9 @@ Rails.application.routes.draw do
   root to: 'home#index'
   
   get 'home/index'
+  get 'contact-us', to: 'home#contact_us'
+  post 'contact-us', to: 'home#contact_us'
+  get 'create', to: 'home#create'
   get 'privacy-policy', to: 'home#privacy_policy'
   get 'empresas', to: 'home#business'
   get 'dashboard', to: "dashboard#index"

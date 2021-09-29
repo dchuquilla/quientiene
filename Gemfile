@@ -46,6 +46,7 @@ gem 'activerecord-session_store'
 gem 'omniauth-rails_csrf_protection'
 gem 'cancancan'
 gem "rolify"
+gem 'mail_form'
 
 gem 'activeadmin'
 gem 'draper'

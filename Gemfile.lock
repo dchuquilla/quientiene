@@ -237,6 +237,9 @@ GEM
       nokogiri (>= 1.5.9)
     mail (2.7.1)
       mini_mime (>= 0.1.1)
+    mail_form (1.9.0)
+      actionmailer (>= 5.2)
+      activemodel (>= 5.2)
     mailgun-ruby (1.2.5)
       rest-client (>= 2.0.2)
     marcel (1.0.1)
@@ -490,6 +493,7 @@ DEPENDENCIES
   image_processing
   jbuilder (~> 2.7)
   listen (~> 3.3)
+  mail_form
   mailgun-ruby
   omniauth-facebook
   omniauth-google-oauth2
