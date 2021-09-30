@@ -6,6 +6,7 @@ class HomeController < ApplicationController
   end
 
   def privacy_policy
+    @title = "QuienTiene :: Política de privacidad"
   end
 
   def business
@@ -14,6 +15,7 @@ class HomeController < ApplicationController
 
   def contact_us
     @contact = Home.new(params[:home])
+    @title = "QuienTiene :: Contáctenos"
   end
 
   def create

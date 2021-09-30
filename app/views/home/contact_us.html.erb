@@ -299,7 +299,11 @@
                   </div>
                   <h4 class="feature-title m-0">Contacto</h4>
                 </div>
-                <p class="text-sm mb-0">Darío Chuquilla.</p>
+                <p class="text-sm mb-0">
+                  <%= mail_to "info@quientiene.com", style: "font-weight:bold;" do %>
+                    <i class="material-icons">email</i> DARÍO CHUQUILLA
+                  <% end %>
+                </p>
               </div>
             </div>
             <div class="feature">
