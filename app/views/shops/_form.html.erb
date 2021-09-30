@@ -42,19 +42,27 @@
       <div class="form-group">
         <%= form.label :country, class:"bmd-label-floating" %>
         <select class="form-control" name="shop[country]" id="shop_country">
-          <%= options_for_select(CS.countries.collect{ |t| [ t.last, t.first ] }) %>
+          <option>Seleccione...</option>
+          <%= options_for_select( CS.countries.collect{ |co| [ co.last, co.first ] }, @shop.country ) %>
         </select>
       </div>
 
       <div class="form-group">
         <%= form.label :state_province, class:"bmd-label-floating" %>
         <select class="form-control" name="shop[state_province]" id="shop_state_province">
+          <% if @shop.country.present? %>
+            <%= options_for_select( CS.states(@shop.country).collect{ |st| [ st.last, st.first ] }, @shop.state_province ) %>
+          <% end %>
         </select>
       </div>
 
       <div class="form-group">
         <%= form.label :city, class:"bmd-label-floating" %>
         <select class="form-control" name="shop[city]" id="shop_city">
+          <% if @shop.state_province.present? %>
+            <%= options_for_select( CS.cities(@shop.state_province, @shop.country).collect{ |ct| [ ct, ct ] }, @shop.city ) %>
+          <% end %>
+        </select>
         </select>
       </div>
 
@@ -89,7 +97,7 @@
     var input_state = $('#shop_state_province');
     $.getJSON('/states_provinces/' + $(this).val(), function(data){
       input_state.empty();
-      input_state.append('<option>Seleccione</option>');
+      input_state.append('<option>Seleccione...</option>');
       $.each(data, function(i, j){
         var opt = '<option value='+ i +'>'+ j +'</optio>';
         input_state.append(opt);
@@ -100,9 +108,9 @@
     var input_city = $('#shop_city');
     $.getJSON('/cities/' + $('#shop_country').val() + '/' + $(this).val(), function(data){
       input_city.empty();
-      input_city.append('<option>Seleccione</option>');
+      input_city.append('<option>Seleccione...</option>');
       $.each(data, function(i, j){
-        var opt = '<option value='+ i +'>'+ j +'</optio>';
+        var opt = '<option value='+ j +'>'+ j +'</optio>';
         input_city.append(opt);
       });
     });

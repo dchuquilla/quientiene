@@ -37,21 +37,27 @@
 
       <div class="form-group">
         <%= form.label :country, class:"bmd-label-floating" %>
-
-        <select class="form-control" name="shop[country]" id="shop_country">
-          <%= options_for_select(CS.countries.collect{ |t| [ t.last, t.first ] }) %>
+        <select class="form-control" name="replacement_request[country]" id="replacement_request_country">
+          <option>Seleccione...</option>
+          <%= options_for_select( CS.countries.collect{ |t| [ t.last, t.first ] }, @replacement_request.country ) %>
         </select>
       </div>
 
       <div class="form-group">
         <%= form.label :state_province, class:"bmd-label-floating" %>
-        <select class="form-control" name="shop[state_province]" id="shop_state_province">
+        <select class="form-control" name="replacement_request[state_province]" id="replacement_request_state_province">
+          <% if @replacement_request.country.present? %>
+            <%= options_for_select( CS.states(@replacement_request.country).collect{ |st| [ st.last, st.first ] }, @replacement_request.state_province ) %>
+          <% end %>
         </select>
       </div>
 
       <div class="form-group">
         <%= form.label :city, class:"bmd-label-floating" %>
-        <select class="form-control" name="shop[city]" id="shop_city">
+        <select class="form-control" name="replacement_request[city]" id="replacement_request_city">
+          <% if @replacement_request.state_province.present? %>
+            <%= options_for_select( CS.cities(@replacement_request.state_province, @replacement_request.country).collect{ |ct| [ ct, ct ] }, @replacement_request.city ) %>
+          <% end %>
         </select>
       </div>
 
@@ -77,24 +83,24 @@
 <% end %>
 
 <script type="text/javascript">
-  $('#shop_country').change(function(){
-    var input_state = $('#shop_state_province');
+  $('#replacement_request_country').change(function(){
+    var input_state = $('#replacement_request_state_province');
     $.getJSON('/states_provinces/' + $(this).val(), function(data){
       input_state.empty();
-      input_state.append('<option>Seleccione</option>');
+      input_state.append('<option>Seleccione...</option>');
       $.each(data, function(i, j){
         var opt = '<option value='+ i +'>'+ j +'</optio>';
         input_state.append(opt);
       });
     });
   });
-  $('#shop_state_province').change(function(){
-    var input_city = $('#shop_city');
-    $.getJSON('/cities/' + $('#shop_country').val() + '/' + $(this).val(), function(data){
+  $('#replacement_request_state_province').change(function(){
+    var input_city = $('#replacement_request_city');
+    $.getJSON('/cities/' + $('#replacement_request_country').val() + '/' + $(this).val(), function(data){
       input_city.empty();
-      input_city.append('<option>Seleccione</option>');
+      input_city.append('<option>Seleccione...</option>');
       $.each(data, function(i, j){
-        var opt = '<option value='+ i +'>'+ j +'</optio>';
+        var opt = '<option value='+ j +'>'+ j +'</optio>';
         input_city.append(opt);
       });
     });
