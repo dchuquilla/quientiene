@@ -1,6 +1,6 @@
 class VehiclesController < ApplicationController
-  before_action :set_vehicle, only: %i[ show edit update destroy ]
   before_action :authenticate_user!
+  before_action :set_vehicle, only: %i[ show edit update destroy ]
   load_and_authorize_resource
 
   # GET /vehicles or /vehicles.json

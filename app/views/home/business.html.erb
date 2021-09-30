@@ -9,9 +9,6 @@
           <div class="hero-copy">
             <h1 class="hero-title mt-0 is-revealing">Empresas</h1>
             <p class="hero-paragraph is-revealing">Consiga más clientes en un solo lugar</p>
-            <div class="hero-form field field-grouped is-revealing">
-              <%= link_to "Quiero registrar mi empresa", new_user_registration_path(state: 'shop'), data: { turbolinks: false }, class: "button button-primary button-block" %>
-            </div>
           </div>
           <div class="hero-illustration">
             <div class="hero-bg">
@@ -340,6 +337,11 @@
                   <h4 class="feature-title m-0">Programa de socios fundadores</h4>
                 </div>
                 <p class="text-sm mb-0">Forme parte del visionario grupo de empresas que tendrán la oportunidad de formar parte del proyecto y sus utilidades.</p>
+                <br>
+                <br>
+                <div class="hero-form field field-grouped is-revealing">
+                  <%= link_to "Quiero registrar mi empresa", new_user_registration_path(state: 'shop'), data: { turbolinks: false }, class: "button button-primary button-block" %>
+                </div>
               </div>
             </div>
           </div>

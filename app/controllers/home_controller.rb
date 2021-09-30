@@ -9,6 +9,7 @@ class HomeController < ApplicationController
   end
 
   def business
+    @title = "QuienTiene :: Empresas"
   end
 
   def contact_us

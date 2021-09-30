@@ -8,12 +8,15 @@
         <div class="hero-inner">
           <div class="hero-copy">
             <h1 class="hero-title mt-0 is-revealing">QuienTiene</h1>
-            <p class="hero-paragraph is-revealing">Aquí encontrará lo que busca</p>
+            <p class="hero-paragraph is-revealing">Aquí encontrará el repuesto que tanto busca</p>
             <div class="hero-form field field-grouped is-revealing">
-              <%= link_to "Buscar un repuesto", new_user_session_path, data: { turbolinks: false }, class: "btn btn-info btn-block" %>
+              <%= link_to "Solicitar un repuesto", new_replacement_request_path, data: { turbolinks: false }, class: "btn btn-success btn-block btn-lg" %>
             </div>
             <div class="hero-form field field-grouped is-revealing">
-              <%= link_to "Empresas", empresas_path, data: { turbolinks: false }, class: "btn btn-primary btn-block" %>
+              <%= link_to "Ingresar", new_user_session_path, data: { turbolinks: false }, class: "btn btn-info btn-block btn-lg" %>
+            </div>
+            <div class="hero-form field field-grouped is-revealing">
+              <%= link_to "Empresas", empresas_path, data: { turbolinks: false }, class: "btn btn-primary btn-block btn-lg" %>
             </div>
           </div>
           <div class="hero-illustration">
@@ -305,7 +308,7 @@
                   </div>
                   <h4 class="feature-title m-0">Solicitar repuesto</h4>
                 </div>
-                <p class="text-sm mb-0">Registra los detalles del repuesto que necesitas.</p>
+                <p class="text-sm mb-0">Registra los detalles del repuesto que necesita.</p>
               </div>
             </div>
             <div class="feature">
@@ -322,7 +325,7 @@
                   </div>
                   <h4 class="feature-title m-0">Los locales lo encuentran</h4>
                 </div>
-                <p class="text-sm mb-0">Los locales comerciales reciben tu solicitud y buscan en sus bodegas.</p>
+                <p class="text-sm mb-0">Los locales comerciales reciben su solicitud y buscan en sus bodegas.</p>
               </div>
             </div>
             <div class="feature">
@@ -341,7 +344,7 @@
                   </div>
                   <h4 class="feature-title m-0">Escoges la mejor propuesta</h4>
                 </div>
-                <p class="text-sm mb-0">Recibes las propuestas y escoges la que más te convenga.</p>
+                <p class="text-sm mb-0">Recibe las propuestas y escoge la que más te convenga.</p>
               </div>
             </div>
           </div>

@@ -1,7 +1,7 @@
 class ReplacementProposalsController < ApplicationController
+  before_action :authenticate_user!
   before_action :set_replacement_request, only: %i[ show edit update new create ]
   before_action :set_searchable_resource, only: %i[ search new ]
-  before_action :authenticate_user!
   load_and_authorize_resource
 
   # GET /replacement_proposals or /replacement_proposals.json

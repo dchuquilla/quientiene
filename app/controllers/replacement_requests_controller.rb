@@ -1,6 +1,6 @@
 class ReplacementRequestsController < ApplicationController
-  before_action :set_replacement_request, only: %i[ ignore ]
   before_action :authenticate_user!
+  before_action :set_replacement_request, only: %i[ ignore ]
   load_and_authorize_resource
 
   # GET /replacement_requests or /replacement_requests.json

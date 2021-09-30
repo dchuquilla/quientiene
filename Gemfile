@@ -47,6 +47,8 @@ gem 'omniauth-rails_csrf_protection'
 gem 'cancancan'
 gem "rolify"
 gem 'mail_form'
+gem 'geocoder'
+gem 'city-state'
 
 gem 'activeadmin'
 gem 'draper'

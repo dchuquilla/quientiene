@@ -31,5 +31,6 @@ $(document).ready(function(){
   }).on("ajax:error", function(event) {
     return $("#replacement_proposal_search").append("<p>ERROR</p>");
   });
+  
 
 });

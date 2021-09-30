@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_08_28_025312) do
+ActiveRecord::Schema.define(version: 2021_09_30_045748) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -117,6 +117,9 @@ ActiveRecord::Schema.define(version: 2021_08_28_025312) do
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.string "state"
+    t.string "country"
+    t.string "city"
+    t.string "state_province"
     t.index ["user_id"], name: "index_replacement_requests_on_user_id"
     t.index ["vehicle_id"], name: "index_replacement_requests_on_vehicle_id"
   end
@@ -151,6 +154,9 @@ ActiveRecord::Schema.define(version: 2021_08_28_025312) do
     t.string "sector"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.string "country"
+    t.string "city"
+    t.string "state_province"
     t.index ["user_id"], name: "index_shops_on_user_id"
   end
 
