@@ -29,10 +29,6 @@
               <%= f.text_field :name, class:"form-control" %>
             </div><br><br>
 
-            <% if @user.pending_reconfirmation? %>
-              <div class="text-secondary">Esperando confirmación para: <%= @user.unconfirmed_email %></div>
-            <% end %>
-
             <div class="form-group">
               <%= f.label :password %> <i class="text-secondary">(Dejar en blanco si no requiere cambiar.)</i><br />
               <%= f.password_field :password, autocomplete: "new-password", class:"form-control" %>

@@ -1,78 +1,32 @@
-<div class="row">
-  <div class="col-md-4 col-sm-4">
-    <div class="card card-stats">
-      <div class="card-header card-header-warning card-header-icon">
-        <div class="card-icon">
-          <i class="material-icons">store</i>
-        </div>
-        <p class="card-category">Mis locales</p>
-        <h3 class="card-title"><%= @my_shops %> <small>Locales</small></h3>
-      </div>
-      <div class="card-footer">
-        <div class="stats align-items-center">
-          <%= link_to shops_path, class:"text-info btn btn-outline-info btn-sm" do %>
-            <i class="material-icons text-dark mr-2" style="top: 0;">add_circle_outline</i>
-            Ver locales
-          <% end %>
-        </div>
-      </div>
-    </div>
-  </div>
-
-  <div class="col-md-4 col-sm-4">
-    <div class="card card-stats">
-      <div class="card-header card-header-primary card-header-icon">
-        <div class="card-icon">
-          <i class="material-icons">email</i>
-        </div>
-        <p class="card-category">Solicitudes pendientes</p>
-        <h3 class="card-title"><%= @pending_requests %> <small>solicitudes</small></h3>
-      </div>
-      <div class="card-footer">
-        <div class="stats align-items-center">
-          <%= link_to replacement_requests_path, data: { turbolinks: false }, class: "text-info btn btn-outline-info btn-sm" do %>
-            <i class="material-icons text-dark mr-2" style="top: 0;">summarize</i>
-            Ver solicitudes
-          <% end %>
-        </div>
-      </div>
-    </div>
-  </div>
-
-  <div class="col-md-4 col-sm-4">
-    <div class="card card-stats">
-      <div class="card-header card-header-success card-header-icon">
-        <div class="card-icon">
-          <i class="material-icons">forward_to_inbox</i>
-        </div>
-        <p class="card-category">Propuestas aceptadas</p>
-        <h3 class="card-title"><%= @accepted_proposals %> <small>Propuestas</small></h3>
-      </div>
-      <div class="card-footer">
-        <div class="stats align-items-center">
-          <%= link_to replacement_proposals_path, data: { turbolinks: false }, class:"text-info btn btn-outline-info btn-sm" do %>
-            <i class="material-icons text-dark mr-2" style="top: 0;">fact_check</i>
-            Propuestas
-          <% end %>
-        </div>
-      </div>
-    </div>
-  </div>
-
-</div>
-
-<div class="row justify-content-center">
+<div class="row justify-content-center dashboard-buttons">
   <div class="col-md-1 col-sm-1"></div>
   <div class="col">
-    <%= link_to replacement_requests_path, data: { turbolinks: false }, class:"btn btn-outline-primary btn-lg btn-block" do %>
-      <i class="material-icons text-dark mr-3" style="top: 0;">flare</i>
-      Ver solicitudes pendientes
-    <% end %>
-
-    <%= link_to new_shop_path, data: { turbolinks: false }, class:"btn btn-outline-warning btn-lg btn-block" do %>
-      <i class="material-icons text-dark mr-3" style="top: 0;">store</i>
-      Agregar más locales
-    <% end %>
+    <div class="row">
+      <div class="col-sm-12 col-lg-6">
+        <%= link_to replacement_requests_path, data: { turbolinks: false }, class:"font-weight-bolder btn btn-outline-primary btn-lg btn-block" do %>
+          <i class="material-icons text-dark mr-3" style="top: 0;font-size: 2rem;">flare</i>
+          Ver solicitudes pendientes
+        <% end %>
+      </div>
+      <div class="col-sm-12 col-lg-6">
+        <%= link_to replacement_proposals_path, data: { turbolinks: false }, class:"font-weight-bolder btn btn-outline-success btn-lg btn-block" do %>
+          <i class="material-icons text-dark mr-2" style="top: 0;font-size: 2rem;">summarize</i>
+          Ver mis propuestas
+        <% end %>
+      </div>
+      <div class="col-sm-12 col-lg-6">
+        <%= link_to shops_path, class:"font-weight-bolder btn btn-outline-warning btn-lg btn-block" do %>
+          <i class="material-icons text-dark mr-3" style="top: 0;font-size: 2rem;">store</i>
+          Ver mis locales
+        <% end %>
+      </div>
+      <div class="col-sm-12 col-lg-6">
+        <%= link_to new_shop_path, data: { turbolinks: false }, class:"font-weight-bolder btn btn-outline-warning btn-lg btn-block" do %>
+          <i class="material-icons text-dark mr-2" style="top: 0;font-size: 2rem;">add_circle_outline</i>
+          Agregar más locales
+        <% end %>
+      </div>
+    </div>
   </div>
   <div class="col-md-1 col-sm-1"></div>
 </div>
