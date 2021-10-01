@@ -20,21 +20,21 @@
             <% end %>
 
             <div class="form-group">
-              <%= f.label :email, "Correo electrónico" %><br />
-              <%= f.email_field :email, autofocus: true, autocomplete: "email", class:"form-control" %>
+              <%= f.label :email, "Correo electrónico", class: "bmd-label-floating" %><br />
+              <%= f.email_field :email, autofocus: true, autocomplete: "off", class:"form-control" %>
             </div>
 
             <div class="form-group">
-              <%= f.label :password, "Contraseña" %>
+              <%= f.label :password, "Contraseña", class: "bmd-label-floating" %><br />
+              <%= f.password_field :password, autocomplete: "off", class:"form-control" %>
               <% if @minimum_password_length %>
-              <em>(<%= @minimum_password_length %> caracteres mínimo)</em>
-              <% end %><br />
-              <%= f.password_field :password, autocomplete: "new-password", class:"form-control" %>
+                <em class="form-text text-muted">(<%= @minimum_password_length %> caracteres mínimo)</em>
+              <% end %>
             </div>
 
             <div class="form-group">
-              <%= f.label :password_confirmation, "Confirmar contraseña" %><br />
-              <%= f.password_field :password_confirmation, autocomplete: "new-password", class:"form-control" %>
+              <%= f.label :password_confirmation, "Confirmar contraseña", class: "bmd-label-floating" %><br />
+              <%= f.password_field :password_confirmation, autocomplete: "off", class:"form-control" %>
             </div>
 
             <div class="d-flex mb-5 align-items-center">

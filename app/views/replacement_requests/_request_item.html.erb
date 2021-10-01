@@ -16,7 +16,7 @@
     <div class="row">
       <% if replacement_request.photos.any? %>
         <div class="col-sm-12 col-md-5">
-          <% if replacement_request.photos.count == 1 %>
+          <% if replacement_request.photos.size == 1 %>
             <div class="image-element">
               <% if replacement_request.photos.first.representable? && (["image/png", "image/jpeg", "image/png", "image/gif"].include?(replacement_request.photos.first.content_type)) %>
                 <%= image_tag replacement_request.photos.first.variant(resize_to_limit: [150, 150]), class: "img-fluid rounded mx-auto d-block" %>
@@ -69,7 +69,7 @@
             Eliminar
           <% end %>
         <% end %>
-        <% if can?(:read, ReplacementProposal) && replacement_request.replacement_proposals.where(user_id: current_user.id).count > 0 %>
+        <% if can?(:read, ReplacementProposal) && replacement_request.replacement_proposals.where(user_id: current_user.id).size > 0 %>
           <%= link_to replacement_proposals_path(replacement_request_id: replacement_request), data: { turbolinks: false }, class:"text-warning btn btn-outline-warning btn-sm" do %>
             <i class="material-icons mr-1" style="top: 0;">mark_email_read</i>
             Propuestas
@@ -81,7 +81,7 @@
             Agregar propueta
           <% end %>
         <% end %>
-        <% if current_user.has_role?(:shop) && replacement_request.replacement_proposals.where(user_id: current_user.id).count == 0 %>
+        <% if current_user.has_role?(:shop) && replacement_request.replacement_proposals.where(user_id: current_user.id).size == 0 %>
           <%= link_to ignore_replacement_request_path(replacement_request), data: { confirm: '¿Está seguro?' }, class:"text-danger btn btn-outline-danger btn-sm" do %>
             <i class="material-icons mr-1" style="top: 0;">close</i>
             Ignorar
