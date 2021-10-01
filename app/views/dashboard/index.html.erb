@@ -1,35 +1,37 @@
 <div class="row justify-content-center dashboard-buttons">
   <div class="col-md-1 col-sm-1"></div>
   <div class="col">
-    <div class="col-sm-12 col-lg-6">
-      <%= link_to new_replacement_request_path, data: { turbolinks: false }, class:"btn btn-outline-primary btn-lg btn-block" do %>
-        <i class="material-icons text-dark mr-3" style="top: 0;font-size: 2rem;">flare</i>
-        Solicitar repuesto
-      <% end %>
-    </div>
-    <div class="col-sm-12 col-lg-6">
-      <%= link_to replacement_requests_path, data: { turbolinks: false }, class:"btn btn-outline-success btn-lg btn-block" do %>
-        <i class="material-icons text-dark mr-2" style="top: 0;font-size: 2rem;">fact_check</i>
-        Ver mis solicitudes
-      <% end %>
-    </div>
-    <div class="col-sm-12 col-lg-6">
-      <%= link_to closed_replacement_requests_path, data: { turbolinks: false }, class:"btn btn-outline-info btn-lg btn-block" do %>
-        <i class="material-icons text-dark mr-2" style="top: 0;font-size: 2rem;">summarize</i>
-        Ver solicitudes cerradas
-      <% end %>
-    </div>
-    <div class="col-sm-12 col-lg-6">
-      <%= link_to vehicles_path, class:"btn btn-outline-warning btn-lg btn-block" do %>
-        <i class="material-icons text-dark mr-2" style="top: 0;font-size: 2rem;">commute</i>
-        Ver mis vehículos
-      <% end %>
-    </div>
-    <div class="col-sm-12 col-lg-6">
-      <%= link_to new_vehicle_path, data: { turbolinks: false }, class:"btn btn-outline-success btn-lg btn-block" do %>
-        <i class="material-icons text-dark mr-3" style="top: 0;font-size: 2rem;">add_circle_outline</i>
-        Agregar vehículo
-      <% end %>
+    <div class="row">
+      <div class="col-sm-12 col-lg-6">
+        <%= link_to new_replacement_request_path, data: { turbolinks: false }, class:"btn btn-outline-primary btn-lg btn-block" do %>
+          <i class="material-icons text-dark mr-3" style="font-size: 3rem;">flare</i>
+          Solicitar repuesto
+        <% end %>
+      </div>
+      <div class="col-sm-12 col-lg-6">
+        <%= link_to replacement_requests_path, data: { turbolinks: false }, class:"btn btn-outline-success btn-lg btn-block" do %>
+          <i class="material-icons text-dark mr-2" style="font-size: 3rem;">fact_check</i>
+          Ver mis solicitudes
+        <% end %>
+      </div>
+      <div class="col-sm-12 col-lg-6">
+        <%= link_to closed_replacement_requests_path, data: { turbolinks: false }, class:"btn btn-outline-info btn-lg btn-block" do %>
+          <i class="material-icons text-dark mr-2" style="font-size: 3rem;">summarize</i>
+          Ver solicitudes cerradas
+        <% end %>
+      </div>
+      <div class="col-sm-12 col-lg-6">
+        <%= link_to vehicles_path, class:"btn btn-outline-warning btn-lg btn-block" do %>
+          <i class="material-icons text-dark mr-2" style="font-size: 3rem;">commute</i>
+          Ver mis vehículos
+        <% end %>
+      </div>
+      <div class="col-sm-12 col-lg-6">
+        <%= link_to new_vehicle_path, data: { turbolinks: false }, class:"btn btn-outline-success btn-lg btn-block" do %>
+          <i class="material-icons text-dark mr-3" style="font-size: 3rem;">add_circle_outline</i>
+          Agregar vehículo
+        <% end %>
+      </div>
     </div>
   </div>
   <div class="col-md-1 col-sm-1"></div>
