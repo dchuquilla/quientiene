@@ -148,17 +148,13 @@
                 <%= link_to "Locales", shops_path, class:"nav-link" %>
               </li>
             <% end %>
+            <li class="nav-item">
+              <%= link_to "Mi cuenta", my_account_path, class: "nav-link" %>
+            </li>
+            <li class="nav-item">
+              <%= link_to "Salir", destroy_user_session_path, method: :delete, class:"nav-link" %>
+            </li>
           </ul>
-          <span class="navbar-text">
-            <ul class="navbar-nav mr-auto">
-              <li class="nav-item">
-                <%= link_to "Mi cuenta", my_account_path, class: "nav-link" %>
-              </li>
-              <li class="nav-item">
-                <%= link_to "Salir", destroy_user_session_path, method: :delete, class:"nav-link" %>
-              </li>
-            </ul>
-          </span>
         </div>
       </div>
     </nav>

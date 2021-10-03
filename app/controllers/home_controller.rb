@@ -1,5 +1,8 @@
 class HomeController < ApplicationController
   def index
+    if current_user.id.present?
+      redirect_to dashboard_path
+    end
   end
 
   def signup

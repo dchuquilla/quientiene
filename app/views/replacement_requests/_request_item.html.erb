@@ -1,14 +1,8 @@
 <div class="card col-sm-12 <%= params[:replacement_request_id].present? ? 'col-lg-12' : 'col-lg-4' %>">
-  <div class="card-header card-header-success card-header-icon">
-    <div class="card-icon p-1 ">
-      <i class="material-icons">email</i>
-    </div>
+  <div class="card-header card-header-success">
     <div class="row">
-      <div class="col-md-4 col-sm-6">
-        <p class="card-category text-dark"><%= replacement_request.updated_at.strftime('%d/%m/%Y') %> </p>
-      </div>
-      <div class="col-md-8 col-sm-6">
-        <p class="card-category text-dark"><%= replacement_request.vehicle.brand %> <%= replacement_request.vehicle.model %> <%= replacement_request.vehicle.year %> </p>
+      <div class=" col-sm-12 col-md-12">
+        <p class="card-category"><%= replacement_request.updated_at.strftime('%d/%m/%Y') %> </p>
       </div>
     </div>
   </div>
@@ -49,16 +43,27 @@
           <% end %>
         </div>
       <% end %>
-      <div class="col-sm-12 col-md-7">
+      <div class="col-sm-12 <%= replacement_request.photos.any? ? 'col-md-7' : 'col-md-12'%>">
+        <h2 class="card-category text-dark"><%= replacement_request.vehicle.brand %> <%= replacement_request.vehicle.model %> <%= replacement_request.vehicle.year %> </h2>
 
-        <h3 class="card-title"><%= replacement_request.short_name %></h3>
+        <h3><%= replacement_request.short_name %></h3>
 
         <% if replacement_request.part_number.present? %>
           <h4>P/N: <%= replacement_request.part_number %></h4>
         <% end %>
-        <%= replacement_request.description.html_safe %>
-        <br>
-        
+        <h5>
+          <%= replacement_request.description.html_safe %>
+        </h5>
+        <h5 class="text-dark">
+          <% if replacement_request.city.present? %>
+            <span class="material-icons text-success mt-1" style="position: relative; top: 5px;">location_city</span> <%= replacement_request.city %>
+          <% end %>
+        </h5>
+      </div>
+    </div>
+  </div>
+  <div class="card-footer">
+    <div class="align-items-center">
         <% if can?(:manage, replacement_request) && replacement_request.state != 'closed' %>
           <%= link_to edit_replacement_request_path(replacement_request), class:"text-info btn btn-outline-info btn-sm" do %>
             <i class="material-icons text-dark mr-2" style="top: 0;">mode_edit</i>
@@ -69,7 +74,7 @@
             Eliminar
           <% end %>
         <% end %>
-        <% if can?(:read, ReplacementProposal) && replacement_request.replacement_proposals.where(user_id: current_user.id).size > 0 %>
+        <% if current_user.has_role?(:customer) && can?(:read, ReplacementProposal) && replacement_request.replacement_proposals.size > 0 %>
           <%= link_to replacement_proposals_path(replacement_request_id: replacement_request), data: { turbolinks: false }, class:"text-warning btn btn-outline-warning btn-sm" do %>
             <i class="material-icons mr-1" style="top: 0;">mark_email_read</i>
             Propuestas
@@ -87,11 +92,6 @@
             Ignorar
           <% end %>
         <% end %>
-      </div>
-    </div>
-  </div>
-  <div class="card-footer">
-    <div class="stats align-items-center">
     </div>
   </div>
 </div>
