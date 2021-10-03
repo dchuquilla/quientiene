@@ -1,6 +1,6 @@
 class HomeController < ApplicationController
   def index
-    if current_user.id.present?
+    if current_user.present?
       redirect_to dashboard_path
     end
   end
