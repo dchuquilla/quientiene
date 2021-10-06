@@ -1,6 +1,5 @@
 class ApplicationController < ActionController::Base
   add_flash_types :info, :error, :warning
-  before_action :authenticate_user!, only: [:states_provinces, :cities]
   before_action :set_metadata
 
   # The path used after sign up.

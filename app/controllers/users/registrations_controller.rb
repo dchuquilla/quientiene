@@ -5,17 +5,47 @@ class Users::RegistrationsController < Devise::RegistrationsController
   # before_action :configure_account_update_params, only: [:update]
 
   # GET /resource/sign_up
-  # def new
-  #   super
-  # end
+  def new
+    @vehicle = Vehicle.new
+    @replacement_request = ReplacementRequest.new
+    super
+  end
 
   # POST /resource
   def create
-    super
     if params[:empresa].present? && params[:empresa] = 'si'
+      super
       resource.remove_role :customer
       resource.add_role :shop
+    elsif params[:new_request].present?
+      if params[:vehicle].present?
+        vehicle_params = params.require(:vehicle).permit(:user_id, :plate, :chasis, :brand, :model, :year)
+        @vehicle = Vehicle.new(vehicle_params)
+      end
+      if params[:replacement_request].present?
+        replacement_request_params = params.require(:replacement_request).permit(:user_id, :vehicle_id, :part_number, :short_name, :description, :country, :state_province, :city, photos: [])
+        @replacement_request = ReplacementRequest.new(replacement_request_params)
+      end
+      if @vehicle.nil? 
+        
+      end
+      if @vehicle.valid? && @replacement_request.valid?
+        super
+        @vehicle.user_id = resource.id
+        @replacement_request.state = "created"
+        @replacement_request.user_id = resource.id
+        @vehicle.save
+        @replacement_request.save
+      else
+        respond_to do |format|
+          format.html { render :new, status: :unprocessable_entity }
+          format.json { render json: @replacement_request.errors, status: :unprocessable_entity }
+        end
+      end
+    else
+      super
     end
+
   end
 
   # GET /resource/edit

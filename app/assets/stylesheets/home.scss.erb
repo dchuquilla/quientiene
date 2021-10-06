@@ -518,7 +518,7 @@
   }
 
   [class^="icon-"], [class*=" icon-"] {
-    /* use !important to prevent issues with browser extensions that change fonts */
+    /* use !important to prevent issues with Buscarr extensions that change fonts */
     font-family: 'icomoon' !important;
     speak: none;
     font-style: normal;
@@ -5369,7 +5369,7 @@
     content: "\e91c";
   }
 
-  .icon-open_in_browser:before {
+  .icon-open_in_Buscarr:before {
     content: "\e89d";
   }
 
@@ -11665,61 +11665,65 @@ a.btn.disabled, fieldset:disabled a.btn {
 
 .custom-file-input {
   position: relative;
-  z-index: 2;
   width: 100%;
-  height: calc(1.5em + .75rem + 2px);
+  height: 40px;
+  z-index: 2;
   margin: 0;
   opacity: 0;
 
-  &:focus ~ .custom-file-label {
-    border-color: #80bdff;
-    -webkit-box-shadow: 0 0 0 .2rem rgba(0, 123, 255, .25);
-    box-shadow: 0 0 0 .2rem rgba(0, 123, 255, .25);
+  &:focus ~ .custom-file-control {
+    border-color: #9acffa;
+    -webkit-box-shadow: 0 0 0 .2rem rgba(33, 150, 243, .25);
+    box-shadow: 0 0 0 .2rem rgba(33, 150, 243, .25);
+
+    &:before {
+      border-color: #9acffa;
+    }
   }
 
   &:disabled ~ .custom-file-label {
     background-color: #e9ecef;
   }
 
-  &:lang(en) ~ .custom-file-label::after {
-    content: "Browse";
+  &:lang(en) ~ .custom-file-label:after {
+    content: "Buscar";
   }
 
   ~ .custom-file-label[data-browse]::after {
-    content: attr(data-browse);
+    content: attr(data-Buscar);
   }
 }
 
 .custom-file-label {
+  left: 0;
+  z-index: 1;
+  height: 40px;
+  border: 0 solid #d2d2d2;
+  border-radius: 5px;
+  box-shadow: none;
   position: absolute;
   top: 0;
   right: 0;
-  left: 0;
-  z-index: 1;
-  height: calc(1.5em + .75rem + 2px);
-  padding: .375rem .75rem;
-  font-weight: 400;
-  line-height: 1.5;
+  padding: 0 1rem;
+  line-height: 40px;
   color: #495057;
-  background-color: #fff;
-  border: 1px solid #ced4da;
-  border-radius: .25rem;
+  background-color: #f5f5f5;
 
-  &::after {
+  &:after {
     position: absolute;
     top: 0;
     right: 0;
+    padding: 0 1rem;
+    line-height: 40px;
+    color: #495057;
+    background-color: #a2a2a2;
     bottom: 0;
     z-index: 3;
     display: block;
-    height: calc(1.5em + .75rem);
-    padding: .375rem .75rem;
-    line-height: 1.5;
-    color: #495057;
-    content: "Browse";
-    background-color: #e9ecef;
-    border-left: inherit;
-    border-radius: 0 .25rem .25rem 0;
+    height: 40px;
+    content: "Buscar";
+    border-left: 0 solid #d2d2d2;
+    border-radius: 0 0 0 0;
   }
 }
 
@@ -12107,6 +12111,7 @@ a.btn.disabled, fieldset:disabled a.btn {
   -webkit-box-align: center;
   -ms-flex-align: center;
   align-items: center;
+  background-color: #343434;
 }
 
 .navbar-toggler {
@@ -12117,8 +12122,12 @@ a.btn.disabled, fieldset:disabled a.btn {
   border: 1px solid transparent;
   border-radius: .25rem;
 
-  &:hover, &:focus {
+  &:focus, &:hover {
     text-decoration: none;
+  }
+
+  &:not(:disabled):not(.disabled) {
+    cursor: pointer;
   }
 }
 
@@ -16826,61 +16835,6 @@ tbody.collapse.show {
   height: calc(2.4375rem + 2px);
 }
 
-.custom-file-input {
-  position: relative;
-  width: 100%;
-  height: calc(2.4375rem + 2px);
-  z-index: 2;
-  margin: 0;
-  opacity: 0;
-
-  &:focus ~ .custom-file-control {
-    border-color: #9acffa;
-    box-shadow: 0 0 0 .2rem rgba(33, 150, 243, .25);
-
-    &:before {
-      border-color: #9acffa;
-    }
-  }
-
-  &:lang(en) ~ .custom-file-label:after {
-    content: "Browse";
-  }
-}
-
-.custom-file-label {
-  left: 0;
-  z-index: 1;
-  height: calc(2.4375rem + 2px);
-  border: 0 solid #d2d2d2;
-  border-radius: 0;
-  box-shadow: none;
-  position: absolute;
-  top: 0;
-  right: 0;
-  padding: .46875rem 1rem;
-  line-height: 1.3;
-  color: #495057;
-  background-color: transparent;
-
-  &:after {
-    position: absolute;
-    top: 0;
-    right: 0;
-    padding: .46875rem 1rem;
-    line-height: 1.3;
-    color: #495057;
-    background-color: transparent;
-    bottom: 0;
-    z-index: 3;
-    display: block;
-    height: calc((2.4375rem + 2px) - 0 * 2);
-    content: "Browse";
-    border-left: 0 solid #d2d2d2;
-    border-radius: 0 0 0 0;
-  }
-}
-
 .nav {
   display: flex;
   flex-wrap: wrap;
@@ -17029,29 +16983,6 @@ tbody.collapse.show {
   display: inline-block;
   padding-top: .5rem;
   padding-bottom: .5rem;
-}
-
-.navbar-collapse {
-  flex-basis: 100%;
-  flex-grow: 1;
-  align-items: center;
-}
-
-.navbar-toggler {
-  padding: .25rem .75rem;
-  font-size: 1.25rem;
-  line-height: 1;
-  background-color: transparent;
-  border: 1px solid transparent;
-  border-radius: .25rem;
-
-  &:focus, &:hover {
-    text-decoration: none;
-  }
-
-  &:not(:disabled):not(.disabled) {
-    cursor: pointer;
-  }
 }
 
 .navbar-toggler-icon {
@@ -28937,7 +28868,7 @@ html[dir=rtl] {
     margin-right: 0 !important;
     z-index: 1032;
     visibility: visible;
-    background-color: #999;
+    background-color: #343434;
     overflow-y: visible;
     border-top: none;
     text-align: left;
@@ -28953,7 +28884,7 @@ html[dir=rtl] {
       height: 100%;
       width: 100%;
       position: absolute;
-      background-color: #fff;
+      background-color: #343434;
       display: block;
       content: "";
       z-index: 1;
@@ -30387,7 +30318,7 @@ h2 {
   }
 
   .contents .form-group label, .bg .form-group label {
-    font-size: 12px;
+    font-size: 1rem;
     display: block;
     margin-bottom: 0;
     color: #b3b3b3;
@@ -35827,18 +35758,6 @@ $dnliconpos: $dnl-icon-size/2;
 
   .ml-lg-auto, .mx-lg-auto {
     margin-left: auto !important;
-  }
-
-  .text-lg-left {
-    text-align: left !important;
-  }
-
-  .text-lg-right {
-    text-align: right !important;
-  }
-
-  .text-lg-center {
-    text-align: center !important;
   }
 
   .card.bmd-card-flat {

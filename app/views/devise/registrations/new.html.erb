@@ -1,47 +1,185 @@
-<div class="d-lg-flex half">
+<div class="d-lg-flex half" style="height: auto !important;">
   <div class="bg order-1 order-md-2" style="background: #f7fbfe url(<%= asset_path 'home_bg.jpg' %>) no-repeat 50%; background-size: contain;"></div>
   <div class="contents order-2 order-md-1">
     <div class="container">
-      <div class="row align-items-center justify-content-center">
-        <div class="col-md-5">
+      <div class="row align-items-center justify-content-center" style="height: auto !important;">
+        <div class="col">
           <div class="mb-4">
-            <a href="<%= root_path %>">
-              <%= image_tag "quien_tiene_logo_b.png", width: "100%" %>
+            <a href="<%= root_path %>" class="btn btn-outline d-block h-auto">
+              <%= image_tag "quien_tiene_logo_b.png", width: "100%", class: "d-block" %>
             </a>
-            <br>
-            <br>
             <p class="mb-4"></p>
           </div>
 
-          <%= form_for(resource, as: resource_name, url: registration_path(resource_name)) do |f| %>
+          <%= form_for resource, as: resource_name, url: registration_path(resource_name), html: { enctype: "multipart/form-data" } do |f| %>
             <%= render "devise/shared/error_messages", resource: resource %>
             <% if params[:state].present? || params[:empresa].present? %>
               <%= hidden_field_tag :empresa, "si" %>
             <% end %>
 
-            <div class="form-group">
-              <%= f.label :email, "Correo electrónico", class: "bmd-label-floating" %><br />
-              <%= f.email_field :email, autofocus: true, autocomplete: "off", class:"form-control" %>
-            </div>
+            <% if params[:new_request].present? %>
+              <%= hidden_field_tag :new_request, "1" %>
 
-            <div class="form-group">
-              <%= f.label :password, "Contraseña", class: "bmd-label-floating" %><br />
-              <%= f.password_field :password, autocomplete: "off", class:"form-control" %>
-              <% if @minimum_password_length %>
-                <em class="form-text text-muted">(<%= @minimum_password_length %> caracteres mínimo)</em>
+              <% if @vehicle.errors.any? %>
+                <div class="alert alert-danger" role="alert">
+                  <h2> <%= I18n.t("errors.messages.not_saved", count: @vehicle.errors.count, resource: @vehicle.class.model_name.human.downcase) %> </h2>
+                  <ul>
+                    <% @vehicle.errors.each do |error| %>
+                      <li><%= error.full_message %></li>
+                    <% end %>
+                  </ul>
+                </div>
               <% end %>
+
+              <% if @replacement_request.errors.any? %>
+                <div class="alert alert-danger" role="alert">
+                  <h2> <%= I18n.t("errors.messages.not_saved", count: @replacement_request.errors.count, resource: @replacement_request.class.model_name.human.downcase) %> </h2>
+                  <ul>
+                    <% @replacement_request.errors.each do |error| %>
+                      <li><%= error.full_message %></li>
+                    <% end %>
+                  </ul>
+                </div>
+              <% end %>
+
+              <div class="new-request">
+                <div class="card">
+                  <div class="card-header card-header-warning">
+                    <h4 class="card-category">Vehículo</h4>
+                  </div>
+                  <div class="card-body">
+
+                    <div class="form-group bmd-form-group">
+                      <label class="bmd-label-floating" for="vehicle_brand">Marca</label>
+                      <input class="form-control" type="text" name="vehicle[brand]" id="vehicle_brand" value="<%= @vehicle.brand %>">
+                    </div>
+
+                    <div class="form-group bmd-form-group">
+                      <label class="bmd-label-floating" for="vehicle_model">Modelo</label>
+                      <input class="form-control" type="text" name="vehicle[model]" id="vehicle_model">
+                    </div>
+
+                    <div class="form-group bmd-form-group">
+                      <label class="bmd-label-floating" for="vehicle_year">Año</label>
+                      <input class="form-control" type="number" name="vehicle[year]" id="vehicle_year">
+                    </div>
+
+                  </div>
+                </div>
+
+                <div class="card">
+                  <div class="card-header card-header-primary">
+                    <h4 class="card-category">Repuesto</h4>
+                  </div>
+                  <div class="card-body">
+
+                    <div class="form-group bmd-form-group">
+                      <label class="bmd-label-floating" for="replacement_request_short_name">Nombre de la parte</label>
+                      <input class="form-control" type="text" name="replacement_request[short_name]" id="replacement_request_short_name">
+                    </div>
+
+                    <div class="form-group bmd-form-group">
+                      <label class="bmd-label-floating" for="replacement_request_part_number">Número de parte</label>
+                      <input class="form-control" type="text" name="replacement_request[part_number]" id="replacement_request_part_number">
+                    </div>
+
+                    <div class="form-group">
+                      <select class="form-control" name="replacement_request[country]" id="replacement_request_country">
+                        <option>Seleccione País...</option>
+                        <%= options_for_select( CS.countries.collect{ |t| [ t.last, t.first ] } ) %>
+                      </select>
+                    </div>
+
+                    <div class="form-group">
+                      <select class="form-control" name="replacement_request[state_province]" id="replacement_request_state_province">
+                      </select>
+                    </div>
+
+                    <div class="form-group">
+                      <select class="form-control" name="replacement_request[city]" id="replacement_request_city">
+                      </select>
+                    </div>
+
+                    <div class="form-group bmd-form-group">
+                      <label class="bmd-label-floating" for="replacement_request_description">Descripción</label>
+                      <textarea class="form-control" rows="4" name="replacement_request[description]" id="replacement_request_description"></textarea>
+                    </div>
+
+                  </div>
+                  <div class="card-footer">
+                    <div class="align-items-center" style="width: 100%; margin-bottom: 10px;">
+                      <div class="custom-file">
+
+                        <input type="file" class="custom-file-input" id="customFile" multiple="multiple" name="replacement_request[photos][]">
+                        <label class="custom-file-label" for="replacement_request_photos">
+                          <i class="material-icons" style="top:5px;position: relative;">attach_file</i>
+                          Adjuntar archivos
+                        </label>
+                      </div>
+
+                    </div>
+                  </div>
+                </div>
+
+                <script type="text/javascript">
+                  $('#replacement_request_country').change(function(){
+                    var input_state = $('#replacement_request_state_province');
+                    $.getJSON('/states_provinces/' + $(this).val(), function(data){
+                      input_state.empty();
+                      input_state.append('<option>Seleccione Estado/Provincia...</option>');
+                      $.each(data, function(i, j){
+                        var opt = '<option value='+ i +'>'+ j +'</optio>';
+                        input_state.append(opt);
+                      });
+                    });
+                  });
+                  $('#replacement_request_state_province').change(function(){
+                    var input_city = $('#replacement_request_city');
+                    $.getJSON('/cities/' + $('#replacement_request_country').val() + '/' + $(this).val(), function(data){
+                      input_city.empty();
+                      input_city.append('<option>Seleccione Ciudad...</option>');
+                      $.each(data, function(i, j){
+                        var opt = '<option value='+ j +'>'+ j +'</optio>';
+                        input_city.append(opt);
+                      });
+                    });
+                  });
+                </script>
+              </div>
+            <% end %>
+
+
+            <div class="card">
+              <div class="card-header card-header-info">
+                <h4 class="card-category">Registro de usuario</h4>
+              </div>
+              <div class="card-body">
+                <div class="form-group">
+                  <%= f.label :email, "Correo electrónico", class: "bmd-label-floating" %><br />
+                  <%= f.email_field :email, autocomplete: "off", class:"form-control" %>
+                </div>
+
+                <div class="form-group">
+                  <%= f.label :password, "Contraseña", class: "bmd-label-floating" %><br />
+                  <%= f.password_field :password, autocomplete: "off", class:"form-control" %>
+                  <% if @minimum_password_length %>
+                    <em class="form-text text-muted">(<%= @minimum_password_length %> caracteres mínimo)</em>
+                  <% end %>
+                </div>
+
+                <div class="form-group">
+                  <%= f.label :password_confirmation, "Confirmar contraseña", class: "bmd-label-floating" %><br />
+                  <%= f.password_field :password_confirmation, autocomplete: "off", class:"form-control" %>
+                </div>
+              </div>
+
+              <div class="card-footer">
+                <div class="align-items-center">
+                  <%= f.submit 'Enviar', class:"btn btn-lg btn-info", style: "font-size: 1.3rem; padding: .75rem 2.25rem;" %>
+                </div>
+              </div>
             </div>
 
-            <div class="form-group">
-              <%= f.label :password_confirmation, "Confirmar contraseña", class: "bmd-label-floating" %><br />
-              <%= f.password_field :password_confirmation, autocomplete: "off", class:"form-control" %>
-            </div>
-
-            <div class="d-flex mb-5 align-items-center">
-              <span class="ml-auto">
-                <%= f.submit "Registrarme", class: "btn btn-block btn-primary" %>
-              </span>
-            </div>
 
             <%= render "devise/shared/links" %>
           <% end %>

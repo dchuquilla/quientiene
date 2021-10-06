@@ -38,13 +38,13 @@
   <%= csrf_meta_tags %>
   <%= csp_meta_tag %>
 
-  <%= stylesheet_link_tag 'application', media: 'all', 'data-turbolinks-track': 'reload' %>
-  <script src="/js_core/10jquery-3.3.1.min.js" data-turbolinks-track="reload"></script>
-  <script src="/js_core/20popper.min.js" data-turbolinks-track="reload"></script>
-  <script src="/js_core/35bootstrap-material-design.min.js" data-turbolinks-track="reload"></script>
-  <script src="/js_core/40material-dashboard.js" data-turbolinks-track="reload"></script>
-  <script src="/js_core/50owl.carousel.min.js" data-turbolinks-track="reload"></script>
-  <%= javascript_pack_tag 'application', 'data-turbolinks-track': 'reload' %>
+  <%= stylesheet_link_tag 'application', media: 'all', 'data-turbolinks-track': 'false' %>
+  <script src="/js_core/10jquery-3.3.1.min.js" data-turbolinks-track="false"></script>
+  <script src="/js_core/20popper.min.js" data-turbolinks-track="false"></script>
+  <script src="/js_core/35bootstrap-material-design.min.js" data-turbolinks-track="false"></script>
+  <script src="/js_core/40material-dashboard.js" data-turbolinks-track="false"></script>
+  <script src="/js_core/50owl.carousel.min.js" data-turbolinks-track="false"></script>
+  <%= javascript_pack_tag 'application', 'data-turbolinks-track': 'false' %>
 
   <% if user_signed_in? %>
     <!-- OneSignal code -->
@@ -121,7 +121,7 @@
   <% if user_signed_in? %>
     <nav class="user-navigation navbar navbar-expand-lg navbar-dark bg-dark">
       <div class="container">
-        <%= link_to root_path, class:"navbar-brand" do %>
+        <%= link_to root_path, class:"navbar-brand btn btn-outline" do %>
           <%= image_tag "quien_tiene_logo_b.png", height: "50" %>
         <% end %>
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarText" aria-controls="navbarText" aria-expanded="false" aria-label="Toggle navigation">
@@ -130,29 +130,29 @@
         <div class="collapse navbar-collapse" id="navbarText">
           <ul class="navbar-nav mr-auto">
             <% if current_user.has_role?(:customer) %>
-              <li class="nav-item active">
-                <%= link_to "Panel de control", dashboard_path, class:"nav-link" %>
+              <li class="nav-item btn btn-outline">
+                <%= link_to "Panel de control", dashboard_path, class:"nav-link text-white" %>
               </li>
-              <li class="nav-item">
-                <%= link_to "Mis Solicitudes", replacement_requests_path, data: { turbolinks: false }, class: "nav-link" %>
+              <li class="nav-item btn btn-outline">
+                <%= link_to "Mis Solicitudes", replacement_requests_path, data: { turbolinks: false }, class: "nav-link text-white" %>
               </li>
-              <li class="nav-item">
-                <%= link_to "Mis vehículos", vehicles_path, data: { turbolinks: false }, class: "nav-link" %>
+              <li class="nav-item btn btn-outline">
+                <%= link_to "Mis vehículos", vehicles_path, data: { turbolinks: false }, class: "nav-link text-white" %>
               </li>
             <% end %>
             <% if current_user.has_role?(:shop) %>
-              <li class="nav-item active">
-                <%= link_to "Panel de control", dashboard_shop_path, class:"nav-link" %>
+              <li class="nav-item btn btn-outline">
+                <%= link_to "Panel de control", dashboard_shop_path, class:"nav-link text-white" %>
               </li>
-              <li class="nav-item">
-                <%= link_to "Mils locales", shops_path, class:"nav-link" %>
+              <li class="nav-item btn btn-outline">
+                <%= link_to "Mils locales", shops_path, class:"nav-link text-white" %>
               </li>
             <% end %>
-            <li class="nav-item">
-              <%= link_to "Mi cuenta", my_account_path, class: "nav-link" %>
+            <li class="nav-item btn btn-outline">
+              <%= link_to "Mi cuenta", my_account_path, class: "nav-link text-white" %>
             </li>
-            <li class="nav-item">
-              <%= link_to "Salir", destroy_user_session_path, method: :delete, class:"nav-link" %>
+            <li class="nav-item btn btn-outline">
+              <%= link_to "Salir", destroy_user_session_path, method: :delete, class:"nav-link text-white" %>
             </li>
           </ul>
         </div>
