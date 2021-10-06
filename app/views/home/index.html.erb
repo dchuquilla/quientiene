@@ -8,7 +8,7 @@
         <div class="hero-inner">
           <div class="hero-copy">
             <h1 class="hero-title mt-0 is-revealing d-none">QuienTiene</h1>
-            <p class="hero-paragraph is-revealing text-white">Encuentre el repuesto que tanto busca</p>
+            <h1 class="hero-paragraph is-revealing text-white">Encuentre el repuesto que tanto busca</h1>
             <div class="hero-form field field-grouped is-revealing">
               <%= link_to "Solicitar un repuesto", new_user_registration_path, data: { turbolinks: false }, class: "btn btn-success btn-block btn-lg" %>
             </div>
@@ -306,9 +306,14 @@
                       </g>
                     </svg>
                   </div>
-                  <h4 class="feature-title m-0">Solicitar repuesto</h4>
+                  <h2 class="feature-title m-0">Solicitar repuesto</h2>
                 </div>
-                <p class="text-sm mb-0">Registra los detalles del repuesto que necesita.</p>
+                <p class="text-sm text-white">Registra los detalles del repuesto que necesita.</p>
+                <h5 class="text-white">Marcas registradas</h5>
+                <p class="text-sm text-white">Estas son las marcas de vehículos que ya están buscando sus repuestos.</p>
+                <% @current_brands.each do |brand| %>
+                  <button type="button" class="btn btn-outline-info"><%= brand.upcase %></button>
+                <% end %>
               </div>
             </div>
             <div class="feature">
@@ -323,9 +328,9 @@
                       </g>
                     </svg>
                   </div>
-                  <h4 class="feature-title m-0">Los locales lo encuentran</h4>
+                  <h2 class="feature-title m-0">Los locales lo encuentran</h2>
                 </div>
-                <p class="text-sm mb-0">Los locales comerciales reciben su solicitud y buscan en sus bodegas.</p>
+                <p class="text-sm mb-0 text-white">Los locales comerciales reciben su solicitud y buscan en sus bodegas.</p>
               </div>
             </div>
             <div class="feature">
@@ -342,9 +347,9 @@
                       </g>
                     </svg>
                   </div>
-                  <h4 class="feature-title m-0">Escoges la mejor propuesta</h4>
+                  <h2 class="feature-title m-0">Escoges la mejor propuesta</h2>
                 </div>
-                <p class="text-sm mb-0">Recibe las propuestas y escoge la que más te convenga.</p>
+                <p class="text-sm mb-0 text-white">Recibe las propuestas y escoge la que más te convenga.</p>
               </div>
             </div>
           </div>
