@@ -3,7 +3,7 @@ class HomeController < ApplicationController
     if current_user.present?
       redirect_to dashboard_path
     end
-    @current_brands = Vehicle.select(:brand).distinct.map { |v| v.brand }
+    @current_brands = Vehicle.select(:brand).distinct.map { |v| v.brand.strip }.uniq
   end
 
   def signup
