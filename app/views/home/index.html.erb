@@ -7,8 +7,7 @@
       <div class="container">
         <div class="hero-inner">
           <div class="hero-copy">
-            <h1 class="hero-title mt-0 is-revealing d-none">QuienTiene</h1>
-            <h1 class="hero-paragraph is-revealing text-white">Encuentre el repuesto que tanto busca</h1>
+            <h1 class="hero-paragraph is-revealing text-white">Encuentre el repuesto que tanto busca para su vehículo.</h1>
             <div class="hero-form field field-grouped is-revealing">
               <%= link_to "Solicitar un repuesto", new_user_registration_path, data: { turbolinks: false }, class: "btn btn-success btn-block btn-lg" %>
             </div>
@@ -312,7 +311,7 @@
                 <h5 class="text-white">Marcas registradas</h5>
                 <p class="text-sm text-white">Estas son las marcas de vehículos que ya están buscando sus repuestos.</p>
                 <% @current_brands.each do |brand| %>
-                  <button type="button" class="btn btn-outline-info"><%= brand.upcase %></button>
+                  <button type="button" class="btn btn-info" disabled><%= brand.upcase %></button>
                 <% end %>
               </div>
             </div>
