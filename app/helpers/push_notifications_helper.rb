@@ -23,7 +23,7 @@ module PushNotificationsHelper
         "included_segments" => ["locales_comerciales"],
         "url" => url,
         "data" => { "type": "new_request_created" },
-        "contents" => { "en" => "New request created! Add a proposal.", "es" =>  "¡Nueva solicitud ingresada! Agregue una propuesta." }
+        "contents" => { "en" => "New request created! Add a proposal.", "es" =>  "¡Nueva solicitud ingresada! Agregue una propuesta." },
       }).to_json
 
     send_push(push_body)
