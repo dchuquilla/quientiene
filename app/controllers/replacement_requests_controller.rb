@@ -74,7 +74,7 @@ class ReplacementRequestsController < ApplicationController
           end
         end
 
-        format.html { redirect_to replacement_requests_url, notice: "Solicitud creada correctamente." }
+        format.html { redirect_to replacement_requests_url, notice: "Solicitud creada correctamente, notificamos a las empresas, ahora están preparando sus propuestas." }
         format.json { render :show, status: :created, location: @replacement_request }
       else
         format.html { render :new, status: :unprocessable_entity }

@@ -52,9 +52,12 @@ class Users::RegistrationsController < Devise::RegistrationsController
             @replacement_request.state = "created"
             @replacement_request.save!
             resource = user
+
+            PushNotificationsHelper::new_request_created(@replacement_request, new_replacement_proposal_path(replacement_request_id: @replacement_request.id))
+            
             sign_up(resource_name, resource)
             
-            format.html { redirect_to dashboard_path }
+            format.html { redirect_to dashboard_path, notice: "Solicitud creada correctamente, notificamos a las empresas, ahora están preparando sus propuestas." }
             format.json { render json: @replacement_request.errors, status: :unprocessable_entity }
           else
             user.destroy if can_destroy_user
