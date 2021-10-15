@@ -1,11 +1,12 @@
 class ApplicationController < ActionController::Base
-  before_action :store_user_location!, if: :storable_location?
+  #before_action :store_user_location!, if: :storable_location?
   add_flash_types :info, :error, :warning
   before_action :set_metadata
 
   # The path used after sign up.
   def after_sign_in_path_for(resource)
-    stored_location_for(resource_or_scope) || dashboard_path
+    dashboard_path
+    #stored_location_for(resource_or_scope) || dashboard_path
   end
 
   def set_metadata
