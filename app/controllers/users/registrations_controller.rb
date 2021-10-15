@@ -26,21 +26,47 @@ class Users::RegistrationsController < Devise::RegistrationsController
         replacement_request_params = params.require(:replacement_request).permit(:user_id, :vehicle_id, :part_number, :short_name, :description, :country, :state_province, :city, photos: [])
         @replacement_request = ReplacementRequest.new(replacement_request_params)
       end
-      if @vehicle.nil? 
-        
+      if params[:user].present?
+        user_params = params.require(:user).permit(:email, :password, :password_confirmation)
+        user = User.new(user_params)
       end
-      if @vehicle.valid? && @replacement_request.valid?
-        super
-        @vehicle.user_id = resource.id
-        @replacement_request.state = "created"
-        @replacement_request.user_id = resource.id
-        @vehicle.save
-        @replacement_request.save
-      else
-        respond_to do |format|
-          format.html { render :new, status: :unprocessable_entity }
-          format.json { render json: @replacement_request.errors, status: :unprocessable_entity }
+
+      can_destroy_user = false
+      if user.valid?
+        user.save
+        can_destroy_user = true
+      
+        @vehicle.user_id = user.id
+        @replacement_request.user_id = user.id
+        
+        can_destroy_vehicle = false
+        if @vehicle.valid?
+          @vehicle.save!
+          can_destroy_vehicle = true
+
+          @replacement_request.vehicle = @vehicle
         end
+        
+        respond_to do |format|
+          if @replacement_request.valid?
+            @replacement_request.state = "created"
+            @replacement_request.save!
+            resource = user
+            sign_up(resource_name, resource)
+            
+            format.html { redirect_to dashboard_path }
+            format.json { render json: @replacement_request.errors, status: :unprocessable_entity }
+          else
+            user.destroy if can_destroy_user
+            @vehicle.destroy if can_destroy_vehicle
+            build_resource
+            
+            format.html { render :new, status: :unprocessable_entity }
+            format.json { render json: @replacement_request.errors, status: :unprocessable_entity }
+          end
+        end
+      else
+        super
       end
     else
       super
@@ -94,4 +120,26 @@ class Users::RegistrationsController < Devise::RegistrationsController
   # def after_inactive_sign_up_path_for(resource)
   #   super(resource)
   # end
+
+  private
+
+    def create_step_by_step(resource)
+      build_resource(sign_up_params)
+
+      resource.save
+      yield resource if block_given?
+      if resource.persisted?
+        if resource.active_for_authentication?
+          set_flash_message! :notice, :signed_up
+          
+        else
+          set_flash_message! :notice, :"signed_up_but_#{resource.inactive_message}"
+          expire_data_after_sign_in!
+        end
+      else
+        clean_up_passwords resource
+        set_minimum_password_length
+      end
+      resource
+    end
 end

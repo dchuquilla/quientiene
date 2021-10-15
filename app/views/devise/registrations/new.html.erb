@@ -56,12 +56,12 @@
 
                     <div class="form-group bmd-form-group">
                       <label class="bmd-label-floating" for="vehicle_model">Modelo</label>
-                      <input class="form-control" type="text" name="vehicle[model]" id="vehicle_model">
+                      <input class="form-control" type="text" name="vehicle[model]" id="vehicle_model" value="<%= @vehicle.model %>">
                     </div>
 
                     <div class="form-group bmd-form-group">
                       <label class="bmd-label-floating" for="vehicle_year">Año</label>
-                      <input class="form-control" type="number" name="vehicle[year]" id="vehicle_year">
+                      <input class="form-control" type="number" name="vehicle[year]" id="vehicle_year" value="<%= @vehicle.year %>">
                     </div>
 
                   </div>
@@ -75,12 +75,7 @@
 
                     <div class="form-group bmd-form-group">
                       <label class="bmd-label-floating" for="replacement_request_short_name">Nombre de la parte</label>
-                      <input class="form-control" type="text" name="replacement_request[short_name]" id="replacement_request_short_name">
-                    </div>
-
-                    <div class="form-group bmd-form-group">
-                      <label class="bmd-label-floating" for="replacement_request_part_number">Número de parte</label>
-                      <input class="form-control" type="text" name="replacement_request[part_number]" id="replacement_request_part_number">
+                      <input class="form-control" type="text" name="replacement_request[short_name]" id="replacement_request_short_name" value="<%= @replacement_request.short_name %>">
                     </div>
 
                     <div class="form-group">

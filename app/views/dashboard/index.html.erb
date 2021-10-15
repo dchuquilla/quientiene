@@ -3,31 +3,40 @@
   <div class="col">
     <div class="row">
       <div class="col-sm-12 col-lg-6">
-        <%= link_to new_replacement_request_path, data: { turbolinks: false }, class:"btn btn-outline-primary btn-lg btn-block" do %>
+        <%= link_to new_replacement_request_path, data: { turbolinks: false }, class:"btn btn-outline-primary btn-lg btn-block position-relative" do %>
           <i class="material-icons text-dark mr-3" style="font-size: 3rem;">flare</i>
           Solicitar repuesto
         <% end %>
       </div>
       <div class="col-sm-12 col-lg-6">
-        <%= link_to replacement_requests_path, data: { turbolinks: false }, class:"btn btn-outline-success btn-lg btn-block" do %>
+        <%= link_to replacement_requests_path, data: { turbolinks: false }, class:"btn btn-outline-success btn-lg btn-block position-relative" do %>
           <i class="material-icons text-dark mr-2" style="font-size: 3rem;">fact_check</i>
           Mis solicitudes
+          <span class="badge badge-red position-absolute badge-ruc">
+            <%= @my_requests %>
+          </span>
         <% end %>
       </div>
       <div class="col-sm-12 col-lg-6">
-        <%= link_to closed_replacement_requests_path, data: { turbolinks: false }, class:"btn btn-outline-info btn-lg btn-block" do %>
+        <%= link_to closed_replacement_requests_path, data: { turbolinks: false }, class:"btn btn-outline-info btn-lg btn-block position-relative" do %>
           <i class="material-icons text-dark mr-2" style="font-size: 3rem;">summarize</i>
           Solicitudes cerradas
+          <span class="badge badge-red position-absolute badge-ruc">
+            <%= @my_c_requests %>
+          </span>
         <% end %>
       </div>
       <div class="col-sm-12 col-lg-6">
-        <%= link_to vehicles_path, class:"btn btn-outline-warning btn-lg btn-block" do %>
+        <%= link_to vehicles_path, class:"btn btn-outline-warning btn-lg btn-block position-relative" do %>
           <i class="material-icons text-dark mr-2" style="font-size: 3rem;">commute</i>
           Mis vehículos
+          <span class="badge badge-red position-absolute badge-ruc">
+            <%= @my_vehicles %>
+          </span>
         <% end %>
       </div>
       <div class="col-sm-12 col-lg-6">
-        <%= link_to new_vehicle_path, data: { turbolinks: false }, class:"btn btn-outline-success btn-lg btn-block" do %>
+        <%= link_to new_vehicle_path, data: { turbolinks: false }, class:"btn btn-outline-success btn-lg btn-block position-relative" do %>
           <i class="material-icons text-dark mr-3" style="font-size: 3rem;">add_circle_outline</i>
           Agregar vehículo
         <% end %>

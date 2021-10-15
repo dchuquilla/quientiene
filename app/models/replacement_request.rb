@@ -6,10 +6,10 @@ class ReplacementRequest < ApplicationRecord
   has_many :replacement_proposals
   has_many_attached :photos
 
-  validates :short_name, presence: true
+  validates :short_name, :country, :state_province, :city, presence: true
 
-  scope :pending, ->() {where(state: 'created')}
-  scope :closed, ->() {where(state: 'closed')}
-  scope :answered, ->() {where(state: 'answered')}
+  scope :pending, ->() { where(state: ['created', 'answered']) }
+  scope :closed, ->() { where(state: 'closed') }
+  scope :answered, ->() { where(state: 'answered') }
   scope :recent, ->(number) { order(id: :desc).limit(number) }
 end

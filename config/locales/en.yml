@@ -51,13 +51,16 @@ en:
         city: Ciudad
       vehicle:
         user_id: Usuario
+        user: Usuario
         plate: Placa
         brand: Marca
         model: Modelo
         year: año
       replacement_request:
         user_id: Usuario
+        user: Usuario
         vehicle_id: Vehículo
+        vehicle: Vehículo
         part_number: Número de parte
         short_name: Nombre
         description: Descripción
