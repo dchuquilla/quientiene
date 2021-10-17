@@ -14,18 +14,30 @@ class ApplicationController < ActionController::Base
     Rails.logger.info "PARAMS ***********************"
     Rails.logger.info params.inspect
 
-    @title = "QuienTiene :: "
+    @title = ""
     case params[:controller]
     when 'users/sessions'
       @title += "Ingreso de usuarios"
     when 'users/registrations'
-      @title += "Registro de usuarios"
+      if params[:action] == 'new'
+        @title += "Solicitar un repuesto para mi vehículo"
+      else
+        @title += "Registro de usuarios"
+      end
     when 'devise/unlocks'
       @title += "Solicitar desbloqueo de cuenta"
     when 'devise/passwords'
       @title += "No recuerdo mi clave"
+    when 'dashboard'
+      @title += "Panel de control"
+    when 'replacement_requests'
+      @title += "Lista de solicitudes de repuestos"
+    when 'replacement_proposals'
+      @title += "Lista de propuestas de repuestos"
+    when 'shops'
+      @title += "Mis locales comerciales"
     else
-      @title += "encuentre el repuesto que está buscando"
+      @title = ""
     end
 
     @enable_fb_chat = false

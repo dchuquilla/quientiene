@@ -6,7 +6,7 @@ class ReplacementRequestsController < ApplicationController
   # GET /replacement_requests or /replacement_requests.json
   def index
     @rr_query = ReplacementRequest.accessible_by(current_ability).order(id: :desc).ransack(params[:q])
-    @replacement_requests = @rr_query.result(distinct: true).includes(:vehicle).where.not(state: ['closed'])
+    @replacement_requests = @rr_query.result(distinct: true).includes(:vehicle).includes(:replacement_proposals).where.not(state: ['closed'])
     
     if current_user.has_role? :shop
       @replacement_requests = @replacement_requests.where.not(id: IgnoredRequest.mine(current_user).map { |ir| ir.replacement_request_id })
@@ -41,6 +41,7 @@ class ReplacementRequestsController < ApplicationController
 
   # GET /replacement_requests/new
   def new
+    @title = "Enviar solicitud de repuesto"
     if current_user.vehicles.count == 0
       redirect_to new_vehicle_path, alert: "Primero debe registrar un vehículo."
     end
@@ -50,6 +51,7 @@ class ReplacementRequestsController < ApplicationController
 
   # GET /replacement_requests/1/edit
   def edit
+    @title = "Editar solicitud de repuesto para #{@replacement_request.short_name} del vehículo #{@replacement_request.brand} #{@replacement_request.model} #{@replacement_request.year}"
   end
 
   # POST /replacement_requests or /replacement_requests.json
@@ -98,7 +100,8 @@ class ReplacementRequestsController < ApplicationController
 
   # DELETE /replacement_requests/1 or /replacement_requests/1.json
   def destroy
-    @replacement_request.destroy
+    @replacement_request.state = 'closed'
+    @replacement_request.save(:validate => false)
     respond_to do |format|
       format.html { redirect_to replacement_requests_url, notice: "Solicitud eliminada correctamente." }
       format.json { head :no_content }

@@ -7,7 +7,7 @@
       <div class="container">
         <div class="hero-inner">
           <div class="hero-copy">
-            <h1 class="hero-paragraph is-revealing text-white">Encuentre el repuesto que tanto busca para su vehículo.</h1>
+            <h1 class="hero-paragraph is-revealing text-white">Encuentre el repuesto que tanto busca para su vehículo, en un solo paso avise a las empresas que usted está buscando un repuesto.</h1>
             <div class="hero-form field field-grouped is-revealing">
               <%= link_to "Solicitar un repuesto", new_user_registration_path(new_request: 1), data: { turbolinks: false }, class: "btn btn-success btn-block btn-lg" %>
             </div>
@@ -307,12 +307,7 @@
                   </div>
                   <h2 class="feature-title m-0">Solicitar repuesto</h2>
                 </div>
-                <p class="text-sm text-white">Registra los detalles del repuesto que necesita.</p>
-                <h5 class="text-white">Marcas registradas</h5>
-                <p class="text-sm text-white">Estas son las marcas de vehículos que ya están buscando sus repuestos.</p>
-                <% @current_brands.each do |brand| %>
-                  <button type="button" class="btn btn-info" disabled><%= brand.upcase %></button>
-                <% end %>
+                <p class="text-sm text-white">Registre los detalles del repuesto que necesita para su vehículo, ingrese la información en un solo paso, en menos de 2 minutos cree su cuenta de usuario para recebir ahí las propuestas de las empresas..</p>
               </div>
             </div>
             <div class="feature">
@@ -327,9 +322,9 @@
                       </g>
                     </svg>
                   </div>
-                  <h2 class="feature-title m-0">Los locales lo encuentran</h2>
+                  <h2 class="feature-title m-0">Las empresas buscan el repuesto</h2>
                 </div>
-                <p class="text-sm mb-0 text-white">Los locales comerciales reciben su solicitud y buscan en sus bodegas.</p>
+                <p class="text-sm mb-0 text-white">Las empresas reciben su solicitud, buscan en sus bodegas y registrasn sus propuestas en el sistema, llegará un mensaje a su dispisitivo con las propuestas realizadas por las empresas. Sin largas y extenuantes caminatas de búsqueda, evite costosas llamadas.</p>
               </div>
             </div>
             <div class="feature">
@@ -346,9 +341,9 @@
                       </g>
                     </svg>
                   </div>
-                  <h2 class="feature-title m-0">Escoges la mejor propuesta</h2>
+                  <h2 class="feature-title m-0">Escoja la mejor propuesta</h2>
                 </div>
-                <p class="text-sm mb-0 text-white">Recibe las propuestas y escoge la que más te convenga.</p>
+                <p class="text-sm mb-0 text-white">Revise las propuestas de repuestos enviadas por las empreasa y escoja la que más le convenga, puede deteminar los detalles finales de la compra mediante el botón WhatsApp con la empresa que haya seleccionado usted.</p>
               </div>
             </div>
           </div>

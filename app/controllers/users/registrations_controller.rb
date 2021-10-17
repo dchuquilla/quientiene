@@ -6,8 +6,10 @@ class Users::RegistrationsController < Devise::RegistrationsController
 
   # GET /resource/sign_up
   def new
-    @vehicle = Vehicle.new
-    @replacement_request = ReplacementRequest.new
+    if params[:new_request].present?
+      @vehicle = Vehicle.new
+      @replacement_request = ReplacementRequest.new
+    end
     super
   end
 

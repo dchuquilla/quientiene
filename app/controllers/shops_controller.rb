@@ -10,16 +10,19 @@ class ShopsController < ApplicationController
 
   # GET /shops/1 or /shops/1.json
   def show
+    redirect_to shops_path
   end
 
   # GET /shops/new
   def new
+    @title = "Agregar un local comercial"
     @shop = Shop.new
     @shop.user = current_user
   end
 
   # GET /shops/1/edit
   def edit
+    @title = "Agregar mi local comercial | #{@shop.name}"
   end
 
   # POST /shops or /shops.json

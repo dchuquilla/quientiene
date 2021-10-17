@@ -10,16 +10,16 @@ class HomeController < ApplicationController
   end
 
   def privacy_policy
-    @title = "QuienTiene :: Política de privacidad"
+    @title = "Política de privacidad"
   end
 
   def business
-    @title = "QuienTiene :: Empresas"
+    @title = "Empresas, venta de repuestos atuomotrices, quiero registrar mi empresa"
   end
 
   def contact_us
     @contact = Home.new(params[:home])
-    @title = "QuienTiene :: Contáctenos"
+    @title = "Contáctenos, chat en línea"
   end
 
   def create

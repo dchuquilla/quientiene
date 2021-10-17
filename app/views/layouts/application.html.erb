@@ -15,7 +15,13 @@
   <meta name="theme-color" content="#343434">
   <meta name='robots' content='index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1' />
 
-  <title><%= @title %></title>
+  <title>
+    <% if @title.blank? %>
+      QuienTinene.com :: Encuentre el repuesto que está buscando
+    <% else %>
+      QuienTinene.com :: <%= @title %>
+    <% end %>
+  </title>
   <meta name="description" content="Todos los locales en un solo lugar, encuentre el repuesto que tanto busca." />
   <link rel="canonical" href="https://quientiene.com/" />
   <meta property="og:locale" content="es_MX" />

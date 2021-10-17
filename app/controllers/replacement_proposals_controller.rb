@@ -36,10 +36,12 @@ class ReplacementProposalsController < ApplicationController
     if params[:replacement_proposal_id].present?
       @replacement_proposal = ReplacementProposal.find params[:replacement_proposal_id]
     end
+    @title = "Agregar una propuesta de repuesto para #{@replacement_request.short_name} del vehículo #{@replacement_request.vehicle.brand} #{@replacement_request.vehicle.model} #{@replacement_request.vehicle.year}"
   end
 
   # GET /replacement_proposals/1/edit
   def edit
+    @title = "Editar la propuesta de repuesto para #{@replacement_request.short_name} del vehículo #{@replacement_request.vehicle.brand} #{@replacement_request.vehicle.model} #{@replacement_request.vehicle.year}"
   end
 
   # POST /replacement_proposals or /replacement_proposals.json

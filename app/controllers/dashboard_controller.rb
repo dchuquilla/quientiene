@@ -10,6 +10,7 @@ class DashboardController < ApplicationController
   end
 
   def shop
+    @title += " Empresas"
     if current_user.shops.count == 0
       redirect_to new_shop_path, alert: "Por favor registre un local"
     end
