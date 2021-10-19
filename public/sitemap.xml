@@ -9,47 +9,52 @@
 
 <url>
   <loc>https://quientiene.com/</loc>
-  <lastmod>2021-10-11T16:12:23+00:00</lastmod>
+  <lastmod>2021-10-18T23:59:19+00:00</lastmod>
   <priority>1.00</priority>
 </url>
 <url>
-  <loc>https://quientiene.com/users/sign_up</loc>
-  <lastmod>2021-10-11T16:12:23+00:00</lastmod>
+  <loc>https://quientiene.com/users/sign_up?new_request=1</loc>
+  <lastmod>2021-10-18T23:59:19+00:00</lastmod>
   <priority>0.80</priority>
 </url>
 <url>
   <loc>https://quientiene.com/users/sign_in</loc>
-  <lastmod>2021-10-11T16:12:23+00:00</lastmod>
+  <lastmod>2021-10-18T23:59:19+00:00</lastmod>
   <priority>0.80</priority>
 </url>
 <url>
   <loc>https://quientiene.com/empresas</loc>
-  <lastmod>2021-10-11T16:12:23+00:00</lastmod>
+  <lastmod>2021-10-18T23:59:19+00:00</lastmod>
   <priority>0.80</priority>
 </url>
 <url>
   <loc>https://quientiene.com/privacy-policy</loc>
-  <lastmod>2021-10-11T16:12:23+00:00</lastmod>
+  <lastmod>2021-10-18T23:59:19+00:00</lastmod>
   <priority>0.80</priority>
 </url>
 <url>
   <loc>https://quientiene.com/contact-us</loc>
-  <lastmod>2021-10-11T16:12:23+00:00</lastmod>
+  <lastmod>2021-10-18T23:59:19+00:00</lastmod>
   <priority>0.80</priority>
 </url>
 <url>
+  <loc>https://quientiene.com/users/sign_up?state=shop</loc>
+  <lastmod>2021-10-18T23:59:19+00:00</lastmod>
+  <priority>0.64</priority>
+</url>
+<url>
   <loc>https://quientiene.com/users/unlock/new</loc>
-  <lastmod>2021-10-11T16:12:23+00:00</lastmod>
+  <lastmod>2021-10-18T23:59:19+00:00</lastmod>
+  <priority>0.64</priority>
+</url>
+<url>
+  <loc>https://quientiene.com/users/sign_up</loc>
+  <lastmod>2021-10-18T23:59:19+00:00</lastmod>
   <priority>0.64</priority>
 </url>
 <url>
   <loc>https://quientiene.com/users/password/new</loc>
-  <lastmod>2021-10-11T16:12:23+00:00</lastmod>
-  <priority>0.64</priority>
-</url>
-<url>
-  <loc>https://quientiene.com/users/sign_up?state=shop</loc>
-  <lastmod>2021-10-11T16:12:23+00:00</lastmod>
+  <lastmod>2021-10-18T23:59:19+00:00</lastmod>
   <priority>0.64</priority>
 </url>
 
