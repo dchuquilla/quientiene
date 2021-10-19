@@ -55,7 +55,7 @@
       <div class="form-group">
         <%= form.label :city, class:"bmd-label-floating" %>
         <select class="form-control" name="replacement_request[city]" id="replacement_request_city">
-          <% if @replacement_request.state_province.present? %>
+          <% if @replacement_request.state_province.present? && @replacement_request.country.present? && @replacement_request.country != 'Seleccione...'  %>
             <%= options_for_select( CS.cities(@replacement_request.state_province, @replacement_request.country).collect{ |ct| [ ct, ct ] }, @replacement_request.city ) %>
           <% end %>
         </select>

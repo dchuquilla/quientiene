@@ -51,7 +51,7 @@ class ReplacementRequestsController < ApplicationController
 
   # GET /replacement_requests/1/edit
   def edit
-    @title = "Editar solicitud de repuesto para #{@replacement_request.short_name} del vehículo #{@replacement_request.brand} #{@replacement_request.model} #{@replacement_request.year}"
+    @title = "Editar solicitud de repuesto para #{@replacement_request.short_name} del vehículo #{@replacement_request.vehicle.brand} #{@replacement_request.vehicle.model} #{@replacement_request.vehicle.year}"
   end
 
   # POST /replacement_requests or /replacement_requests.json
