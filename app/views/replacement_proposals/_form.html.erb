@@ -31,7 +31,7 @@
       </div>
 
       <div class="row">
-        <div class="col">
+        <div class="col-sm-12 col-md-6">
           <div class="input-group">
             <%= form.label :price %>
             <div class="input-group-prepend">
@@ -42,7 +42,7 @@
             <%= form.text_field :price, class:"form-control", required: true %>
           </div>
         </div>
-        <div class="col">
+        <div class="col-sm-12 col-md-6">
           <div class="form-check">
             <label class="form-check-label">
               <%= form.check_box :original, class:"form-check-input" %>
@@ -88,6 +88,7 @@
       <div class="form-group">
         <%= form.label :photos, "Agregar Fotos", class:"text-primary btn btn-outline-primary btn-sm" %>
         <%= form.file_field :photos, class:"form-control-file", multiple: true %>
+        <div class="add_photo row"></div>
       </div>
     </div>
     
@@ -101,3 +102,17 @@
   </div>
 
 <% end %>
+
+<script type="text/javascript">
+  replacement_proposal_photos.onchange = evt => {
+    const v_files = Array.from(replacement_proposal_photos.files);
+    console.log(v_files);
+    v_files.forEach(item => {
+      console.log(item);
+      if (item) {
+        prev_photo = $('<div class="col-sm-12 col-md-4"><img src="'+URL.createObjectURL(item)+'" alt="your image" style="width: 100%; display: block;" /></div>');
+        $('.add_photo').append(prev_photo);
+      }
+    });
+  }
+</script>

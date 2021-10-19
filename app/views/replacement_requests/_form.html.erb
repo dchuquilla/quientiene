@@ -64,9 +64,7 @@
       <div class="form-group">
         <%= form.label :photos, "Agregar Fotos", class:"text-primary btn btn-outline-primary btn-sm" %>
         <%= form.file_field :photos, class:"form-control-file", multiple: true %>
-        <div class="add_photo row">
-          
-        </div>
+        <div class="add_photo row"></div>
       </div>
     </div>
     <div class="card-footer">
@@ -87,7 +85,7 @@
     v_files.forEach(item => {
       console.log(item);
       if (item) {
-        prev_photo = $('<div class="col col-sm-4"><img src="'+URL.createObjectURL(item)+'" alt="your image" style="width: 100%; display: block;" /></div>');
+        prev_photo = $('<div class="col-sm-12 col-md-4"><img src="'+URL.createObjectURL(item)+'" alt="your image" style="width: 100%; display: block;" /></div>');
         $('.add_photo').append(prev_photo);
       }
     });
