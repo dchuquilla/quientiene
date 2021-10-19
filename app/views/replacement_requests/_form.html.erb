@@ -31,11 +31,6 @@
       </div>
 
       <div class="form-group">
-        <%= form.label :part_number, "Número de parte", class:"bmd-label-floating" %>
-        <%= form.text_field :part_number, class:"form-control" %>
-      </div>
-
-      <div class="form-group">
         <%= form.label :country, class:"bmd-label-floating" %>
         <select class="form-control" name="replacement_request[country]" id="replacement_request_country">
           <option>Seleccione...</option>
@@ -69,6 +64,9 @@
       <div class="form-group">
         <%= form.label :photos, "Agregar Fotos", class:"text-primary btn btn-outline-primary btn-sm" %>
         <%= form.file_field :photos, class:"form-control-file", multiple: true %>
+        <div class="add_photo row">
+          
+        </div>
       </div>
     </div>
     <div class="card-footer">
@@ -83,6 +81,17 @@
 <% end %>
 
 <script type="text/javascript">
+  replacement_request_photos.onchange = evt => {
+    const v_files = Array.from(replacement_request_photos.files);
+    console.log(v_files);
+    v_files.forEach(item => {
+      console.log(item);
+      if (item) {
+        prev_photo = $('<div class="col col-sm-4"><img src="'+URL.createObjectURL(item)+'" alt="your image" style="width: 100%; display: block;" /></div>');
+        $('.add_photo').append(prev_photo);
+      }
+    });
+  }
   $('#replacement_request_country').change(function(){
     var input_state = $('#replacement_request_state_province');
     $.getJSON('/states_provinces/' + $(this).val(), function(data){
