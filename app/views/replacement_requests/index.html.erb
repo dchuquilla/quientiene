@@ -4,7 +4,7 @@
     <div class="row">
       <div class="col-sm-12 col-lg-9">
         <h1 class="view-title">
-          <%= link_to dashboard_path, class:"btn btn-outline-dark btn-lg" do %>
+          <%= link_to dashboard_path, class:"btn btn-outline-dark btn-lg back-dashboard-button" do %>
             <i class="material-icons text-dark" style="top: 0;">arrow_back_ios_new</i>
           <% end %>
           <% if current_user.has_role? :customer %>
