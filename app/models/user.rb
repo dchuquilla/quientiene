@@ -1,3 +1,6 @@
+# frozen_string_literal: true
+
+# It manage users information, it works with Devise to define session and passwords.
 class User < ApplicationRecord
   rolify
 

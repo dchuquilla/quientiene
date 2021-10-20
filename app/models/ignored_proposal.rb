@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class IgnoredProposal < ApplicationRecord
   belongs_to :user
   belongs_to :replacement_proposal

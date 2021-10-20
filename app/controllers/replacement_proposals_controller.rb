@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class ReplacementProposalsController < ApplicationController
   before_action :authenticate_user!
   before_action :set_replacement_request, only: %i[show edit update new create]

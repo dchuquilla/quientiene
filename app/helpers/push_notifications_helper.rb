@@ -40,7 +40,8 @@ module PushNotificationsHelper
         'include_player_ids' => [replacement_proposal.replacement_request.user.onesignal_id],
         'data' => { "type": 'new_proposal_created', "id": replacement_proposal.id },
         'contents' => {
-          'en' => "You have receibed a new proposal for #{replacement_proposal.replacement_request.short_name}.", 'es' => "Ha recibido una nueva propuesta para #{replacement_proposal.replacement_request.short_name}."
+          'en' => "You have receibed a new proposal for #{replacement_proposal.replacement_request.short_name}.",
+          'es' => "Ha recibido una nueva propuesta para #{replacement_proposal.replacement_request.short_name}."
         }
       }
     ).to_json
@@ -56,7 +57,8 @@ module PushNotificationsHelper
         'include_player_ids' => [replacement_proposal.shop.user.onesignal_id],
         'data' => { "type": 'proposal_accepted', "id": replacement_proposal.id },
         'contents' => {
-          'en' => "Your proposal for #{replacement_proposal.replacement_request.short_name} has been accepted.", 'es' => "Su propuesta para #{replacement_proposal.replacement_request.short_name} fue aceptada."
+          'en' => "Your proposal for #{replacement_proposal.replacement_request.short_name} has been accepted.",
+          'es' => "Su propuesta para #{replacement_proposal.replacement_request.short_name} fue aceptada."
         }
       }
     ).to_json

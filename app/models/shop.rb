@@ -1,3 +1,6 @@
+# frozen_string_literal: true
+
+# Shops keep informatios for business, it shiuld be defined with country and location information
 class Shop < ApplicationRecord
   resourcify
   belongs_to :user

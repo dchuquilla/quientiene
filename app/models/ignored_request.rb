@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class IgnoredRequest < ApplicationRecord
   belongs_to :user
   belongs_to :replacement_request
