@@ -10,46 +10,40 @@ class ApplicationController < ActionController::Base
   end
 
   def set_metadata
-
-    Rails.logger.info "PARAMS ***********************"
+    Rails.logger.info 'PARAMS ***********************'
     Rails.logger.info params.inspect
 
-    @title = ""
+    @title = ''
     case params[:controller]
     when 'users/sessions'
-      @title += "Ingreso de usuarios"
+      @title += 'Ingreso de usuarios'
     when 'users/registrations'
-      if params[:action] == 'new'
-        @title += "Solicitar un repuesto para mi vehículo"
-      else
-        @title += "Registro de usuarios"
-      end
+      @title += if params[:action] == 'new'
+                  'Solicitar un repuesto para mi vehículo'
+                else
+                  'Registro de usuarios'
+                end
     when 'devise/unlocks'
-      @title += "Solicitar desbloqueo de cuenta"
+      @title += 'Solicitar desbloqueo de cuenta'
     when 'devise/passwords'
-      @title += "No recuerdo mi clave"
+      @title += 'No recuerdo mi clave'
     when 'dashboard'
-      @title += "Panel de control"
+      @title += 'Panel de control'
     when 'replacement_requests'
-      @title += "Lista de solicitudes de repuestos"
+      @title += 'Lista de solicitudes de repuestos'
     when 'replacement_proposals'
-      @title += "Lista de propuestas de repuestos"
+      @title += 'Lista de propuestas de repuestos'
     when 'shops'
-      @title += "Mis locales comerciales"
+      @title += 'Mis locales comerciales'
     else
-      @title = ""
+      @title = ''
     end
 
     @enable_fb_chat = false
 
-    if params[:controller] == 'home'
-      @enable_fb_chat = true
-    end
+    @enable_fb_chat = true if params[:controller] == 'home'
 
-    if params[:controller] == "dashboard" && ["shop", "index"].include?(params[:action])
-      @enable_fb_chat = true
-    end
-
+    @enable_fb_chat = true if params[:controller] == 'dashboard' && %w[shop index].include?(params[:action])
   end
 
   def states_provinces
@@ -61,17 +55,18 @@ class ApplicationController < ActionController::Base
   end
 
   private
-    # Its important that the location is NOT stored if:
-    # - The request method is not GET (non idempotent)
-    # - The request is handled by a Devise controller such as Devise::SessionsController as that could cause an 
-    #    infinite redirect loop.
-    # - The request is an Ajax request as this can lead to very unexpected behaviour.
-    def storable_location?
-      request.get? && is_navigational_format? && !devise_controller? && !request.xhr? 
-    end
 
-    def store_user_location!
-      # :user is the scope we are authenticating
-      store_location_for(:user, request.fullpath)
-    end
+  # Its important that the location is NOT stored if:
+  # - The request method is not GET (non idempotent)
+  # - The request is handled by a Devise controller such as Devise::SessionsController as that could cause an
+  #    infinite redirect loop.
+  # - The request is an Ajax request as this can lead to very unexpected behaviour.
+  def storable_location?
+    request.get? && is_navigational_format? && !devise_controller? && !request.xhr?
+  end
+
+  def store_user_location!
+    # :user is the scope we are authenticating
+    store_location_for(:user, request.fullpath)
+  end
 end

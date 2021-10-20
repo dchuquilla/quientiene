@@ -6,7 +6,7 @@ class User < ApplicationRecord
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :trackable, :validatable,
          :lockable,
-         :omniauthable, omniauth_providers: [:facebook, :google_oauth2, :twitter]
+         :omniauthable, omniauth_providers: %i[facebook google_oauth2 twitter]
 
   has_many :vehicles, dependent: :destroy
   has_many :replacement_requests, dependent: :destroy
@@ -14,15 +14,15 @@ class User < ApplicationRecord
   has_many :replacement_proposals, dependent: :destroy
 
   scope :recent, ->(number) { order(id: :desc).limit(number) }
-  
+
   after_create :assign_default_role
 
   def assign_default_role
-    self.add_role(:customer) if self.roles.blank?
+    add_role(:customer) if roles.blank?
   end
 
   def self.create_from_provider_data(provider_data)
-    where(provider: provider_data.provider, uid: provider_data.uid).first_or_create do | user |
+    where(provider: provider_data.provider, uid: provider_data.uid).first_or_create do |user|
       user.email = provider_data.info.email
       user.name = provider_data.info.name
       user.password = Devise.friendly_token[0, 20]

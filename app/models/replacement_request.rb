@@ -1,6 +1,6 @@
 class ReplacementRequest < ApplicationRecord
   resourcify
-  
+
   belongs_to :user
   belongs_to :vehicle
   has_many :replacement_proposals
@@ -8,8 +8,8 @@ class ReplacementRequest < ApplicationRecord
 
   validates :short_name, :country, :state_province, :city, presence: true
 
-  scope :pending, ->() { where(state: ['created', 'answered']) }
-  scope :closed, ->() { where(state: 'closed') }
-  scope :answered, ->() { where(state: 'answered') }
+  scope :pending, -> { where(state: %w[created answered]) }
+  scope :closed, -> { where(state: 'closed') }
+  scope :answered, -> { where(state: 'answered') }
   scope :recent, ->(number) { order(id: :desc).limit(number) }
 end

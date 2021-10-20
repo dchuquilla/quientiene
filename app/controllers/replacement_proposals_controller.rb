@@ -1,7 +1,7 @@
 class ReplacementProposalsController < ApplicationController
   before_action :authenticate_user!
-  before_action :set_replacement_request, only: %i[ show edit update new create ]
-  before_action :set_searchable_resource, only: %i[ search new ]
+  before_action :set_replacement_request, only: %i[show edit update new create]
+  before_action :set_searchable_resource, only: %i[search new]
   load_and_authorize_resource
 
   # GET /replacement_proposals or /replacement_proposals.json
@@ -10,7 +10,9 @@ class ReplacementProposalsController < ApplicationController
       @replacement_proposals = @replacement_proposals.where(replacement_request_id: params[:replacement_request_id].to_i)
     end
     if current_user.has_role? :customer
-      @replacement_proposals = @replacement_proposals.where.not(id: IgnoredProposal.mine(current_user).map { |ir| ir.replacement_proposal_id })
+      @replacement_proposals = @replacement_proposals.where.not(id: IgnoredProposal.mine(current_user).map do |ir|
+                                                                      ir.replacement_proposal_id
+                                                                    end)
     end
     @replacement_proposals = @replacement_proposals.order(id: :desc)
   end
@@ -21,7 +23,9 @@ class ReplacementProposalsController < ApplicationController
 
     respond_to do |format|
       format.html
-      format.json { render 'replacement_proposals/search_results', location: @replacement_proposals.to_json, status: :ok }
+      format.json do
+        render 'replacement_proposals/search_results', location: @replacement_proposals.to_json, status: :ok
+      end
     end
   end
 
@@ -56,13 +60,17 @@ class ReplacementProposalsController < ApplicationController
         @replacement_proposal.replacement_request.update(state: 'answered')
 
         if @replacement_proposal.replacement_request.user.onesignal_id.present?
-          PushNotificationsHelper::new_proposal_created(@replacement_proposal, replacement_proposals_path(replacement_request_id: @replacement_proposal.replacement_request_id))
+          PushNotificationsHelper.new_proposal_created(@replacement_proposal,
+                                                       replacement_proposals_path(replacement_request_id: @replacement_proposal.replacement_request_id))
         else
-          ReplacementMailer.new_proposal(@replacement_proposal.replacement_request.user, @replacement_proposal).deliver_later
+          ReplacementMailer.new_proposal(@replacement_proposal.replacement_request.user,
+                                         @replacement_proposal).deliver_later
         end
 
-
-        format.html { redirect_to replacement_proposals_path(replacement_request_id: @replacement_proposal.replacement_request.id), notice: "Propuesta creada correctamente." }
+        format.html do
+          redirect_to replacement_proposals_path(replacement_request_id: @replacement_proposal.replacement_request.id),
+                      notice: 'Propuesta creada correctamente.'
+        end
         format.json { render :show, status: :created, location: @replacement_proposal }
       else
         format.html { render :new, status: :unprocessable_entity }
@@ -75,7 +83,10 @@ class ReplacementProposalsController < ApplicationController
   def update
     respond_to do |format|
       if @replacement_proposal.update(replacement_proposal_params)
-        format.html { redirect_to replacement_proposals_path(replacement_request_id: @replacement_proposal.replacement_request.id), notice: "Propuesta actualizada correctamente." }
+        format.html do
+          redirect_to replacement_proposals_path(replacement_request_id: @replacement_proposal.replacement_request.id),
+                      notice: 'Propuesta actualizada correctamente.'
+        end
         format.json { render :show, status: :ok, location: @replacement_proposal }
       else
         format.html { render :edit, status: :unprocessable_entity }
@@ -88,7 +99,7 @@ class ReplacementProposalsController < ApplicationController
   def destroy
     @replacement_proposal.destroy
     respond_to do |format|
-      format.html { redirect_to replacement_proposals_url, notice: "Propuesta eliminada correctamente." }
+      format.html { redirect_to replacement_proposals_url, notice: 'Propuesta eliminada correctamente.' }
       format.json { head :no_content }
     end
   end
@@ -96,7 +107,8 @@ class ReplacementProposalsController < ApplicationController
   # GET /replacement_proposals/1/ignore or /replacement_proposals/1/ignore.json
   def ignore
     IgnoredProposal.create(user: current_user, replacement_proposal: @replacement_proposal)
-    redirect_to replacement_proposals_url(replacement_request_id: params[:replacement_request_id]), warning: "Propuesta ignorada correctamente."
+    redirect_to replacement_proposals_url(replacement_request_id: params[:replacement_request_id]),
+                warning: 'Propuesta ignorada correctamente.'
   end
 
   # GET /replacement_proposals/1/accept or /replacement_proposals/1/accept.json
@@ -104,35 +116,38 @@ class ReplacementProposalsController < ApplicationController
     @replacement_proposal.update(state: 'accepted')
     @replacement_proposal.replacement_request.update(state: 'closed')
     if @replacement_proposal.shop.user.onesignal_id.present?
-      PushNotificationsHelper::proposal_accepted(@replacement_proposal, replacement_proposals_path(replacement_request_id: @replacement_proposal.replacement_request_id))
+      PushNotificationsHelper.proposal_accepted(@replacement_proposal,
+                                                replacement_proposals_path(replacement_request_id: @replacement_proposal.replacement_request_id))
     else
       ReplacementMailer.proposal_accepted(@replacement_proposal.shop.user, @replacement_proposal).deliver_later
     end
-    redirect_to closed_replacement_requests_path, warning: "Propuesta aceptada correctamente."
+    redirect_to closed_replacement_requests_path, warning: 'Propuesta aceptada correctamente.'
   end
 
   private
-    # Use callbacks to share common setup or constraints between actions.
-    def set_replacement_proposal
-      #@replacement_proposal = ReplacementProposal.find(params[:id])
-    end
 
-    def set_replacement_request
-      if params[:replacement_proposal].present?
-        request_id = params[:replacement_proposal][:replacement_request_id]
-      else
-        request_id = params[:replacement_request_id]
-      end
-      @replacement_request = ReplacementRequest.find(request_id)
-    end
+  # Use callbacks to share common setup or constraints between actions.
+  def set_replacement_proposal
+    # @replacement_proposal = ReplacementProposal.find(params[:id])
+  end
 
-    # Only allow a list of trusted parameters through.
-    def replacement_proposal_params
-      params.require(:replacement_proposal).permit(:user_id, :shop_id, :replacement_request_id, :name, :price, :original, :brand, :origin, :life_time, :target, :delivery_time, :conditions, photos: [])
-    end
+  def set_replacement_request
+    request_id = if params[:replacement_proposal].present?
+                   params[:replacement_proposal][:replacement_request_id]
+                 else
+                   params[:replacement_request_id]
+                 end
+    @replacement_request = ReplacementRequest.find(request_id)
+  end
 
-    def set_searchable_resource
-      @rp_query = ReplacementProposal.accessible_by(current_ability).order(id: :desc).ransack(params[:q])
-      @replacement_proposals = @rp_query.result(distinct: true).includes(:replacement_request)
-    end
+  # Only allow a list of trusted parameters through.
+  def replacement_proposal_params
+    params.require(:replacement_proposal).permit(:user_id, :shop_id, :replacement_request_id, :name, :price,
+                                                 :original, :brand, :origin, :life_time, :target, :delivery_time, :conditions, photos: [])
+  end
+
+  def set_searchable_resource
+    @rp_query = ReplacementProposal.accessible_by(current_ability).order(id: :desc).ransack(params[:q])
+    @replacement_proposals = @rp_query.result(distinct: true).includes(:replacement_request)
+  end
 end

@@ -4,7 +4,6 @@ class Ability
   include CanCan::Ability
 
   def initialize(user)
-
     # Customer permissions
     if user.has_role?(:customer)
       can :manage, Vehicle, user: user
@@ -23,9 +22,7 @@ class Ability
       can :manage, IgnoredRequest
     end
 
-    if user.has_role?(:administrator)
-      can :manage, :all
-    end
+    can :manage, :all if user.has_role?(:administrator)
 
     # Define abilities for the passed in user here. For example:
     #

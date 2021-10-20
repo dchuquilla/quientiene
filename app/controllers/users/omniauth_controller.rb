@@ -1,5 +1,4 @@
 class Users::OmniauthController < ApplicationController
-
   # facebook callback
   def facebook
     @user = User.create_from_provider_data(request.env['omniauth.auth'])
@@ -10,7 +9,7 @@ class Users::OmniauthController < ApplicationController
     else
       flash[:alert] = 'Hubo un problema para registrarse mediante Facebook. Por favor regístrese o inténtelo más tarde.'
       redirect_to new_user_registration_url
-    end 
+    end
   end
 
   # google callback
@@ -23,7 +22,7 @@ class Users::OmniauthController < ApplicationController
     else
       flash[:alert] = 'Hubo un problema para registrarse mediante Google. Por favor regístrese o inténtelo más tarde.'
       redirect_to new_user_registration_url
-    end 
+    end
   end
 
   # twitter callback
@@ -36,7 +35,7 @@ class Users::OmniauthController < ApplicationController
     else
       flash[:alert] = 'Hubo un problema para registrarse mediante Twitter. Por favor regístrese o inténtelo más tarde.'
       redirect_to new_user_registration_url
-    end 
+    end
   end
 
   def failure
