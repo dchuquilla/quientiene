@@ -45,21 +45,14 @@
 
   <%= stylesheet_link_tag 'application', media: 'all', 'data-turbolinks-track': 'false' %>
   <script src="/js_core/10jquery-3.3.1.min.js" data-turbolinks-track="false"></script>
-  <script src="/js_core/20popper.min.js" data-turbolinks-track="false"></script>
-  <script src="/js_core/35bootstrap-material-design.min.js" data-turbolinks-track="false"></script>
-  <script src="/js_core/40material-dashboard.js" data-turbolinks-track="false"></script>
-  <script src="/js_core/50owl.carousel.min.js" data-turbolinks-track="false"></script>
-  <%= javascript_pack_tag 'application', 'data-turbolinks-track': 'false' %>
+  <script async src="/js_core/20popper.min.js" data-turbolinks-track="false"></script>
+  <script async src="/js_core/35bootstrap-material-design.min.js" data-turbolinks-track="false"></script>
+  <script async src="/js_core/40material-dashboard.js" data-turbolinks-track="false"></script>
+  <%= javascript_pack_tag 'application', 'data-turbolinks-track': 'false', async: true %>
 
   <!-- Global site tag (gtag.js) - Google Analytics -->
-  <script async src="https://www.googletagmanager.com/gtag/js?id=G-0HKQTSW8VY"></script>
-  <script>
-    window.dataLayer = window.dataLayer || [];
-    function gtag(){dataLayer.push(arguments);}
-    gtag('js', new Date());
-
-    gtag('config', 'G-0HKQTSW8VY');
-  </script>
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-0HKQTSW8VY"></script>
+    <script async src="/js_core/60ga.js" data-turbolinks-track="false"></script>
   <!-- END Global site tag (gtag.js) - Google Analytics -->
 
   <% if user_signed_in? %>

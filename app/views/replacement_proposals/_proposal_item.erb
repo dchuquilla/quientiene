@@ -20,7 +20,7 @@
       <p class="text-dark"><%= replacement_proposal.conditions.html_safe %></p>
       <% if replacement_proposal.photos.any? %>
         <h4 class="text-dark alert-link">Fotos del repuesto</h4>
-        <div class="owl-carousel">
+        <div class="image-gallery">
           <% replacement_proposal.photos.each_with_index do |photo, index| %>
             <div class="image-element">
               <% if photo.representable? && (["image/png", "image/jpeg", "image/png", "image/gif"].include?(photo.content_type)) %>

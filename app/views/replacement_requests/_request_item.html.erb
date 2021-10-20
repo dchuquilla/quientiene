@@ -24,7 +24,7 @@
               <% end %>
             </div>
           <% else %>
-            <div class="owl-carousel">
+            <div class="image-gallery">
               <% replacement_request.photos.each_with_index do |photo, index| %>
                 <div class="image-element">
                   <% if photo.representable? && (["image/png", "image/jpeg", "image/png", "image/gif"].include?(photo.content_type)) %>

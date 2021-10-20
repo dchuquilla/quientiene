@@ -13,15 +13,10 @@ Rails.start()
 ActiveStorage.start()
 
 $(document).ready(function(){
-  $(".owl-carousel").owlCarousel({
-    loop:true,
-    margin:10,
-    items:1
-  });
   if ($('.alert').length > 0) {
     setTimeout(function(){
       $('.alert').fadeOut('slow');
-    }, 5000)
+    }, 15000)
   }
 
   return $("#replacement_proposal_search").on("ajax:success", function(event) {
