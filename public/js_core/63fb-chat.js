@@ -4,7 +4,7 @@ chatbox.setAttribute("attribution", "biz_inbox");
 
 window.fbAsyncInit = function() {
   FB.init({
-    xfbml                : false,
+    xfbml                : true,
     cookie               : true,
     frictionlessRequests : true,
     version              : 'v12.0'
