@@ -2,7 +2,7 @@
 (function() {
   if (sessionStorage.getItem('gaTagManager') === "string") {
     dataLayer.push({
-      ip: sessionStorage.getItem('gaTagManager')
+      GtM: sessionStorage.getItem('gaTagManager')
     }); 
   }
   else {
@@ -12,7 +12,7 @@
     if (xhr.readyState === 4) {
       if (xhr.status === 200) {
         dataLayer.push({
-          ip: xhr.responseText
+          GtM: xhr.responseText
         });
         sessionStorage.setItem('gaTagManager',xhr.responseText);
       } else {
@@ -26,9 +26,4 @@
     xhr.send(null);
   }
   
-  window.dataLayer = window.dataLayer || [];
-  function gtag(){dataLayer.push(arguments);}
-  gtag('js', new Date());
-
-  gtag('config', 'G-0HKQTSW8VY');
 })()

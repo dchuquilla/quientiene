@@ -51,7 +51,16 @@
   <%= javascript_pack_tag 'application', 'data-turbolinks-track': 'false', async: true %>
 
   <!-- Global site tag (gtag.js) - Google Analytics -->
-    <script defer src="/js_core/60ga.js" data-turbolinks-track="false"></script>
+    <script async src="/js_core/60ga.js" data-turbolinks-track="false"></script>
+    <script type="text/javascript">
+      (async function() {
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+
+        gtag('config', 'G-0HKQTSW8VY');
+      })();
+    </script>
   <!-- END Global site tag (gtag.js) - Google Analytics -->
 
   <% if user_signed_in? %>
