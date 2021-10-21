@@ -4,8 +4,10 @@ chatbox.setAttribute("attribution", "biz_inbox");
 
 window.fbAsyncInit = function() {
   FB.init({
-    xfbml            : true,
-    version          : 'v12.0'
+    xfbml                : false,
+    cookie               : true,
+    frictionlessRequests : true,
+    version              : 'v12.0'
   });
 };
 
