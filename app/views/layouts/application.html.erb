@@ -123,6 +123,11 @@
     <% end %>
   <% end %>
 
+  <!-- Facebook Pixel Code -->
+    <script defer src="/js_core/62fb-pixel.js" data-turbolinks-track="false"></script>
+    <noscript><img height="1" width="1" src="https://www.facebook.com/tr?id=4715094701868400&ev=PageView&noscript=1"/></noscript>
+  <!-- End Facebook Pixel Code -->
+
 </head>
 
 <body class="<%= ['index', 'new'].include?(params[:action]) && ['users/sessions', 'users/registrations', 'devise/unlocks','home', 'devise/passwords'].include?(params[:controller]) ? 'is-boxed' : '' %>">
@@ -184,10 +189,5 @@
   <% else %>
     <%= render "home/shared/footer_users" %>
   <% end %>
-
-  <!-- Facebook Pixel Code -->
-    <script defer src="/js_core/61fb-pixel.js" data-turbolinks-track="false"></script>
-    <noscript><img height="1" width="1" src="https://www.facebook.com/tr?id=4715094701868400&ev=PageView&noscript=1"/></noscript>
-  <!-- End Facebook Pixel Code -->
 </body>
 </html>

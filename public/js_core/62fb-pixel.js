@@ -1,20 +1,20 @@
 
 (function() {
-  if (sessionStorage.getItem('gaTagManager') === "string") {
+  if (sessionStorage.getItem('fbPixelImpl') === "string") {
     dataLayer.push({
-      ip: sessionStorage.getItem('gaTagManager')
+      ip: sessionStorage.getItem('fbPixelImpl')
     }); 
   }
   else {
     var xhr = new XMLHttpRequest();
-    xhr.open("GET", "https://www.googletagmanager.com/gtag/js?id=G-0HKQTSW8VY", true);
+    xhr.open("GET", "https://quientiene.com/js_core/61fb-pixel.js", true);
     xhr.onload = function (e) {
     if (xhr.readyState === 4) {
       if (xhr.status === 200) {
         dataLayer.push({
           ip: xhr.responseText
         });
-        sessionStorage.setItem('gaTagManager',xhr.responseText);
+        sessionStorage.setItem('fbPixelImpl',xhr.responseText);
       } else {
         console.error(xhr.statusText);
       }
@@ -25,10 +25,4 @@
     };
     xhr.send(null);
   }
-  
-  window.dataLayer = window.dataLayer || [];
-  function gtag(){dataLayer.push(arguments);}
-  gtag('js', new Date());
-
-  gtag('config', 'G-0HKQTSW8VY');
 })()
