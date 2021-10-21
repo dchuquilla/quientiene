@@ -51,8 +51,8 @@
   <%= javascript_pack_tag 'application', 'data-turbolinks-track': 'false', async: true %>
 
   <!-- Global site tag (gtag.js) - Google Analytics -->
-    <script async src="https://www.googletagmanager.com/gtag/js?id=G-0HKQTSW8VY"></script>
-    <script async src="/js_core/60ga.js" data-turbolinks-track="false"></script>
+    <script defer src="https://www.googletagmanager.com/gtag/js?id=G-0HKQTSW8VY"></script>
+    <script defer src="/js_core/60ga.js" data-turbolinks-track="false"></script>
   <!-- END Global site tag (gtag.js) - Google Analytics -->
 
   <% if user_signed_in? %>
@@ -125,7 +125,7 @@
   <% end %>
 
   <!-- Facebook Pixel Code -->
-    <script async src="/js_core/61fb-pixel.js" data-turbolinks-track="false"></script>
+    <script defer src="/js_core/61fb-pixel.js" data-turbolinks-track="false"></script>
     <noscript><img height="1" width="1" src="https://www.facebook.com/tr?id=4715094701868400&ev=PageView&noscript=1"/></noscript>
   <!-- End Facebook Pixel Code -->
 
