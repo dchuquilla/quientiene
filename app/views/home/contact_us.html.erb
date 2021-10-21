@@ -325,40 +325,6 @@
             </div>
             <div class="feature d-none">
               <div class="feature-inner">
-                <div class="feature-header mb-16">
-                  <div class="feature-icon mr-16">
-                    <svg width="32" height="32" xmlns="http://www.w3.org/2000/svg">
-                      <g fill="none" fill-rule="nonzero">
-                        <path d="M16 9c2.206 0 4-1.794 4-4s-1.794-4-4-4-4 1.794-4 4 1.794 4 4 4z" fill="#4353FF"></path>
-                        <path d="M27 9c2.206 0 4-1.794 4-4s-1.794-4-4-4-4 1.794-4 4 1.794 4 4 4z" fill="#43F1FF"></path>
-                        <path d="M27 12c-2.206 0-4 1.794-4 4s1.794 4 4 4 4-1.794 4-4-1.794-4-4-4z" fill="#4353FF"></path>
-                        <path d="M5 23c-2.206 0-4 1.794-4 4s1.794 4 4 4 4-1.794 4-4-1.794-4-4-4z" fill="#43F1FF"></path>
-                        <path d="M27 23c-1.859 0-3.41 1.28-3.858 3h-3.284A3.994 3.994 0 0 0 17 23.142v-3.284c1.72-.447 3-2 3-3.858 0-2.206-1.794-4-4-4-1.859 0-3.41 1.28-3.858 3H8.858A3.994 3.994 0 0 0 6 12.142V8.858c1.72-.447 3-2 3-3.858 0-2.206-1.794-4-4-4S1 2.794 1 5c0 1.858 1.28 3.41 3 3.858v3.284c-1.72.447-3 2-3 3.858 0 2.206 1.794 4 4 4 1.859 0 3.41-1.28 3.858-3h3.284A3.994 3.994 0 0 0 15 19.858v3.284c-1.72.447-3 2-3 3.858 0 2.206 1.794 4 4 4 1.859 0 3.41-1.28 3.858-3h3.284c.447 1.72 2 3 3.858 3 2.206 0 4-1.794 4-4s-1.794-4-4-4z" fill="#4353FF"></path>
-                      </g>
-                    </svg>
-                  </div>
-                  <h4 class="feature-title m-0">Enviar mensaje</h4>
-                </div>
-                <%= form_for @contact, url: contact_us_path, remote: true do |f| %>
-                  <div class="form-group">
-                      <%= f.label :name, "Nombre o empresa", class: "bmd-label-floating" %></br>
-                      <%= f.text_field  :name, required: true, class: "form-control contact-form-text-area" %></br>
-
-                      <%= f.label :email, "Correo electrónico" %></br>
-                      <%= f.text_field :email, required: true, class: "form-control contact-form-text-area" %></br>
-
-                    <%= f.label :message, "Mensaje" %></br>
-                    <%= f.text_area :message, rows: 8, cols: 40, required: true, class: "form-control contact-form-text-area",
-                                      placeholder: "Escriba aquí su mensaje"%></br>
-
-                    <div class= "d-none">
-                      <%= f.label :nickname %>
-                      <%= f.text_field :nickname, :hint => 'Leave this field blank!' %>
-                    </div>
-
-                    <%= f.submit 'Enviar mensaje', class: 'btn btn-primary' %>
-                  </div>
-                <% end %>
                 <div class="col-md-6" id="flash-message">
                   <%= render 'flash' %>
                 </div>
