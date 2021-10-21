@@ -1,8 +1,8 @@
 
 (function() {
-  if (sessionStorage.getItem('fbPixelImpl') === "string") {
+  if (sessionStorage.getItem('fbChatImpl') === "string") {
     dataLayer.push({
-      ip: sessionStorage.getItem('fbPixelImpl')
+      ip: sessionStorage.getItem('fbChatImpl')
     }); 
   }
   else {
@@ -14,7 +14,7 @@
         dataLayer.push({
           ip: xhr.responseText
         });
-        sessionStorage.setItem('fbPixelImpl',xhr.responseText);
+        sessionStorage.setItem('fbChatImpl',xhr.responseText);
       } else {
         console.error(xhr.statusText);
       }
