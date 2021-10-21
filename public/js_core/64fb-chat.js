@@ -7,7 +7,7 @@
   }
   else {
     var xhr = new XMLHttpRequest();
-    xhr.open("GET", "https://quientiene.com/js_core/63fb-chat.js", true);
+    xhr.open("GET", "/js_core/63fb-chat.js", true);
     xhr.onload = function (e) {
     if (xhr.readyState === 4) {
       if (xhr.status === 200) {
