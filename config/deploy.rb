@@ -40,5 +40,5 @@ set :keep_releases, 5
 set :ssh_options, {
   forward_agent: true,
   auth_methods: %w[publickey],
-  keys: %w[/home/dario/proyectos/ienkey.pem]
+  keys: %w[/Users/dariochuquilla/Downloads/ienkey.pem]
 }
