@@ -14,9 +14,9 @@
 <% end %>
 
 <%- if devise_mapping.confirmable? && controller_name != 'confirmations' %>
-  <%= link_to "No recibí las instrucciones de confirmación", new_confirmation_path(resource_name), data: { turbolinks: false }, class: "btn btn-link btn-block text-white" %>
+  <%= link_to "Solicitar confirmación", new_confirmation_path(resource_name), data: { turbolinks: false }, class: "btn btn-link btn-block text-white" %>
 <% end %>
 
 <%- if devise_mapping.lockable? && resource_class.unlock_strategy_enabled?(:email) && controller_name != 'unlocks' %>
-  <%= link_to "No recibí las instrucciones de desbloqueo", new_unlock_path(resource_name), data: { turbolinks: false }, class: "btn btn-link btn-block text-white" %>
+  <%= link_to "Solicitar desbloqueo", new_unlock_path(resource_name), data: { turbolinks: false }, class: "btn btn-link btn-block text-white" %>
 <% end %>

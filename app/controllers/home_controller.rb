@@ -1,6 +1,7 @@
 # frozen_string_literal: true
 
 class HomeController < ApplicationController
+  layout "landing", only: [:index]
   def index
     redirect_to dashboard_path if current_user.present?
     @current_brands = Vehicle.select(:brand).distinct.map { |v| v.brand.strip }.uniq

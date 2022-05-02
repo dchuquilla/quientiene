@@ -80,6 +80,7 @@ group :development do
   gem 'capistrano-rbenv', '~> 2.1', '>= 2.1.4'
   gem 'capistrano-sidekiq'
   gem "airbrussh", require: false
+  gem 'htmlbeautifier'
 end
 
 group :test do

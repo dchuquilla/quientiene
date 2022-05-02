@@ -1,0 +1,61 @@
+<script src="https://cdn.onesignal.com/sdks/OneSignalSDK.js" async="true"></script>
+      <script>
+        window.OneSignal = window.OneSignal || [];
+        OneSignal.push(function() {
+          OneSignal.init({
+            appId: "19562cd9-e931-441f-b7ca-171be04a5224",
+            autoRegister: false,
+            allowLocalhostAsSecureOrigin: true,
+            notifyButton: {
+              enable: true
+            },
+            webhooks: {
+              cors: true
+            }
+          });
+          OneSignal.on('subscriptionChange', function (isSubscribed) {
+            if (isSubscribed) {
+              OneSignal.getUserId(function(userId) {
+                var user_params = { onesignal_id: userId };
+                $.ajax({
+                  url: '<%= users_add_onesignal_id_url %>.json',
+                  dataType: "json",
+                  type: "put",
+                  async: true,
+                  data: { onesignal_id: userId },
+                  success: function (data) {
+                    var user = data;
+                    OneSignal.push(["sendTag", "user_id", user.id]);
+                    OneSignal.push(["sendTag", "user_name", user.name]);
+                    OneSignal.push(["sendTag", "user_email", user.email]);
+                    <% if current_user.has_role?(:shop) %>
+                      OneSignal.push(["sendTag", "user_type", 'store']);
+                    <% else %>
+                      OneSignal.push(["sendTag", "user_type", 'client']);
+                    <% end %>
+                  },
+                  error: function (xhr, exception) {
+                    var msg = "";
+                    if (xhr.status === 0) {
+                      msg = "Not connect.\n Verify Network." + xhr.responseText;
+                    } else if (xhr.status == 404) {
+                      msg = "Requested page not found. [404]" + xhr.responseText;
+                    } else if (xhr.status == 500) {
+                      msg = "Internal Server Error [500]." +  xhr.responseText;
+                    } else if (exception === "parsererror") {
+                      msg = "Requested JSON parse failed.";
+                    } else if (exception === "timeout") {
+                      msg = "Time out error." + xhr.responseText;
+                    } else if (exception === "abort") {
+                      msg = "Ajax request aborted.";
+                    } else {
+                      msg = "Error:" + xhr.status + " " + xhr.responseText;
+                    }
+                    console.log(msg);
+                  }
+                }); 
+              });
+            }
+          });
+        });
+      </script>
