@@ -7,7 +7,7 @@ class Vehicle < ApplicationRecord
   has_many :replacement_requests
 
   validates :brand, :model, :year, presence: true
-  validates :year, format: { with: /\A[0-9]+\z/, message: 'solo admite números' }
+  validates :year, numericality: { only_integer: true }
 
   scope :recent, ->(number) { order(id: :desc).limit(number) }
   scope :all_brands, -> { distinct(:brand).select(:brand).to_a.map { |v| v['brand'] } }
